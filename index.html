@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주식회사 메이저세븐이엔엠 | Major7 Entertainment & Music Copyright Inc.</title>
+  <meta name="description" content="국내 최고의 음악 저작권 클리어런스 에이전시. 방송·드라마·광고·게임 등 다양한 장르의 음악저작물을 합리적인 비용으로 안전하게 이용할 수 있도록 전문적이고 체계적인 프로세스를 제공합니다." />
+  <meta property="og:title" content="주식회사 메이저세븐이엔엠 | Major7 E&M" />
+  <meta property="og:description" content="음악 저작권 클리어런스 | 리스크 관리 | 저작권 정보 서비스 | 콘텐츠 기획 및 제작" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner container">
+      <a href="#" class="logo" aria-label="메이저세븐이엔엠 홈으로">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <circle cx="18" cy="18" r="18" fill="var(--color-primary)"/>
+          <circle cx="18" cy="18" r="8" fill="none" stroke="var(--color-bg)" stroke-width="2"/>
+          <circle cx="18" cy="18" r="2.5" fill="var(--color-bg)"/>
+          <line x1="18" y1="10" x2="18" y2="4" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-kr">메이저세븐이엔엠</span>
+          <span class="logo-en">Major7 E&M</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#about">회사 소개</a>
+        <a href="#business">사업 분야</a>
+        <a href="#capability">대응역량</a>
+        <a href="#performance">주요 성과</a>
+        <a href="#contact">문의하기</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-mobile-view" id="mobileViewBtn" aria-label="모바일 뷰 보기">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          모바일 뷰
+        </button>
+        <button class="btn-contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">문의하기</button>
+        <button class="theme-toggle" data-theme-toggle aria-label="다크모드 전환">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#about" class="mobile-link">회사 소개</a>
+      <a href="#business" class="mobile-link">사업 분야</a>
+      <a href="#capability" class="mobile-link">대응역량</a>
+      <a href="#performance" class="mobile-link">주요 성과</a>
+      <a href="#contact" class="mobile-link">문의하기</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="vinyl-graphic" aria-hidden="true">
+        <svg viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="240" cy="240" r="230" fill="#0a1628" opacity="0.85"/>
+          <circle cx="240" cy="240" r="180" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <circle cx="240" cy="240" r="140" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <circle cx="240" cy="240" r="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <circle cx="240" cy="240" r="60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <circle cx="240" cy="240" r="36" fill="#1e3a5f"/>
+          <circle cx="240" cy="240" r="12" fill="#f0c040"/>
+          <circle cx="240" cy="240" r="4" fill="#0a1628"/>
+          <!-- sound wave lines -->
+          <path d="M240 50 Q290 80 240 110 Q190 140 240 170" stroke="rgba(240,192,64,0.3)" stroke-width="1.5" fill="none"/>
+          <path d="M240 50 Q270 80 240 110 Q210 140 240 170" stroke="rgba(240,192,64,0.15)" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
+    </div>
+    <div class="hero-content container">
+      <div class="hero-badge">Music Copyright Clearance Agency</div>
+      <h1 class="hero-title">
+        콘텐츠의 글로벌<br />
+        <span class="hero-accent">IP 비상</span>을 가능케 하는<br />
+        최적의 파트너
+      </h1>
+      <p class="hero-desc">
+        방송 · 드라마 · 광고 · 게임 등 다양한 장르에서<br />
+        음악저작물을 <strong>합리적인 비용</strong>으로 <strong>안전하게</strong> 이용할 수 있도록<br />
+        전문적이고 체계적인 프로세스를 제공합니다.
+      </p>
+      <div class="hero-cta">
+        <a href="#business" class="btn-primary">사업 분야 보기</a>
+        <a href="#contact" class="btn-ghost">문의하기</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2009</span>
+          <span class="stat-label">설립연도</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num">15<span class="stat-unit">년+</span></span>
+          <span class="stat-label">전문 경력</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num">90<span class="stat-unit">%+</span></span>
+          <span class="stat-label">클리어런스 성공률</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>스크롤</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5" fill="currentColor"/></svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">About Us</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <h2 class="section-title">국내 최고의<br />음악 저작권<br /><span class="text-accent">클리어런스 에이전시</span></h2>
+          <p class="about-desc">
+            ㈜ 메이저세븐이엔엠은 사용자가 방송·드라마·광고·게임 등 다양한 장르에서 필요한 음악저작물을 합리적인 비용으로 안전하게 이용할 수 있도록 콘텐츠 제작 전반의 이해도와 실무 경험을 바탕으로 전문적이고 체계적인 프로세스를 제공합니다.
+          </p>
+          <div class="about-info-table">
+            <div class="info-row">
+              <span class="info-label">기업명</span>
+              <span class="info-value">주식회사 메이저세븐이엔엠</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">설립일</span>
+              <span class="info-value">2009년 9월</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">대표이사</span>
+              <span class="info-value">김지욱</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">사업분야</span>
+              <span class="info-value">음악 저작권 관리, 저작권 컨설팅, 정보 서비스, 콘텐츠 기획 및 제작</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">주소</span>
+              <span class="info-value">경기도 고양시 일산동구 산두로 17-2 2F (하이카프라자빌딩)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">E-mail</span>
+              <span class="info-value"><a href="mailto:music2550@naver.com">music2550@naver.com</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="mission-card">
+            <div class="mission-label">Mission</div>
+            <blockquote class="mission-text">
+              "합리적인 비용과 전문적이고 체계적인 솔루션을 제공함으로써 콘텐츠의 글로벌 IP 비상을 가능케 하는 최적의 파트너, Major7 E&M"
+            </blockquote>
+          </div>
+          <div class="values-grid">
+            <div class="value-card">
+              <div class="value-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3>신뢰성</h3>
+              <p>검증된 네트워크와 실무 경험으로 확실한 결과를 보장합니다</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+              </div>
+              <h3>전문성</h3>
+              <p>15년 이상의 음악 저작권 실무 역량과 글로벌 네트워크</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3>책임감</h3>
+              <p>프로젝트 시작부터 완료까지 일관된 책임감으로 대응합니다</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <h3>글로벌</h3>
+              <p>국내외 권리사 네트워크를 통한 글로벌 클리어런스 수행</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="section section-dark" id="history">
+    <div class="container">
+      <div class="section-label light">History</div>
+      <h2 class="section-title light">15년의 전문 역사</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2009</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>회사 설립</h3>
+            <p>주식회사 메이저세븐이엔엠 창립. 음악 저작권 클리어런스 전문 에이전시로 출발</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2013</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>공연 기획 및 제작</h3>
+            <p>공연 분야 저작권 업무 확장, 라이브 공연·뮤지컬 등 공연 기획 및 제작 서비스 개시</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>아티스트 및 콘텐츠 제작</h3>
+            <p>아티스트 발굴·육성 및 음원·영상 콘텐츠 제작 사업 본격화</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>음악 저작권 매니지먼트</h3>
+            <p>저작권 매니지먼트 서비스 강화, 권리사 네트워크 확대 및 체계적 관리 시스템 구축</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-dot accent"></div>
+          <div class="timeline-content">
+            <h3>글로벌 사업진출</h3>
+            <p>글로벌 OTT·방송 시장 대응 역량 강화, 해외 권리사·에이전시와의 네트워크 본격 구축</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS -->
+  <section class="section" id="business">
+    <div class="container">
+      <div class="section-label">Business Overview</div>
+      <div class="section-header">
+        <h2 class="section-title">저작권 Clearance</h2>
+        <p class="section-sub">급변하는 콘텐츠 시장 속, IP 제작의 가장 큰 허들 '음악 저작권'<br />㈜메이저세븐이엔엠은 제작자의 니즈를 충족하는 솔루션을 제시합니다.</p>
+      </div>
+      <div class="business-grid">
+        <div class="business-card">
+          <div class="business-num">01</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Screening Work<br /><span>분석</span></h3>
+          <ul>
+            <li>음악 저작물 권리 분석 및 리스크 파악</li>
+            <li>사용 유형 / Syndication 방식에 맞춘 범위 분류</li>
+            <li>사용자의 니즈에 맞는 사용료 견적 산출</li>
+            <li>권리사 / 권리자별 국내·외 Contact Point 파악</li>
+          </ul>
+        </div>
+        <div class="business-card featured">
+          <div class="business-num">02</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Clearance<br /><span>협의 및 해결</span></h3>
+          <ul>
+            <li>사용자의 니즈에 부합한 저작권 솔루션 프로세스</li>
+            <li>Global Standard에 맞춘 유형별 Clearance</li>
+            <li>Moral Right / Neighboring right / Cover / Syncronization / AR / SA / TR 등 사용 방식에 따른 조건 및 합리적인 승인로 협의</li>
+            <li>계약서 작성 및 법무 검토 대응, 체결</li>
+          </ul>
+        </div>
+        <div class="business-card">
+          <div class="business-num">03</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Dispute & Response<br /><span>대응</span></h3>
+          <ul>
+            <li>저작권 분쟁 유형별 대응 프로세스 지원</li>
+            <li>저작권 분쟁 전략 수립 및 대응</li>
+            <li>침해 제기 및 자문</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Services tags -->
+      <div class="service-tags">
+        <span>방송</span>
+        <span>드라마</span>
+        <span>OTT</span>
+        <span>K-POP</span>
+        <span>광고</span>
+        <span>게임</span>
+        <span>공연</span>
+        <span>영화</span>
+        <span>유튜브</span>
+        <span>글로벌 송출</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITY -->
+  <section class="section section-muted" id="capability">
+    <div class="container">
+      <div class="section-label">Our Performance</div>
+      <h2 class="section-title">장르별 대응역량</h2>
+      <p class="section-sub">각 콘텐츠 장르의 특성을 깊이 이해하고 맞춤형 솔루션을 제공합니다</p>
+
+      <div class="capability-tabs" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="drama">드라마</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="kpop">K-POP</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="trot">트로트·크로스오버</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="ballad">발라드</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="concert">콘서트·예능</button>
+      </div>
+
+      <div class="tab-content active" id="tab-drama">
+        <div class="capability-card">
+          <div class="cap-header">
+            <h3>드라마</h3>
+            <p class="cap-tagline">드라마에서의 음악 저작권, <strong>'Context 이해'</strong>가 선행되어야 합니다.</p>
+          </div>
+          <div class="cap-grid">
+            <div class="cap-col problem">
+              <div class="cap-col-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                창작 의도와 음악 맥락
+              </div>
+              <ul>
+                <li>특정 장면의 연출 의도와 음악의 창작 취지 상충 가능성</li>
+                <li>희화화 및 정치적 해석 등 오해 소지 발생 가능성</li>
+                <li>저작자의 창작 의도와 반하는 작품 훼손 우려</li>
+              </ul>
+            </div>
+            <div class="cap-col risk">
+              <div class="cap-col-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                PPL·계약 범위 리스크
+              </div>
+              <ul>
+                <li>드라마 내 PPL 장면과 음악이 결합될 경우 상업적 이용으로 해석될 오인 여지</li>
+                <li>계약 범위를 초과하는 사용으로 분쟁 발생 여지</li>
+              </ul>
+            </div>
+            <div class="cap-col solution">
+              <div class="cap-col-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                메이저세븐이엔엠의 Solution
+              </div>
+              <ul>
+                <li>음악 사용에 대한 자세한 연출 의도 설명을 통한 공감대 형성, 합의 형성</li>
+                <li>PPL, 브랜드 노출 가능성까지 고려한 사전 리스크 진단</li>
+                <li>글로벌 송출 및 2차 사업 확장에 맞춘 통합 권리 대응</li>
+              </ul>
+            </div>
+          </div>
+          <p class="cap-footer">드라마의 장면과 음악의 맥락을 연결하는 커뮤니케이션으로 <strong>창작 의도</strong>와 <strong>권리</strong> 사이의 균형을 동시에 보호합니다</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-kpop">
+        <div class="capability-card">
+          <div class="cap-header">
+            <h3>K-POP 프로그램</h3>
+            <p class="cap-tagline">K-POP 프로그램, <strong>저작권 대응력</strong>이 곧 경쟁력입니다.</p>
+          </div>
+          <div class="cap-grid">
+            <div class="cap-col problem">
+              <div class="cap-col-label">복잡한 권리 구조</div>
+              <ul>
+                <li>1곡에 얽힌 다수의 국내·해외 저작자</li>
+                <li>다수의 권리사 및 글로벌 퍼블리싱 분산</li>
+                <li>사용 범위별 권리 조건 상이</li>
+              </ul>
+            </div>
+            <div class="cap-col risk">
+              <div class="cap-col-label">제작 리스크</div>
+              <ul>
+                <li>짧은 제작 기간</li>
+                <li>실시간 투표·급박한 선곡</li>
+                <li>공정성 논란</li>
+              </ul>
+            </div>
+            <div class="cap-col solution">
+              <div class="cap-col-label">메이저세븐이엔엠의 Solution</div>
+              <ul>
+                <li>리스크 진단 및 사용 가능 곡군 확보</li>
+                <li>긴급 승인 요청 및 조건 협상 대응</li>
+                <li>제작 일정 단계별 클리어런스 관리</li>
+                <li>방송·OTT·해외 송출 통합 권리 설계</li>
+              </ul>
+            </div>
+          </div>
+          <div class="kpop-stat">
+            <span class="stat-big">90%</span>
+            <span>이상 (최근 3년 평균) 클리어런스 성공률</span>
+          </div>
+          <p class="cap-footer">체계적이고 선제적인 대응으로 제작·편성·송출의 <strong>불확실성을 제거</strong>합니다</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-trot">
+        <div class="capability-card">
+          <div class="cap-header">
+            <h3>트로트·크로스오버·글로벌 음악 프로그램</h3>
+            <p class="cap-tagline">세대와 장르를 아우르는 정밀한 <strong>저작권 권리 분석 역량</strong></p>
+          </div>
+          <div class="cap-grid">
+            <div class="cap-col problem">
+              <div class="cap-col-label">원로 작가 및 승계 구조</div>
+              <ul>
+                <li>다수의 원로 저작자 비중, 세심한 협상 커뮤니케이션 역량</li>
+                <li>저작자 별세 이후 승계자·양수자로 권리 구조가 분산된 사례 다수</li>
+              </ul>
+            </div>
+            <div class="cap-col risk">
+              <div class="cap-col-label">번안곡·원작 작품 권리 관계</div>
+              <ul>
+                <li>이탈리아·프랑스·독일·일본 외국 원곡 기반 작품 다수</li>
+                <li>번안 및 재편곡 과정, 장르 혼합 및 국악 작창 결합 시도 빈번</li>
+                <li>국내 통상 관리 범위를 벗어난 권리 체계 존재</li>
+              </ul>
+            </div>
+            <div class="cap-col solution">
+              <div class="cap-col-label">메이저세븐이엔엠의 Solution</div>
+              <ul>
+                <li>승계 양수 구조 체계적 권리 분석</li>
+                <li>글로벌 현지 에이전시와의 협상 역량</li>
+                <li>장르에 대한 음악적 이해 기반 대응</li>
+                <li>분쟁 가능성 사전 차단 클리어런스</li>
+              </ul>
+            </div>
+          </div>
+          <p class="cap-footer">권리에 대한 정확한 이해와 음악적 전문성을 바탕으로 세대와 국경을 넘는 장르 융합의 리스크를 정밀하게 관리합니다</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-ballad">
+        <div class="capability-card">
+          <div class="cap-header">
+            <h3>BALLAD 프로그램</h3>
+            <p class="cap-tagline"><strong>리메이크 수요가 집중된</strong> 명곡 아카이브 정밀 대응 역량</p>
+          </div>
+          <div class="cap-grid">
+            <div class="cap-col problem">
+              <div class="cap-col-label">8-90년대 명곡 수요 집중</div>
+              <ul>
+                <li>대한민국 대중음악의 르네상스, 리메이크 프로젝트 수요 다수</li>
+                <li>복수 프로젝트 동일곡 동시 사용 요청 빈번, 수요 관리 역량</li>
+              </ul>
+            </div>
+            <div class="cap-col risk">
+              <div class="cap-col-label">동시 사용 일정 충돌 리스크</div>
+              <ul>
+                <li>다수 프로젝트 간 사용 일정 중복 가능성</li>
+                <li>선사용 조건 발생, 시장 혼선 및 분쟁 리스크</li>
+              </ul>
+            </div>
+            <div class="cap-col solution">
+              <div class="cap-col-label">메이저세븐이엔엠의 Solution</div>
+              <ul>
+                <li>프로젝트 간 이해 관계 조율 및 조정</li>
+                <li>편곡 범위에 대한 권리 검토</li>
+                <li>방송·음원·디지털 확장까지 고려한 협상</li>
+              </ul>
+            </div>
+          </div>
+          <p class="cap-footer">명곡을 향한 시장 수요와 권리 리스크 사이를 전략적으로 대응하는 전문 역량</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-concert">
+        <div class="capability-card">
+          <div class="cap-header">
+            <h3>콘서트·시상식·리얼리티 예능 프로그램</h3>
+            <p class="cap-tagline">속도와 정확성을 동시에 요구하는 <strong>실시간 제작 환경</strong>에 최적화된 대응 전문성</p>
+          </div>
+          <div class="cap-grid">
+            <div class="cap-col problem">
+              <div class="cap-col-label">실시간 변동 대응</div>
+              <ul>
+                <li>셋리스트·큐시트 변경 즉각 대응</li>
+                <li>방송 직전 변경 사항 긴급 협의</li>
+                <li>리허설 단계 수정 사항 대응</li>
+              </ul>
+            </div>
+            <div class="cap-col risk">
+              <div class="cap-col-label">다수 권리자 통합 협의</div>
+              <ul>
+                <li>다수 권리자 협상 창구 일원화</li>
+                <li>제작 일정에 맞춘 단계별 추진</li>
+                <li>사용 범위에 맞춘 협상 설계</li>
+              </ul>
+            </div>
+            <div class="cap-col solution">
+              <div class="cap-col-label">메이저세븐이엔엠의 Solution</div>
+              <ul>
+                <li>돌발 변수 발생 대응 시나리오 구축</li>
+                <li>제작 단계별 권리 리스크 점검</li>
+                <li>현장 변수 발생 시 승인 재협의 체계</li>
+              </ul>
+            </div>
+          </div>
+          <p class="cap-footer">실시간으로 급변하는 제작 사이클 속에서도 저작권의 빈틈이 남기지 않는 전문 대응 역량</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCE -->
+  <section class="section" id="performance">
+    <div class="container">
+      <div class="section-label">Our Performance</div>
+      <h2 class="section-title">주요 성과</h2>
+      <p class="section-sub">국내 주요 채널 및 OTT 오리지널 콘텐츠 클리어런스 전담 수행</p>
+
+      <div class="perf-tabs" role="tablist">
+        <button class="perf-tab active" data-perf="drama-perf">드라마</button>
+        <button class="perf-tab" data-perf="kpop-perf">K-POP / 아이돌</button>
+        <button class="perf-tab" data-perf="trot-perf">트로트·크로스오버</button>
+        <button class="perf-tab" data-perf="ballad-perf">발라드</button>
+        <button class="perf-tab" data-perf="concert-perf">콘서트·예능</button>
+        <button class="perf-tab" data-perf="content-perf">음원제작</button>
+      </div>
+
+      <div class="perf-content active" id="drama-perf">
+        <div class="perf-meta">
+          <div class="perf-tag">기획부터 글로벌 송출까지 전 단계 클리어런스 수행</div>
+          <div class="perf-points">
+            <span>✓ 제작 단계별 권리 리스크 관리</span>
+            <span>✓ 장면, Context 기반 협상</span>
+            <span>✓ OTT 글로벌 송출 저작권 통합 대응</span>
+          </div>
+        </div>
+        <div class="program-list">
+          <div class="prog-item">런닝맨/미쏘홍</div><div class="prog-item">이모가</div><div class="prog-item">우리들의 블루스</div><div class="prog-item">눈물의 여왕</div><div class="prog-item">소년시대</div><div class="prog-item">럭셔니 기술</div><div class="prog-item">커피메이트</div><div class="prog-item">나의 행복만보기</div><div class="prog-item">살인자의 난감</div><div class="prog-item">아무도 없는 곳에서</div><div class="prog-item">온종개상연</div><div class="prog-item">살갱이</div><div class="prog-item">카지노</div><div class="prog-item">청년이</div><div class="prog-item">클라스업</div><div class="prog-item">비밀을 없애</div><div class="prog-item">구길이</div><div class="prog-item">Loveria</div><div class="prog-item">돌아주는 여자</div>
+        </div>
+      </div>
+
+      <div class="perf-content" id="kpop-perf">
+        <div class="perf-meta">
+          <div class="perf-stat-highlight">
+            <span class="big-num">90%</span>
+            <span>이상 (최근 3년 평균)</span>
+          </div>
+          <div class="perf-points">
+            <span>✓ 저작권 업무 및 리스크 대응</span>
+            <span>✓ 채널 및 OTT 오리지널 다수</span>
+            <span>✓ 글로벌 송출을 위한 사전 리스크 제거 등 전략적 대응 역량 보유</span>
+          </div>
+        </div>
+        <div class="program-list">
+          <div class="prog-item">Planet 999</div><div class="prog-item">Boys Planet</div><div class="prog-item">Planet C</div><div class="prog-item">I-LAND2</div><div class="prog-item">퀸덤씨즐</div><div class="prog-item">로드캐킹</div><div class="prog-item">K-Now</div><div class="prog-item">전 세계에서</div><div class="prog-item">RUNext?</div><div class="prog-item">Peak Time</div><div class="prog-item">Project C+</div><div class="prog-item">KPOPPED</div><div class="prog-item">Next Movement</div><div class="prog-item">소믈리에딩지</div><div class="prog-item">MA최</div><div class="prog-item">B:MY BOYZ</div><div class="prog-item">SCOOL</div><div class="prog-item">싱라이즈</div><div class="prog-item">의미있는 아이돌</div><div class="prog-item">Stars,Room</div>
+        </div>
+      </div>
+
+      <div class="perf-content" id="trot-perf">
+        <div class="perf-meta">
+          <div class="perf-tag">세대와 국경을 넘는 복합 권리 구조 정밀 해석</div>
+          <div class="perf-points">
+            <span>✓ 번안, Mash-up, 편곡 협의</span>
+            <span>✓ 국외 원저작자 현지 직접 협상</span>
+            <span>✓ 승계 양수 분산 구조 정밀 대응</span>
+          </div>
+        </div>
+        <div class="program-list">
+          <div class="prog-item">현역가왕</div><div class="prog-item">한일가왕전</div><div class="prog-item">발라트로켄</div><div class="prog-item">한일 TOP10쇼</div><div class="prog-item">랜팅심이 홀스타친</div><div class="prog-item">랜팅심이3</div><div class="prog-item">슈퍼밴드</div><div class="prog-item">다발리</div><div class="prog-item">체인지스트릿</div><div class="prog-item">스타지파이터</div><div class="prog-item">Hippol Princess</div><div class="prog-item">싱라이즈</div>
+        </div>
+      </div>
+
+      <div class="perf-content" id="ballad-perf">
+        <div class="perf-meta">
+          <div class="perf-tag">권리 변동 파악 및 이해관계 조울 역량</div>
+          <div class="perf-points">
+            <span>✓ 명곡 클리어런스 다수 수행</span>
+            <span>✓ 시장 수요 파악 및 전략적 조율</span>
+            <span>✓ 선사용, 독점 조건 리스크 대응</span>
+          </div>
+        </div>
+        <div class="program-list">
+          <div class="prog-item">싱어게인4</div><div class="prog-item">싱어게인3</div><div class="prog-item">싱어게인2</div><div class="prog-item">유명가수진</div><div class="prog-item">WANTED</div><div class="prog-item">유발리디호</div><div class="prog-item">포커스</div><div class="prog-item">아티스탁게임</div><div class="prog-item">팬타스틱패밀리</div><div class="prog-item">뉴페이스타</div><div class="prog-item">아이야 싱어</div><div class="prog-item">인어스 링크</div><div class="prog-item">국대 TAKE 1</div>
+        </div>
+      </div>
+
+      <div class="perf-content" id="concert-perf">
+        <div class="perf-meta">
+          <div class="perf-tag">실시간 제작 변수에 대한 즉각 대응 체계</div>
+          <div class="perf-points">
+            <span>✓ 셋리스트 변경 긴급 승인 대응</span>
+            <span>✓ 다수 권리자 협상 통합 관리</span>
+            <span>✓ 제작 일정에 맞춘 단계별 클리어런스 관리</span>
+          </div>
+        </div>
+        <div class="program-list">
+          <div class="prog-item">DANDAMIN</div><div class="prog-item">소녀여 연애하다</div><div class="prog-item">청춘MT</div><div class="prog-item">할수나4</div><div class="prog-item">기쇼다체전</div><div class="prog-item">TMA 2025</div><div class="prog-item">통미세</div><div class="prog-item">CONNECT</div><div class="prog-item">U&I Concert</div><div class="prog-item">문화공연장</div><div class="prog-item">굿데이</div>
+        </div>
+      </div>
+
+      <div class="perf-content" id="content-perf">
+        <div class="perf-meta">
+          <div class="perf-tag">콘텐츠 제작 – 주요 추진 성과</div>
+        </div>
+        <div class="content-perf-list">
+          <div class="perf-item">SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정우) 제작</div>
+          <div class="perf-item">SBS 푸바오와 할부지 PART 2 – 넌 기쁨이자 행운이야 (레드벨벳 슬기) 제작</div>
+          <div class="perf-item">Mnet 아티스탁게임 – SEMI FINAL, FINAL 음원 제작</div>
+          <div class="perf-item">공익광고협의회 X 환경부 캠페인 – 지구를 위한 중독되는 용기송 (브레이브걸스 편) CM송 제작</div>
+          <div class="perf-item">DISCOVER WORLD WIDE 'SING AGAIN' BGM 제작</div>
+          <div class="perf-item">2019 MGMA 슬지(EXID) X 산들(B1A4) 월간 윤종신 스페셜 듀엣 편곡</div>
+          <div class="perf-item">㈜ 아이비클럽 공식음원 &lt;Ivy with you – 워너원, 스트레이키즈&gt; 제작</div>
+          <div class="perf-item">tvN 드라마 &lt;싸우자 귀신아&gt; OST 너만보여 &lt;피리부는 사나이&gt; OST 멈춰버린 밤, SBS 드라마 &lt;질투의 화신&gt; 멀어져만 간다 등 프로듀싱 다수</div>
+          <div class="perf-item">tvN 10주년기념 다큐멘터리 &lt;판타스틱 패밀리&gt; 음악 제작</div>
+          <div class="perf-item">KBS 역사기획 &lt;가야&gt; 음악 제작</div>
+          <div class="perf-item">이데일리TV 개국 14주년 특별기획 VR 다큐멘터리 치유 – 음악 제작</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-dark" id="contact">
+    <div class="container">
+      <div class="section-label light">Contact</div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2 class="section-title light">저작권 문제,<br />저희에게<br /><span class="text-gold">맡겨주세요</span></h2>
+          <p class="contact-desc">음악 저작권 클리어런스부터 콘텐츠 제작까지<br />전문가팀이 신속하고 정확하게 도와드립니다.</p>
+          <div class="contact-info">
+            <a href="tel:01077569940" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.62 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.54a16 16 0 0 0 6.55 6.55l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              010. 7756. 9940
+            </a>
+            <a href="mailto:music2550@naver.com" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              music2550@naver.com
+            </a>
+            <div class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              경기도 고양시 일산동구 산두로 17-2 2F<br />(하이카프라자빌딩)
+            </div>
+          </div>
+        </div>
+        <div class="contact-right">
+          <form class="contact-form" id="contactForm" onsubmit="handleMailto(event)">
+            <div class="form-group">
+              <label for="name">이름 / 회사명</label>
+              <input type="text" id="name" name="name" placeholder="홍길동 / ㈜OO엔터테인먼트" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-email">연락처</label>
+              <input type="text" id="contact-email" name="contact" placeholder="이메일 또는 전화번호" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">문의 유형</label>
+              <select id="subject" name="subject">
+                <option value="">선택해주세요</option>
+                <option>저작권 클리어런스</option>
+                <option>드라마·OTT 저작권</option>
+                <option>K-POP / 아이돌 프로그램</option>
+                <option>트로트·발라드 프로그램</option>
+                <option>콘서트·예능·시상식</option>
+                <option>콘텐츠 제작</option>
+                <option>저작권 분쟁 대응</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" rows="5" placeholder="프로젝트 개요, 사용 장르, 일정 등을 간략히 적어주세요." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">문의 보내기</button>
+            <div class="form-security-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              보안상 개인 이메일로 다시 메일을 보내주세요. 감사합니다.
+            </div>
+            <p class="form-note">* 버튼을 누르면 네이버 메일이 열립니다. 전송 후 빠른 시일 내에 회신드립니다.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <circle cx="18" cy="18" r="18" fill="var(--color-primary)"/>
+            <circle cx="18" cy="18" r="8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <circle cx="18" cy="18" r="2.5" fill="rgba(255,255,255,0.8)"/>
+            <line x1="18" y1="10" x2="18" y2="4" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="footer-name">주식회사 메이저세븐이엔엠</div>
+            <div class="footer-name-en">Major7 Entertainment &amp; Music Copyright Inc.</div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="#about">회사 소개</a>
+          <a href="#business">사업 분야</a>
+          <a href="#capability">대응역량</a>
+          <a href="#performance">주요 성과</a>
+          <a href="#contact">문의하기</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Major7 E&amp;M Inc. All rights reserved.</span>
+        <span>음악 저작권 클리어런스 | 리스크 관리 | 저작권 정보 서비스 | 콘텐츠 기획 및 제작</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Security Notice Popup -->
+  <div class="security-popup-overlay" id="securityPopup" role="dialog" aria-modal="true">
+    <div class="security-popup">
+      <div class="security-popup-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="security-popup-title">보안 안내</h3>
+      <p class="security-popup-msg">보안상 개인 이메일로<br>다시 메일을 보내주세요.<br><br>감사합니다.</p>
+      <button class="security-popup-close" id="securityPopupClose">확인</button>
+    </div>
+  </div>
+
+  <!-- Mobile Preview Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" role="dialog" aria-modal="true" aria-label="모바일 미리보기">
+    <div class="mobile-frame-wrap">
+      <div class="mobile-frame-toolbar">
+        <span class="mobile-frame-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          Mobile Preview — 390px
+        </span>
+        <button class="mobile-frame-close" id="mobileOverlayClose" aria-label="모바일 뷰 닫기">✕</button>
+      </div>
+      <div class="mobile-device">
+        <div class="mobile-screen">
+          <iframe src="index.html" title="모바일 미리보기" scrolling="yes"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  var scrollRaf=0;
+  function emitScroll(){
+    scrollRaf=0;
+    var x=window.scrollX||window.pageXOffset||0;
+    var y=window.scrollY||window.pageYOffset||0;
+    window.parent.postMessage({type:'INLINE_EDIT_SCROLL',scrollX:x,scrollY:y},'*');
+  }
+  window.addEventListener('scroll',function(){
+    if(scrollRaf)return;
+    scrollRaf=requestAnimationFrame(emitScroll);
+  },{passive:true,capture:true});
+  emitScroll();
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>
