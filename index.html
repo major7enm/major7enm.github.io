@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,18 +35,32 @@
         </span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="#about">회사 소개</a>
-        <a href="#business">사업 분야</a>
-        <a href="#capability">대응역량</a>
-        <a href="#performance">주요 성과</a>
-        <a href="#contact">문의하기</a>
+        <a href="#about" data-i18n="nav_about">회사 소개</a>
+        <a href="#business" data-i18n="nav_business">사업 분야</a>
+        <a href="#capability" data-i18n="nav_capability">대응역량</a>
+        <a href="#performance" data-i18n="nav_performance">주요 성과</a>
+        <a href="#contact" data-i18n="nav_contact">문의하기</a>
       </nav>
       <div class="header-actions">
+        <!-- 언어 전환 드롭다운 -->
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-label="언어 선택" aria-haspopup="true" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="langLabel">KO</span>
+            <svg class="lang-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown" role="menu">
+            <button class="lang-option active" data-lang="ko" role="menuitem">🇰🇷 한국어</button>
+            <button class="lang-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+            <button class="lang-option" data-lang="ja" role="menuitem">🇯🇵 日本語</button>
+            <button class="lang-option" data-lang="zh" role="menuitem">🇨🇳 中文</button>
+          </div>
+        </div>
         <button class="btn-mobile-view" id="mobileViewBtn" aria-label="모바일 뷰 보기">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
-          모바일 뷰
+          <span data-i18n="mobile_view">모바일 뷰</span>
         </button>
-        <button class="btn-contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">문의하기</button>
+        <button class="btn-contact" data-i18n="nav_contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">문의하기</button>
         <button class="theme-toggle" data-theme-toggle aria-label="다크모드 전환">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -56,11 +70,17 @@
       </div>
     </div>
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <a href="#about" class="mobile-link">회사 소개</a>
-      <a href="#business" class="mobile-link">사업 분야</a>
-      <a href="#capability" class="mobile-link">대응역량</a>
-      <a href="#performance" class="mobile-link">주요 성과</a>
-      <a href="#contact" class="mobile-link">문의하기</a>
+      <a href="#about" class="mobile-link" data-i18n="nav_about">회사 소개</a>
+      <a href="#business" class="mobile-link" data-i18n="nav_business">사업 분야</a>
+      <a href="#capability" class="mobile-link" data-i18n="nav_capability">대응역량</a>
+      <a href="#performance" class="mobile-link" data-i18n="nav_performance">주요 성과</a>
+      <a href="#contact" class="mobile-link" data-i18n="nav_contact">문의하기</a>
+      <div class="mobile-lang-row">
+        <button class="mobile-lang-opt active" data-lang="ko">🇰🇷 KO</button>
+        <button class="mobile-lang-opt" data-lang="en">🇺🇸 EN</button>
+        <button class="mobile-lang-opt" data-lang="ja">🇯🇵 JA</button>
+        <button class="mobile-lang-opt" data-lang="zh">🇨🇳 ZH</button>
+      </div>
     </div>
   </header>
 
@@ -131,41 +151,77 @@
       <div class="hero-grid-overlay" aria-hidden="true"></div>
     </div>
     <div class="hero-content container">
-      <div class="hero-badge">Music Copyright Clearance Agency</div>
-      <h1 class="hero-title">
+      <div class="hero-badge" data-i18n="hero_badge">Music Copyright Clearance Agency</div>
+      <h1 class="hero-title" data-i18n="hero_title_html">
         콘텐츠의 글로벌<br />
         <span class="hero-accent">IP 비상</span>을 가능케 하는<br />
         최적의 파트너
       </h1>
-      <p class="hero-desc">
+      <p class="hero-desc" data-i18n="hero_desc_html">
         방송 · 드라마 · 광고 · 게임 등 다양한 장르에서<br />
         음악저작물을 <strong>합리적인 비용</strong>으로 <strong>안전하게</strong> 이용할 수 있도록<br />
         전문적이고 체계적인 프로세스를 제공합니다.
       </p>
       <div class="hero-cta">
-        <a href="#business" class="btn-primary">사업 분야 보기</a>
-        <a href="#contact" class="btn-ghost">문의하기</a>
+        <a href="#business" class="btn-primary" data-i18n="hero_cta_business">사업 분야 보기</a>
+        <a href="#contact" class="btn-ghost" data-i18n="nav_contact">문의하기</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
           <span class="stat-num">2009</span>
-          <span class="stat-label">설립연도</span>
+          <span class="stat-label" data-i18n="stat_founded">설립연도</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat">
-          <span class="stat-num">15<span class="stat-unit">년+</span></span>
-          <span class="stat-label">전문 경력</span>
+          <span class="stat-num">15<span class="stat-unit" data-i18n="stat_years_unit">년+</span></span>
+          <span class="stat-label" data-i18n="stat_experience">전문 경력</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat">
           <span class="stat-num">90<span class="stat-unit">%+</span></span>
-          <span class="stat-label">클리어런스 성공률</span>
+          <span class="stat-label" data-i18n="stat_clearance">클리어런스 성공률</span>
         </div>
       </div>
     </div>
     <div class="hero-scroll-hint" aria-hidden="true">
-      <span>스크롤</span>
+      <span data-i18n="scroll_hint">스크롤</span>
       <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5" fill="currentColor"/></svg>
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section class="section youtube-section" id="youtube">
+    <div class="container">
+      <div class="section-label" data-i18n="yt_label">Channel</div>
+      <div class="youtube-header">
+        <h2 class="section-title" data-i18n="yt_title">Major7 E&amp;M 채널</h2>
+        <p class="section-sub" data-i18n="yt_desc">음악 저작권의 최신 트렌드와 인사이트를 영상으로 만나보세요.</p>
+      </div>
+      <div class="youtube-player-wrap">
+        <!-- 유튜브 영상 연결 전 플레이스홀더 -->
+        <div class="yt-placeholder" id="ytPlaceholder">
+          <div class="yt-placeholder-inner">
+            <svg class="yt-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" fill="#FF0000"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+            </svg>
+            <p class="yt-placeholder-text" data-i18n="yt_placeholder">영상이 곧 업로드됩니다. 채널을 구독해 주세요!</p>
+            <a href="https://youtube.com/@major7enmtv" target="_blank" rel="noopener" class="yt-channel-btn" data-i18n="yt_channel_btn">채널 방문하기</a>
+          </div>
+        </div>
+        <!-- 영상 업로드 후 아래 주석을 해제하고 VIDEO_ID를 교체하세요 -->
+        <!--
+        <div class="yt-embed-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=1&rel=0"
+            title="Major7 E&M 채널"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        -->
+      </div>
     </div>
   </section>
 
@@ -175,29 +231,29 @@
       <div class="section-label">About Us</div>
       <div class="about-grid">
         <div class="about-left">
-          <h2 class="section-title">국내 최고의<br />음악 저작권<br /><span class="text-accent">클리어런스 에이전시</span></h2>
-          <p class="about-desc">
+          <h2 class="section-title" data-i18n="about_title_html">국내 최고의<br />음악 저작권<br /><span class="text-accent">클리어런스 에이전시</span></h2>
+          <p class="about-desc" data-i18n="about_desc">
             ㈜ 메이저세븐이엔엠은 사용자가 방송·드라마·광고·게임 등 다양한 장르에서 필요한 음악저작물을 합리적인 비용으로 안전하게 이용할 수 있도록 콘텐츠 제작 전반의 이해도와 실무 경험을 바탕으로 전문적이고 체계적인 프로세스를 제공합니다.
           </p>
           <div class="about-info-table">
             <div class="info-row">
-              <span class="info-label">기업명</span>
+              <span class="info-label" data-i18n="info_company">기업명</span>
               <span class="info-value">주식회사 메이저세븐이엔엠</span>
             </div>
             <div class="info-row">
-              <span class="info-label">설립일</span>
-              <span class="info-value">2009년 9월</span>
+              <span class="info-label" data-i18n="info_founded_label">설립일</span>
+              <span class="info-value" data-i18n="info_founded_val">2009년 9월</span>
             </div>
             <div class="info-row">
-              <span class="info-label">대표이사</span>
+              <span class="info-label" data-i18n="info_ceo">대표이사</span>
               <span class="info-value">김지욱</span>
             </div>
             <div class="info-row">
-              <span class="info-label">사업분야</span>
-              <span class="info-value">음악 저작권 관리, 저작권 컨설팅, 정보 서비스, 콘텐츠 기획 및 제작</span>
+              <span class="info-label" data-i18n="info_business">사업분야</span>
+              <span class="info-value" data-i18n="info_business_val">음악 저작권 관리, 저작권 컨설팅, 정보 서비스, 콘텐츠 기획 및 제작</span>
             </div>
             <div class="info-row">
-              <span class="info-label">주소</span>
+              <span class="info-label" data-i18n="info_address">주소</span>
               <span class="info-value">경기도 고양시 일산동구 산두로 17-2 2F (하이카프라자빌딩)</span>
             </div>
             <div class="info-row">
@@ -209,7 +265,7 @@
         <div class="about-right">
           <div class="mission-card">
             <div class="mission-label">Mission</div>
-            <blockquote class="mission-text">
+            <blockquote class="mission-text" data-i18n="mission_text">
               "합리적인 비용과 전문적이고 체계적인 솔루션을 제공함으로써 콘텐츠의 글로벌 IP 비상을 가능케 하는 최적의 파트너, Major7 E&M"
             </blockquote>
           </div>
@@ -218,29 +274,29 @@
               <div class="value-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <h3>신뢰성</h3>
-              <p>검증된 네트워크와 실무 경험으로 확실한 결과를 보장합니다</p>
+              <h3 data-i18n="val1_title">신뢰성</h3>
+              <p data-i18n="val1_desc">검증된 네트워크와 실무 경험으로 확실한 결과를 보장합니다</p>
             </div>
             <div class="value-card">
               <div class="value-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
               </div>
-              <h3>전문성</h3>
-              <p>15년 이상의 음악 저작권 실무 역량과 글로벌 네트워크</p>
+              <h3 data-i18n="val2_title">전문성</h3>
+              <p data-i18n="val2_desc">15년 이상의 음악 저작권 실무 역량과 글로벌 네트워크</p>
             </div>
             <div class="value-card">
               <div class="value-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
-              <h3>책임감</h3>
-              <p>프로젝트 시작부터 완료까지 일관된 책임감으로 대응합니다</p>
+              <h3 data-i18n="val3_title">책임감</h3>
+              <p data-i18n="val3_desc">프로젝트 시작부터 완료까지 일관된 책임감으로 대응합니다</p>
             </div>
             <div class="value-card">
               <div class="value-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </div>
-              <h3>글로벌</h3>
-              <p>국내외 권리사 네트워크를 통한 글로벌 클리어런스 수행</p>
+              <h3 data-i18n="val4_title">글로벌</h3>
+              <p data-i18n="val4_desc">국내외 권리사 네트워크를 통한 글로벌 클리어런스 수행</p>
             </div>
           </div>
         </div>
@@ -252,7 +308,7 @@
   <section class="section section-dark" id="history">
     <div class="container">
       <div class="section-label light">History</div>
-      <h2 class="section-title light">15년의 전문 역사</h2>
+      <h2 class="section-title light" data-i18n="history_title">15년의 전문 역사</h2>
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-year">2009</div>
@@ -303,7 +359,7 @@
     <div class="container">
       <div class="section-label">Business Overview</div>
       <div class="section-header">
-        <h2 class="section-title">저작권 Clearance</h2>
+        <h2 class="section-title" data-i18n="biz_title">저작권 Clearance</h2>
         <p class="section-sub">급변하는 콘텐츠 시장 속, IP 제작의 가장 큰 허들 '음악 저작권'<br />㈜메이저세븐이엔엠은 제작자의 니즈를 충족하는 솔루션을 제시합니다.</p>
       </div>
       <div class="business-grid">
@@ -367,8 +423,8 @@
   <section class="section section-muted" id="capability">
     <div class="container">
       <div class="section-label">Our Performance</div>
-      <h2 class="section-title">장르별 대응역량</h2>
-      <p class="section-sub">각 콘텐츠 장르의 특성을 깊이 이해하고 맞춤형 솔루션을 제공합니다</p>
+      <h2 class="section-title" data-i18n="cap_title">장르별 대응역량</h2>
+      <p class="section-sub" data-i18n="cap_sub">각 콘텐츠 장르의 특성을 깊이 이해하고 맞춤형 솔루션을 제공합니다</p>
 
       <div class="capability-tabs" role="tablist">
         <button class="tab-btn active" role="tab" aria-selected="true" data-tab="drama">드라마</button>
@@ -575,8 +631,8 @@
   <section class="section" id="performance">
     <div class="container">
       <div class="section-label">Our Performance</div>
-      <h2 class="section-title">주요 성과</h2>
-      <p class="section-sub">국내 주요 채널 및 OTT 오리지널 콘텐츠 클리어런스 전담 수행</p>
+      <h2 class="section-title" data-i18n="perf_title">주요 성과</h2>
+      <p class="section-sub" data-i18n="perf_sub">국내 주요 채널 및 OTT 오리지널 콘텐츠 클리어런스 전담 수행</p>
 
       <div class="perf-tabs" role="tablist">
         <button class="perf-tab active" data-perf="drama-perf">드라마</button>
@@ -687,8 +743,8 @@
       <div class="section-label light">Contact</div>
       <div class="contact-grid">
         <div class="contact-left">
-          <h2 class="section-title light">저작권 문제,<br />저희에게<br /><span class="text-gold">맡겨주세요</span></h2>
-          <p class="contact-desc">음악 저작권 클리어런스부터 콘텐츠 제작까지<br />전문가팀이 신속하고 정확하게 도와드립니다.</p>
+          <h2 class="section-title light" data-i18n="contact_title_html">저작권 문제,<br />저희에게<br /><span class="text-gold">맡겨주세요</span></h2>
+          <p class="contact-desc" data-i18n="contact_desc">음악 저작권 클리어런스부터 콘텐츠 제작까지<br />전문가팀이 신속하고 정확하게 도와드립니다.</p>
           <div class="contact-info">
             <a href="tel:01077569940" class="contact-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.62 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.54a16 16 0 0 0 6.55 6.55l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -707,15 +763,15 @@
         <div class="contact-right">
           <form class="contact-form" id="contactForm" onsubmit="handleMailto(event)">
             <div class="form-group">
-              <label for="name">이름 / 회사명</label>
-              <input type="text" id="name" name="name" placeholder="홍길동 / ㈜OO엔터테인먼트" required />
+              <label for="name" data-i18n="form_name">이름 / 회사명</label>
+              <input type="text" id="name" name="name" data-i18n-placeholder="form_name_ph" placeholder="홍길동 / ㈜OO엔터테인먼트" required />
             </div>
             <div class="form-group">
-              <label for="contact-email">연락처</label>
-              <input type="text" id="contact-email" name="contact" placeholder="이메일 또는 전화번호" required />
+              <label for="contact-email" data-i18n="form_contact">연락처</label>
+              <input type="text" id="contact-email" name="contact" data-i18n-placeholder="form_contact_ph" placeholder="이메일 또는 전화번호" required />
             </div>
             <div class="form-group">
-              <label for="subject">문의 유형</label>
+              <label for="subject" data-i18n="form_subject">문의 유형</label>
               <select id="subject" name="subject">
                 <option value="">선택해주세요</option>
                 <option>저작권 클리어런스</option>
@@ -729,15 +785,15 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="message">문의 내용</label>
-              <textarea id="message" name="message" rows="5" placeholder="프로젝트 개요, 사용 장르, 일정 등을 간략히 적어주세요." required></textarea>
+              <label for="message" data-i18n="form_message">문의 내용</label>
+              <textarea id="message" name="message" rows="5" data-i18n-placeholder="form_message_ph" placeholder="프로젝트 개요, 사용 장르, 일정 등을 간략히 적어주세요." required></textarea>
             </div>
-            <button type="submit" class="btn-submit">문의 보내기</button>
+            <button type="submit" class="btn-submit" data-i18n="form_submit">문의 보내기</button>
             <div class="form-security-note">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              보안상 개인 이메일로 다시 메일을 보내주세요. 감사합니다.
+              <span data-i18n="security_note">보안상 개인 이메일로 다시 메일을 보내주세요. 감사합니다.</span>
             </div>
-            <p class="form-note">* 버튼을 누르면 네이버 메일이 열립니다. 전송 후 빠른 시일 내에 회신드립니다.</p>
+            <p class="form-note" data-i18n="form_note">* 버튼을 누르면 네이버 메일이 열립니다. 전송 후 빠른 시일 내에 회신드립니다.</p>
           </form>
         </div>
       </div>
@@ -770,7 +826,7 @@
       </div>
       <div class="footer-bottom">
         <span>© 2024 Major7 E&amp;M Inc. All rights reserved.</span>
-        <span>음악 저작권 클리어런스 | 리스크 관리 | 저작권 정보 서비스 | 콘텐츠 기획 및 제작</span>
+        <span data-i18n="footer_services">음악 저작권 클리어런스 | 리스크 관리 | 저작권 정보 서비스 | 콘텐츠 기획 및 제작</span>
       </div>
     </div>
   </footer>
@@ -781,9 +837,9 @@
       <div class="security-popup-icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
-      <h3 class="security-popup-title">보안 안내</h3>
-      <p class="security-popup-msg">보안상 개인 이메일로<br>다시 메일을 보내주세요.<br><br>감사합니다.</p>
-      <button class="security-popup-close" id="securityPopupClose">확인</button>
+      <h3 class="security-popup-title" data-i18n="popup_title">보안 안내</h3>
+      <p class="security-popup-msg" data-i18n="popup_msg_html">보안상 개인 이메일로<br>다시 메일을 보내주세요.<br><br>감사합니다.</p>
+      <button class="security-popup-close" id="securityPopupClose" data-i18n="popup_confirm">확인</button>
     </div>
   </div>
 
@@ -806,5 +862,78 @@
   </div>
 
   <script src="main.js"></script>
-</body>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  var scrollRaf=0;
+  function emitScroll(){
+    scrollRaf=0;
+    var x=window.scrollX||window.pageXOffset||0;
+    var y=window.scrollY||window.pageYOffset||0;
+    window.parent.postMessage({type:'INLINE_EDIT_SCROLL',scrollX:x,scrollY:y},'*');
+  }
+  window.addEventListener('scroll',function(){
+    if(scrollRaf)return;
+    scrollRaf=requestAnimationFrame(emitScroll);
+  },{passive:true,capture:true});
+  emitScroll();
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
 </html>
