@@ -83,65 +83,7 @@
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="vinyl-graphic" aria-hidden="true">
-        <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
-          <defs>
-            <style>
-              .vinyl-disc { animation: vinylDiscSpin 6s linear infinite; transform-origin: 250px 250px; }
-              @keyframes vinylDiscSpin {
-                from { transform: rotate(0deg); }
-                to   { transform: rotate(360deg); }
-              }
-              .tonearm-group { animation: tonearmSwing 3s ease-in-out infinite alternate; transform-origin: 468px 120px; }
-              @keyframes tonearmSwing {
-                from { transform: rotate(-12deg); }
-                to   { transform: rotate(0deg); }
-              }
-            </style>
-          </defs>
-
-          <!-- Vinyl disc -->
-          <g class="vinyl-disc">
-            <!-- Outer disc : 짙은 갈색 계열 -->
-            <circle cx="250" cy="250" r="238" fill="#2c2420"/>
-            <!-- Groove rings -->
-            <circle cx="250" cy="250" r="218" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.2"/>
-            <circle cx="250" cy="250" r="196" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <circle cx="250" cy="250" r="174" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <circle cx="250" cy="250" r="152" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <circle cx="250" cy="250" r="130" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-            <!-- Center dark ring -->
-            <circle cx="250" cy="250" r="106" fill="#1e1a18"/>
-            <!-- Center label : 복숭아빛 주황 -->
-            <circle cx="250" cy="250" r="100" fill="#e8956d"/>
-            <!-- Speech bubble tail -->
-            <polygon points="232,346 250,372 268,346" fill="#e8956d"/>
-            <!-- Inner bubble darker -->
-            <ellipse cx="250" cy="242" rx="72" ry="62" fill="#d4724a"/>
-            <!-- maj7 텍스트 -->
-            <text x="234" y="234" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="bold" font-style="italic" fill="#1e1008" letter-spacing="-1">maj</text>
-            <text x="272" y="268" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="bold" fill="#1e1008">7</text>
-            <!-- Center hole -->
-            <circle cx="250" cy="250" r="7" fill="#1e1a18"/>
-            <!-- 왼쪽 하단 웨이브 라인 (흰색) -->
-            <path d="M68 310 Q84 296 68 282" stroke="rgba(255,255,255,0.85)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-            <path d="M80 324 Q100 306 80 288" stroke="rgba(255,255,255,0.65)" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M94 338 Q118 316 94 294" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          </g>
-
-          <!-- 톤암 : 오른쪽 바깥에서 레코드 안쪽으로 -->
-          <g class="tonearm-group">
-            <!-- 피벗 원 -->
-            <circle cx="468" cy="120" r="12" fill="#c8c8c8"/>
-            <circle cx="468" cy="120" r="6" fill="#909090"/>
-            <!-- 팔 본체 -->
-            <line x1="468" y1="120" x2="352" y2="215" stroke="#d8d8d8" stroke-width="6" stroke-linecap="round"/>
-            <!-- 헤드셸 꺾임 -->
-            <line x1="352" y1="215" x2="328" y2="248" stroke="#d0d0d0" stroke-width="5" stroke-linecap="round"/>
-            <!-- 바늘 -->
-            <line x1="328" y1="248" x2="322" y2="268" stroke="#b8b8b8" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="321" cy="270" r="4" fill="#a0a0a0"/>
-          </g>
-        </svg>
+        <img src="logo.jpg" alt="메이저세븐이엔엠 레코드 심볼" class="vinyl-logo-img" />
       </div>
       <div class="hero-grid-overlay" aria-hidden="true"></div>
     </div>
@@ -716,17 +658,17 @@
           <div class="perf-tag" data-i18n="perf_content_tag">콘텐츠 제작 – 주요 추진 성과</div>
         </div>
         <div class="content-perf-list">
-          <div class="perf-item">SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정우) 제작</div>
-          <div class="perf-item">SBS 푸바오와 할부지 PART 2 – 넌 기쁨이자 행운이야 (레드벨벳 슬기) 제작</div>
-          <div class="perf-item">Mnet 아티스탁게임 – SEMI FINAL, FINAL 음원 제작</div>
-          <div class="perf-item">공익광고협의회 X 환경부 캠페인 – 지구를 위한 중독되는 용기송 (브레이브걸스 편) CM송 제작</div>
-          <div class="perf-item">DISCOVER WORLD WIDE 'SING AGAIN' BGM 제작</div>
-          <div class="perf-item">2019 MGMA 슬지(EXID) X 산들(B1A4) 월간 윤종신 스페셜 듀엣 편곡</div>
-          <div class="perf-item">㈜ 아이비클럽 공식음원 &lt;Ivy with you – 워너원, 스트레이키즈&gt; 제작</div>
-          <div class="perf-item">tvN 드라마 &lt;싸우자 귀신아&gt; OST 너만보여 &lt;피리부는 사나이&gt; OST 멈춰버린 밤, SBS 드라마 &lt;질투의 화신&gt; 멀어져만 간다 등 프로듀싱 다수</div>
-          <div class="perf-item">tvN 10주년기념 다큐멘터리 &lt;판타스틱 패밀리&gt; 음악 제작</div>
-          <div class="perf-item">KBS 역사기획 &lt;가야&gt; 음악 제작</div>
-          <div class="perf-item">이데일리TV 개국 14주년 특별기획 VR 다큐멘터리 치유 – 음악 제작</div>
+          <div class="perf-item" data-i18n="perf_c1">SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정우) 제작</div>
+          <div class="perf-item" data-i18n="perf_c2">SBS 푸바오와 할부지 PART 2 – 넌 기쁨이자 행운이야 (레드벨벳 슬기) 제작</div>
+          <div class="perf-item" data-i18n="perf_c3">Mnet 아티스탁게임 – SEMI FINAL, FINAL 음원 제작</div>
+          <div class="perf-item" data-i18n="perf_c4">공익광고협의회 X 환경부 캠페인 – 지구를 위한 중독되는 용기송 (브레이브걸스 편) CM송 제작</div>
+          <div class="perf-item" data-i18n="perf_c5">DISCOVER WORLD WIDE 'SING AGAIN' BGM 제작</div>
+          <div class="perf-item" data-i18n="perf_c6">2019 MGMA 슬지(EXID) X 산들(B1A4) 월간 윤종신 스페셜 듀엣 편곡</div>
+          <div class="perf-item" data-i18n="perf_c7">㈜ 아이비클럽 공식음원 &lt;Ivy with you – 워너원, 스트레이키즈&gt; 제작</div>
+          <div class="perf-item" data-i18n="perf_c8">tvN 드라마 &lt;싸우자 귀신아&gt; OST 너만보여 &lt;피리부는 사나이&gt; OST 멈춰버린 밤, SBS 드라마 &lt;질투의 화신&gt; 멀어져만 간다 등 프로듀싱 다수</div>
+          <div class="perf-item" data-i18n="perf_c9">tvN 10주년기념 다큐멘터리 &lt;판타스틱 패밀리&gt; 음악 제작</div>
+          <div class="perf-item" data-i18n="perf_c10">KBS 역사기획 &lt;가야&gt; 음악 제작</div>
+          <div class="perf-item" data-i18n="perf_c11">이데일리TV 개국 14주년 특별기획 VR 다큐멘터리 치유 – 음악 제작</div>
         </div>
       </div>
     </div>
