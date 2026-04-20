@@ -68,61 +68,63 @@
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="vinyl-graphic" aria-hidden="true">
-        <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+        <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
           <defs>
             <style>
-              .vinyl-disc { animation: vinylDiscSpin 5s linear infinite; transform-origin: 240px 260px; }
+              .vinyl-disc { animation: vinylDiscSpin 6s linear infinite; transform-origin: 250px 250px; }
               @keyframes vinylDiscSpin {
                 from { transform: rotate(0deg); }
                 to   { transform: rotate(360deg); }
               }
-              .tonearm-group { animation: tonearmSwing 3s ease-in-out infinite alternate; transform-origin: 420px 80px; }
+              .tonearm-group { animation: tonearmSwing 3s ease-in-out infinite alternate; transform-origin: 468px 120px; }
               @keyframes tonearmSwing {
-                from { transform: rotate(-18deg); }
-                to   { transform: rotate(-5deg); }
+                from { transform: rotate(-12deg); }
+                to   { transform: rotate(0deg); }
               }
             </style>
           </defs>
 
-          <!-- Vinyl disc (spinning) -->
+          <!-- Vinyl disc -->
           <g class="vinyl-disc">
-            <!-- Outer disc -->
-            <circle cx="240" cy="260" r="220" fill="#1a1a1a"/>
+            <!-- Outer disc : 짙은 갈색 계열 -->
+            <circle cx="250" cy="250" r="238" fill="#2c2420"/>
             <!-- Groove rings -->
-            <circle cx="240" cy="260" r="200" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
-            <circle cx="240" cy="260" r="178" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-            <circle cx="240" cy="260" r="156" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-            <circle cx="240" cy="260" r="134" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <circle cx="240" cy="260" r="112" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <!-- Center label -->
-            <circle cx="240" cy="260" r="82" fill="#2a2a2a"/>
-            <circle cx="240" cy="260" r="80" fill="#e8a87c"/>
-            <!-- Speech bubble shape inside label -->
-            <ellipse cx="240" cy="256" rx="52" ry="44" fill="#d4885a"/>
-            <polygon points="228,298 240,318 252,298" fill="#d4885a"/>
-            <!-- maj7 text -->
-            <text x="240" y="248" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#2a1505" letter-spacing="-1">maj</text>
-            <text x="264" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2a1505">7</text>
+            <circle cx="250" cy="250" r="218" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.2"/>
+            <circle cx="250" cy="250" r="196" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="174" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="152" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="130" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <!-- Center dark ring -->
+            <circle cx="250" cy="250" r="106" fill="#1e1a18"/>
+            <!-- Center label : 복숭아빛 주황 -->
+            <circle cx="250" cy="250" r="100" fill="#e8956d"/>
+            <!-- Speech bubble tail -->
+            <polygon points="232,346 250,372 268,346" fill="#e8956d"/>
+            <!-- Inner bubble darker -->
+            <ellipse cx="250" cy="242" rx="72" ry="62" fill="#d4724a"/>
+            <!-- maj7 텍스트 -->
+            <text x="234" y="234" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="bold" font-style="italic" fill="#1e1008" letter-spacing="-1">maj</text>
+            <text x="272" y="268" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="bold" fill="#1e1008">7</text>
             <!-- Center hole -->
-            <circle cx="240" cy="260" r="6" fill="#1a1a1a"/>
-            <!-- Left groove accent lines -->
-            <path d="M42 210 Q58 230 42 250" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M54 200 Q72 230 54 260" stroke="rgba(255,255,255,0.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M66 192 Q86 230 66 268" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="250" cy="250" r="7" fill="#1e1a18"/>
+            <!-- 왼쪽 하단 웨이브 라인 (흰색) -->
+            <path d="M68 310 Q84 296 68 282" stroke="rgba(255,255,255,0.85)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M80 324 Q100 306 80 288" stroke="rgba(255,255,255,0.65)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M94 338 Q118 316 94 294" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           </g>
 
-          <!-- Tonearm (pivot at top-right, swinging) -->
+          <!-- 톤암 : 오른쪽 바깥에서 레코드 안쪽으로 -->
           <g class="tonearm-group">
-            <!-- Pivot point -->
-            <circle cx="420" cy="80" r="10" fill="#c0c0c0"/>
-            <circle cx="420" cy="80" r="5" fill="#888"/>
-            <!-- Arm body -->
-            <line x1="420" y1="80" x2="330" y2="240" stroke="#d0d0d0" stroke-width="5" stroke-linecap="round"/>
-            <!-- Head shell -->
-            <line x1="330" y1="240" x2="312" y2="268" stroke="#d0d0d0" stroke-width="4" stroke-linecap="round"/>
-            <!-- Stylus needle tip -->
-            <line x1="312" y1="268" x2="308" y2="282" stroke="#bbb" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="308" cy="283" r="3" fill="#aaa"/>
+            <!-- 피벗 원 -->
+            <circle cx="468" cy="120" r="12" fill="#c8c8c8"/>
+            <circle cx="468" cy="120" r="6" fill="#909090"/>
+            <!-- 팔 본체 -->
+            <line x1="468" y1="120" x2="352" y2="215" stroke="#d8d8d8" stroke-width="6" stroke-linecap="round"/>
+            <!-- 헤드셸 꺾임 -->
+            <line x1="352" y1="215" x2="328" y2="248" stroke="#d0d0d0" stroke-width="5" stroke-linecap="round"/>
+            <!-- 바늘 -->
+            <line x1="328" y1="248" x2="322" y2="268" stroke="#b8b8b8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="321" cy="270" r="4" fill="#a0a0a0"/>
           </g>
         </svg>
       </div>
