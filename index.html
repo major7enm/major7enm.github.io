@@ -68,18 +68,62 @@
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="vinyl-graphic" aria-hidden="true">
-        <svg viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="240" cy="240" r="230" fill="#0a1628" opacity="0.85"/>
-          <circle cx="240" cy="240" r="180" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <circle cx="240" cy="240" r="140" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <circle cx="240" cy="240" r="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <circle cx="240" cy="240" r="60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <circle cx="240" cy="240" r="36" fill="#1e3a5f"/>
-          <circle cx="240" cy="240" r="12" fill="#f0c040"/>
-          <circle cx="240" cy="240" r="4" fill="#0a1628"/>
-          <!-- sound wave lines -->
-          <path d="M240 50 Q290 80 240 110 Q190 140 240 170" stroke="rgba(240,192,64,0.3)" stroke-width="1.5" fill="none"/>
-          <path d="M240 50 Q270 80 240 110 Q210 140 240 170" stroke="rgba(240,192,64,0.15)" stroke-width="1" fill="none"/>
+        <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+          <defs>
+            <style>
+              .vinyl-disc { animation: vinylSpin 4s linear infinite; transform-origin: 240px 260px; }
+              @keyframes vinylSpin {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+              }
+              .tonearm-group { animation: tonearmSwing 3s ease-in-out infinite alternate; transform-origin: 420px 80px; }
+              @keyframes tonearmSwing {
+                from { transform: rotate(-18deg); }
+                to   { transform: rotate(-5deg); }
+              }
+            </style>
+          </defs>
+
+          <!-- Vinyl disc (spinning) -->
+          <g class="vinyl-disc">
+            <!-- Outer disc -->
+            <circle cx="240" cy="260" r="220" fill="#1a1a1a"/>
+            <!-- Groove rings -->
+            <circle cx="240" cy="260" r="200" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+            <circle cx="240" cy="260" r="178" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <circle cx="240" cy="260" r="156" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <circle cx="240" cy="260" r="134" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <circle cx="240" cy="260" r="112" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- Center label -->
+            <circle cx="240" cy="260" r="82" fill="#2a2a2a"/>
+            <circle cx="240" cy="260" r="80" fill="#e8a87c"/>
+            <!-- Speech bubble shape inside label -->
+            <ellipse cx="240" cy="256" rx="52" ry="44" fill="#d4885a"/>
+            <polygon points="228,298 240,318 252,298" fill="#d4885a"/>
+            <!-- maj7 text -->
+            <text x="240" y="248" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#2a1505" letter-spacing="-1">maj</text>
+            <text x="264" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2a1505">7</text>
+            <!-- Center hole -->
+            <circle cx="240" cy="260" r="6" fill="#1a1a1a"/>
+            <!-- Left groove accent lines -->
+            <path d="M42 210 Q58 230 42 250" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M54 200 Q72 230 54 260" stroke="rgba(255,255,255,0.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M66 192 Q86 230 66 268" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- Tonearm (pivot at top-right, swinging) -->
+          <g class="tonearm-group">
+            <!-- Pivot point -->
+            <circle cx="420" cy="80" r="10" fill="#c0c0c0"/>
+            <circle cx="420" cy="80" r="5" fill="#888"/>
+            <!-- Arm body -->
+            <line x1="420" y1="80" x2="330" y2="240" stroke="#d0d0d0" stroke-width="5" stroke-linecap="round"/>
+            <!-- Head shell -->
+            <line x1="330" y1="240" x2="312" y2="268" stroke="#d0d0d0" stroke-width="4" stroke-linecap="round"/>
+            <!-- Stylus needle tip -->
+            <line x1="312" y1="268" x2="308" y2="282" stroke="#bbb" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="308" cy="283" r="3" fill="#aaa"/>
+          </g>
         </svg>
       </div>
       <div class="hero-grid-overlay" aria-hidden="true"></div>
@@ -88,8 +132,8 @@
       <div class="hero-badge">Music Copyright Clearance Agency</div>
       <h1 class="hero-title">
         콘텐츠의 글로벌<br />
-        <span class="hero-accent">IP 비상</span>을<br />
-        가능케 하는 최적의 파트너
+        <span class="hero-accent">IP 비상</span>을 가능케 하는<br />
+        최적의 파트너
       </h1>
       <p class="hero-desc">
         방송 · 드라마 · 광고 · 게임 등 다양한 장르에서<br />
