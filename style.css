@@ -271,10 +271,10 @@ input,textarea,select{font:inherit;color:inherit}
 .hero-bg{position:absolute;inset:0;pointer-events:none}
 .vinyl-graphic{
   position:absolute;
-  right:3%;
+  right:8%;
   top:50%;
   transform:translateY(-50%);
-  width:min(480px,44vw);
+  width:min(420px,38vw);
   opacity:.9;
 }
 .hero-grid-overlay{
@@ -286,8 +286,8 @@ input,textarea,select{font:inherit;color:inherit}
 .hero-content{
   position:relative;z-index:2;
   padding-top:var(--space-16);padding-bottom:var(--space-16);
-  max-width:52%;
-  margin-left:0;
+  max-width:48%;
+  margin-left:8%;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:var(--space-2);
