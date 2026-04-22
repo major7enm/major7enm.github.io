@@ -143,8 +143,8 @@ input,textarea,select{font:inherit;color:inherit}
   color:var(--color-primary);line-height:1.1;letter-spacing:-.01em}
 .logo-en{font-size:.65rem;font-weight:500;color:var(--color-text-muted);letter-spacing:.04em}
 
-.nav{display:flex;align-items:center;gap:var(--space-8);margin-left:auto}
-.nav a{font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted)}
+.nav{display:flex;align-items:center;gap:var(--space-6);margin-left:auto;flex-shrink:0}
+.nav a{font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);white-space:nowrap}
 .nav a:hover{color:var(--color-primary)}
 
 .header-actions{display:flex;align-items:center;gap:var(--space-3)}
