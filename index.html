@@ -134,15 +134,32 @@
         <h2 class="section-title" data-i18n="yt_title">Major7 E&amp;M 채널</h2>
         <p class="section-sub" data-i18n="yt_desc">음악 저작권의 최신 트렌드와 인사이트를 영상으로 만나보세요.</p>
       </div>
-      <div class="youtube-player-wrap">
-        <div class="yt-embed-wrap">
-          <iframe
-            src="https://www.youtube.com/embed/l4RQMWZMBKo?loop=1&playlist=l4RQMWZMBKo&controls=1&rel=0"
-            title="Major7 E&M 채널"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
+      <div class="yt-gallery">
+        <!-- 메인 플레이어 -->
+        <div class="yt-main-player">
+          <div class="yt-embed-wrap">
+            <iframe
+              id="ytMainIframe"
+              src="https://www.youtube.com/embed/l4RQMWZMBKo?rel=0&controls=1"
+              title="Major7 E&M 채널"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <a href="https://youtube.com/@major7enmtv" target="_blank" rel="noopener" class="yt-channel-link">
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true"><rect width="20" height="14" rx="4" fill="#FF0000"/><polygon points="8,3.5 15,7 8,10.5" fill="white"/></svg>
+            <span data-i18n="yt_watch_more">다음에서 보기</span>
+          </a>
+        </div>
+        <!-- 썸네일 갤러리 -->
+        <div class="yt-thumbs">
+          <div class="yt-thumb active" data-video-id="l4RQMWZMBKo">
+            <img src="https://img.youtube.com/vi/l4RQMWZMBKo/mqdefault.jpg" alt="2025 SHOW REEL" />
+            <div class="yt-thumb-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.6)"/><polygon points="9.5,7 18,12 9.5,17" fill="white"/></svg></div>
+            <span class="yt-thumb-label">2025 SHOW REEL</span>
+          </div>
+          <!-- 추가 영상은 여기에 동일한 형식으로 추가 -->
         </div>
       </div>
     </div>

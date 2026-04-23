@@ -698,6 +698,7 @@ perf_c1: 'SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정
       perf_c9: 'tvN 10주년기념 다큐멘터리 &lt;판타스틱 패밀리&gt; 음악 제작',
       perf_c10: 'KBS 역사기획 &lt;가야&gt; 음악 제작',
       perf_c11: '이데일리TV 개국 14주년 특별기획 VR 다큐멘터리 치유 – 음악 제작',
+      yt_watch_more:'다음에서 보기',
       opt_select:'선택해주세요', opt1:'저작권 클리어런스', opt2:'드라마·OTT 저작권', opt3:'K-POP / 아이돌 프로그램',
       opt4:'트로트·발라드 프로그램', opt5:'콘서트·예능·시상식', opt6:'콘텐츠 제작', opt7:'저작권 분쟁 대응', opt8:'기타',
     },
@@ -804,6 +805,7 @@ perf_c1: 'SBS Fubao and Grandpa PART 1 – Goodbye with a Smile Now (NCT Jungwoo
       perf_c9: 'tvN 10th Anniversary Documentary &lt;Fantastic Family&gt; Music Production',
       perf_c10: 'KBS Historical Documentary &lt;Gaya&gt; Music Production',
       perf_c11: 'E-Daily TV 14th Anniversary Special VR Documentary "Healing" – Music Production',
+      yt_watch_more:'Watch on YouTube',
       opt_select:'Please select', opt1:'Copyright Clearance', opt2:'Drama · OTT Copyright', opt3:'K-POP / Idol Programs',
       opt4:'Trot · Ballad Programs', opt5:'Concert · Variety · Awards', opt6:'Content Production', opt7:'Copyright Dispute', opt8:'Other',
     },
@@ -910,6 +912,7 @@ perf_c1: 'SBS プバオとおじいちゃん PART 1 – 笑顔でさようなら
       perf_c9: 'tvN 10周年記念ドキュメンタリー &lt;ファンタスティックファミリー&gt; 音楽制作',
       perf_c10: 'KBS 歴史企画 &lt;伽耶&gt; 音楽制作',
       perf_c11: 'E-Daily TV 開局14周年特別企画 VRドキュメンタリー「癒し」 – 音楽制作',
+      yt_watch_more:'YouTubeで見る',
       opt_select:'選択してください', opt1:'著作権クリアランス', opt2:'ドラマ・OTT著作権', opt3:'K-POP / アイドル番組',
       opt4:'トロット・バラード番組', opt5:'コンサート・バラエティ・授賞式', opt6:'コンテンツ制作', opt7:'著作権紛争対応', opt8:'その他',
     },
@@ -1016,6 +1019,7 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
       perf_c9: 'tvN十周年纪念纪录片 &lt;梦幻家族&gt; 音乐制作',
       perf_c10: 'KBS历史企划 &lt;伽倻&gt; 音乐制作',
       perf_c11: 'E-Daily TV开播14周年特别企划VR纪录片"治愈" – 音乐制作',
+      yt_watch_more:'在YouTube上观看',
       opt_select:'请选择', opt1:'版权许可', opt2:'影视·OTT版权', opt3:'K-POP / 偶像节目',
       opt4:'Trot·抒情曲节目', opt5:'演唱会·综艺·颁奖典礼', opt6:'内容制作', opt7:'版权纠纷应对', opt8:'其他',
     }
@@ -1028,4 +1032,22 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 
   // option 태그 번역을 위한 applyTranslations 재실행 패치
   const _orig = window._i18nApply;
+})();
+
+// ── 유튜브 썸네일 갤러리 ──────────────────────────
+(function(){
+  const thumbs = document.querySelectorAll('.yt-thumb');
+  const iframe  = document.getElementById('ytMainIframe');
+  if(!thumbs.length || !iframe) return;
+
+  thumbs.forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      const vid = this.dataset.videoId;
+      // 메인 플레이어 교체 (autoplay=1)
+      iframe.src = 'https://www.youtube.com/embed/' + vid + '?rel=0&controls=1&autoplay=1';
+      // active 표시
+      thumbs.forEach(function(t){ t.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
 })();
