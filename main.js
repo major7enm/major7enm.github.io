@@ -1034,69 +1034,100 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   const _orig = window._i18nApply;
 })();
 
-// ── 유튜브 썸네일 → 팝업 모달 ─────────────────────
+// ── 유튜브 썸네일 팝업 모달 ──────────────────────────
 (function(){
-  // 실제 영상이 있는 썸네일만 (yt-thumb-empty 제외)
-  const thumbs  = Array.from(document.querySelectorAll('.yt-thumb:not(.yt-thumb-empty)'));
-  const modal   = document.getElementById('ytModal');
-  const iframe  = document.getElementById('ytModalIframe');
-  const closeBtn = document.getElementById('ytModalClose');
-  const prevBtn  = document.getElementById('ytModalPrev');
-  const nextBtn  = document.getElementById('ytModalNext');
+  var thumbs   = Array.from(document.querySelectorAll('.yt-thumb:not(.yt-thumb-empty)'));
+  var modal    = document.getElementById('ytModal');
+  var iframe   = document.getElementById('ytModalIframe');
+  var closeBtn = document.getElementById('ytModalClose');
+  var prevBtn  = document.getElementById('ytModalPrev');
+  var nextBtn  = document.getElementById('ytModalNext');
+  var mainIframe = document.getElementById('ytMainIframe');
   if(!thumbs.length || !modal) return;
 
-  let currentIdx = 0;
+  var currentIdx = 0;
+
+  // 메인 플레이어 postMessage 헬퍼
+  function mainCmd(func) {
+    if(!mainIframe) return;
+    try {
+      mainIframe.contentWindow.postMessage(
+        JSON.stringify({ event:'command', func:func, args:[] }), '*'
+      );
+    } catch(e) {}
+  }
 
   function openModal(idx) {
     currentIdx = idx;
+    // 메인 영상 일시정지 + 화면에서 숨기기 (iframe GPU 레이어가 모달 위에 겹치는 현상 방지)
+    mainCmd('pauseVideo');
+    if(mainIframe) mainIframe.style.visibility = 'hidden';
     loadVideo();
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    updateNavBtns();
+    updateNav();
   }
 
   function closeModal() {
     modal.classList.remove('active');
-    iframe.src = '';  // 소리 즉시 차단
+    // 팝업 영상 소리 즉시 차단
+    iframe.src = 'about:blank';
     document.body.style.overflow = '';
+    // 메인 iframe 다시 표시 후 재생 재개
+    if(mainIframe) mainIframe.style.visibility = '';
+    setTimeout(function(){ mainCmd('playVideo'); }, 300);
   }
 
   function loadVideo() {
-    const vid = thumbs[currentIdx].dataset.videoId;
-    iframe.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0&controls=1';
+    var vid = thumbs[currentIdx].dataset.videoId;
+    iframe.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0&controls=1&enablejsapi=1';
   }
 
-  function updateNavBtns() {
+  function updateNav() {
     prevBtn.disabled = (currentIdx === 0);
     nextBtn.disabled = (currentIdx === thumbs.length - 1);
   }
 
   // 썸네일 클릭
   thumbs.forEach(function(thumb, i) {
-    thumb.addEventListener('click', function() { openModal(i); });
+    thumb.addEventListener('click', function(){ openModal(i); });
   });
 
   // 닫기 버튼
   closeBtn.addEventListener('click', closeModal);
 
-  // 모달 바깥 클릭 시 닫기
-  modal.addEventListener('click', function(e) {
+  // 모달 바깥 클릭
+  modal.addEventListener('click', function(e){
     if(e.target === modal) closeModal();
   });
 
-  // ESC 키로 닫기
-  document.addEventListener('keydown', function(e) {
-    if(!modal.classList.contains('active')) return;
-    if(e.key === 'Escape') closeModal();
-    if(e.key === 'ArrowLeft' && currentIdx > 0) { currentIdx--; loadVideo(); updateNavBtns(); }
-    if(e.key === 'ArrowRight' && currentIdx < thumbs.length - 1) { currentIdx++; loadVideo(); updateNavBtns(); }
+  // 이전/다음
+  prevBtn.addEventListener('click', function(){
+    if(currentIdx > 0){ currentIdx--; loadVideo(); updateNav(); }
+  });
+  nextBtn.addEventListener('click', function(){
+    if(currentIdx < thumbs.length - 1){ currentIdx++; loadVideo(); updateNav(); }
   });
 
-  // 이전/다음 버튼
-  prevBtn.addEventListener('click', function() {
-    if(currentIdx > 0) { currentIdx--; loadVideo(); updateNavBtns(); }
+  // ESC / 방향키
+  document.addEventListener('keydown', function(e){
+    if(!modal.classList.contains('active')) return;
+    if(e.key === 'Escape') { closeModal(); return; }
+    if(e.key === 'ArrowLeft' && currentIdx > 0){ currentIdx--; loadVideo(); updateNav(); }
+    if(e.key === 'ArrowRight' && currentIdx < thumbs.length - 1){ currentIdx++; loadVideo(); updateNav(); }
   });
-  nextBtn.addEventListener('click', function() {
-    if(currentIdx < thumbs.length - 1) { currentIdx++; loadVideo(); updateNavBtns(); }
+
+  // 다른 탭으로 이동 시 팝업 + 메인 영상 모두 일시정지
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){
+      if(modal.classList.contains('active')){
+        try {
+          iframe.contentWindow.postMessage(JSON.stringify({
+            event:'command', func:'pauseVideo', args:[]
+          }), '*');
+        } catch(e) {}
+      }
+      mainCmd('pauseVideo');
+    }
   });
 })();
