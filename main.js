@@ -1119,3 +1119,39 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     }
   });
 })();
+
+// ── 메인 유튜브 영상: 화면 밖으로 나가면 자동 정지 ──────────────
+(function(){
+  var mainIframe = document.getElementById('ytMainIframe');
+  if(!mainIframe) return;
+
+  var MAIN_SRC = 'https://www.youtube.com/embed/l4RQMWZMBKo?rel=0&controls=1&enablejsapi=1';
+  var isPlaying = false; // 사용자가 재생 중인지 추적
+
+  // 유튜브 iframe 메시지 수신 → 재생 상태 추적
+  window.addEventListener('message', function(e){
+    try {
+      var data = JSON.parse(e.data);
+      // YT IFrame API 상태: 1=재생중, 2=일시정지, 0=종료
+      if(data.event === 'infoDelivery' && data.info && typeof data.info.playerState !== 'undefined'){
+        isPlaying = (data.info.playerState === 1);
+      }
+    } catch(err) {}
+  });
+
+  // IntersectionObserver: 영상이 10% 미만으로 보이면 src 교체로 강제 정지
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting && isPlaying){
+        // 화면 밖으로 나감 → 강제 정지
+        mainIframe.src = 'about:blank';
+        isPlaying = false;
+      } else if(entry.isIntersecting && mainIframe.src === 'about:blank'){
+        // 다시 화면에 들어옴 → 영상 복원 (일시정지 상태로)
+        mainIframe.src = MAIN_SRC;
+      }
+    });
+  }, { threshold: 0.1 }); // 10% 이상 보여야 "보이는 상태"로 판단
+
+  observer.observe(mainIframe);
+})();
