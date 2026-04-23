@@ -1043,25 +1043,18 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   var prevBtn  = document.getElementById('ytModalPrev');
   var nextBtn  = document.getElementById('ytModalNext');
   var mainIframe = document.getElementById('ytMainIframe');
+  var MAIN_SRC = 'https://www.youtube.com/embed/l4RQMWZMBKo?rel=0&controls=1&enablejsapi=1';
   if(!thumbs.length || !modal) return;
 
   var currentIdx = 0;
 
-  // 메인 플레이어 postMessage 헬퍼
-  function mainCmd(func) {
-    if(!mainIframe) return;
-    try {
-      mainIframe.contentWindow.postMessage(
-        JSON.stringify({ event:'command', func:func, args:[] }), '*'
-      );
-    } catch(e) {}
-  }
-
   function openModal(idx) {
     currentIdx = idx;
-    // 메인 영상 일시정지 + 화면에서 숨기기 (iframe GPU 레이어가 모달 위에 겹치는 현상 방지)
-    mainCmd('pauseVideo');
-    if(mainIframe) mainIframe.style.visibility = 'hidden';
+    // 메인 영상 강제 정지: src를 blank로 교체 (postMessage보다 확실)
+    if(mainIframe) {
+      mainIframe.src = 'about:blank';
+      mainIframe.style.visibility = 'hidden';
+    }
     loadVideo();
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -1073,9 +1066,11 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     // 팝업 영상 소리 즉시 차단
     iframe.src = 'about:blank';
     document.body.style.overflow = '';
-    // 메인 iframe 다시 표시 후 재생 재개
-    if(mainIframe) mainIframe.style.visibility = '';
-    setTimeout(function(){ mainCmd('playVideo'); }, 300);
+    // 메인 iframe 원래 src로 복원 (자동재생 없이 — 사용자가 원할 때 재생)
+    if(mainIframe) {
+      mainIframe.src = MAIN_SRC;
+      mainIframe.style.visibility = '';
+    }
   }
 
   function loadVideo() {
@@ -1117,17 +1112,10 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     if(e.key === 'ArrowRight' && currentIdx < thumbs.length - 1){ currentIdx++; loadVideo(); updateNav(); }
   });
 
-  // 다른 탭으로 이동 시 팝업 + 메인 영상 모두 일시정지
+  // 다른 탭으로 이동 시 팝업 영상 정지 (src blank 방식)
   document.addEventListener('visibilitychange', function(){
-    if(document.hidden){
-      if(modal.classList.contains('active')){
-        try {
-          iframe.contentWindow.postMessage(JSON.stringify({
-            event:'command', func:'pauseVideo', args:[]
-          }), '*');
-        } catch(e) {}
-      }
-      mainCmd('pauseVideo');
+    if(document.hidden && modal.classList.contains('active')){
+      iframe.src = 'about:blank';
     }
   });
 })();
