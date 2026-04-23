@@ -1034,79 +1034,69 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   const _orig = window._i18nApply;
 })();
 
-/* ─── YOUTUBE SECTION (MODAL VERSION) ────────────────────────── */
-.youtube-section { background: var(--color-surface-2); }
-.youtube-header { text-align: center; margin-bottom: var(--space-10); }
+// ── 유튜브 썸네일 → 팝업 모달 ─────────────────────
+(function(){
+  // 실제 영상이 있는 썸네일만 (yt-thumb-empty 제외)
+  const thumbs  = Array.from(document.querySelectorAll('.yt-thumb:not(.yt-thumb-empty)'));
+  const modal   = document.getElementById('ytModal');
+  const iframe  = document.getElementById('ytModalIframe');
+  const closeBtn = document.getElementById('ytModalClose');
+  const prevBtn  = document.getElementById('ytModalPrev');
+  const nextBtn  = document.getElementById('ytModalNext');
+  if(!thumbs.length || !modal) return;
 
-.yt-gallery { max-width: 1080px; margin-inline: auto; }
+  let currentIdx = 0;
 
-.yt-thumbs {
-  display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center;
-}
-.yt-thumb {
-  position: relative; width: calc(33.333% - var(--space-3)); min-width: 280px;
-  border-radius: var(--radius-lg); overflow: hidden; cursor: pointer;
-  border: 2px solid transparent; transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-  background: #000; aspect-ratio: 16/9;
-}
-.yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.7; transition: opacity var(--transition); }
-.yt-thumb:hover img { opacity: 1; }
-.yt-thumb:hover { transform: translateY(-5px); border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+  function openModal(idx) {
+    currentIdx = idx;
+    loadVideo();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    updateNavBtns();
+  }
 
-.yt-thumb-play {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  pointer-events: none; opacity: 0.9;
-}
-.yt-thumb-label {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  color: #fff; font-size: var(--text-sm); font-weight: 700;
-  padding: var(--space-4) var(--space-4) var(--space-3);
-  letter-spacing: .02em;
-}
+  function closeModal() {
+    modal.classList.remove('active');
+    iframe.src = '';  // 소리 즉시 차단
+    document.body.style.overflow = '';
+  }
 
-/* YOUTUBE MODAL */
-.yt-modal {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0, 0, 0, 0.95); z-index: 9999;
-  justify-content: center; align-items: center;
-}
-.yt-modal.active { display: flex; }
+  function loadVideo() {
+    const vid = thumbs[currentIdx].dataset.videoId;
+    iframe.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0&controls=1';
+  }
 
-.yt-modal-content {
-  position: relative; width: 90%; max-width: 1100px;
-  display: flex; align-items: center; justify-content: space-between; gap: 20px;
-}
+  function updateNavBtns() {
+    prevBtn.disabled = (currentIdx === 0);
+    nextBtn.disabled = (currentIdx === thumbs.length - 1);
+  }
 
-.yt-video-wrapper {
-  position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 비율 */
-  background: #000; border-radius: var(--radius-md); overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-.yt-video-wrapper iframe {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-}
+  // 썸네일 클릭
+  thumbs.forEach(function(thumb, i) {
+    thumb.addEventListener('click', function() { openModal(i); });
+  });
 
-.yt-nav-btn {
-  background: none; border: none; color: white; font-size: 3.5rem;
-  cursor: pointer; padding: 10px; opacity: 0.5; transition: opacity var(--transition), transform var(--transition);
-}
-.yt-nav-btn:hover { opacity: 1; transform: scale(1.1); }
+  // 닫기 버튼
+  closeBtn.addEventListener('click', closeModal);
 
-.yt-close-btn {
-  position: absolute; top: -50px; right: 0;
-  background: none; border: none; color: white; font-size: 2.5rem;
-  cursor: pointer; opacity: 0.6; transition: opacity var(--transition);
-}
-.yt-close-btn:hover { opacity: 1; }
+  // 모달 바깥 클릭 시 닫기
+  modal.addEventListener('click', function(e) {
+    if(e.target === modal) closeModal();
+  });
 
-/* 모바일 화면 대응 (버튼을 영상 안쪽/위쪽으로 배치) */
-@media (max-width: 768px) {
-  .yt-modal-content { width: 100%; flex-direction: column; justify-content: center; padding: 0 10px; }
-  .yt-video-wrapper { width: 100%; border-radius: 0; }
-  .yt-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.4); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-  .yt-nav-btn:hover { transform: translateY(-50%) scale(1.05); }
-  .yt-prev { left: 15px; }
-  .yt-next { right: 15px; }
-  .yt-close-btn { top: 20px; right: 20px; z-index: 10; background: rgba(0,0,0,0.4); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
-}
+  // ESC 키로 닫기
+  document.addEventListener('keydown', function(e) {
+    if(!modal.classList.contains('active')) return;
+    if(e.key === 'Escape') closeModal();
+    if(e.key === 'ArrowLeft' && currentIdx > 0) { currentIdx--; loadVideo(); updateNavBtns(); }
+    if(e.key === 'ArrowRight' && currentIdx < thumbs.length - 1) { currentIdx++; loadVideo(); updateNavBtns(); }
+  });
+
+  // 이전/다음 버튼
+  prevBtn.addEventListener('click', function() {
+    if(currentIdx > 0) { currentIdx--; loadVideo(); updateNavBtns(); }
+  });
+  nextBtn.addEventListener('click', function() {
+    if(currentIdx < thumbs.length - 1) { currentIdx++; loadVideo(); updateNavBtns(); }
+  });
+})();
