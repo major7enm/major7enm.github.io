@@ -1011,3 +1011,18 @@ input,textarea,select{font:inherit;color:inherit}
 [data-theme="dark"] .perf-poster-empty span {
   color: rgba(255,255,255,0.3);
 }
+
+/* ── 통합 팝업 섹션 구분 타이틀 ──────────────────────────────── */
+.perf-modal-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold, #c9982a);
+  border-bottom: 1px solid rgba(201,152,42,0.3);
+  padding-bottom: 6px;
+  margin: 24px 0 12px;
+}
+.perf-modal-section-title:first-of-type {
+  margin-top: 0;
+}
