@@ -861,3 +861,126 @@ input,textarea,select{font:inherit;color:inherit}
   .footer-bottom{flex-direction:column}
   .capability-card{padding:var(--space-6)}
 }
+
+/* ── 주요성과 포스터 갤러리 ─────────────────────────── */
+.perf-poster-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+.perf-poster {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 2/3;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.perf-poster:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.32);
+}
+.perf-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* more 버튼 */
+.perf-more-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.perf-more-btn {
+  background: none;
+  border: none;
+  color: var(--color-gold, #c9982a);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  padding: 4px 8px;
+  transition: opacity 0.18s;
+}
+.perf-more-btn:hover { opacity: 0.7; }
+
+/* 포스터 모달 */
+.perf-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+.perf-modal.active { display: flex; }
+.perf-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+}
+.perf-modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--bg, #f8f7f4);
+  border-radius: 14px;
+  padding: 36px 32px 32px;
+  width: min(92vw, 860px);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+[data-theme="dark"] .perf-modal-box {
+  background: #1a2a4a;
+}
+.perf-modal-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: none; border: none;
+  font-size: 1.6rem; cursor: pointer;
+  color: inherit; line-height: 1;
+}
+.perf-modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--color-gold, #c9982a);
+}
+.perf-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.perf-modal-item {
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 2/3;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+}
+.perf-modal-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .perf-poster-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+  .perf-modal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .perf-modal-box {
+    padding: 28px 16px 20px;
+  }
+}
+@media (max-width: 480px) {
+  .perf-poster-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+}
