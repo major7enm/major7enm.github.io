@@ -1156,13 +1156,13 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   observer.observe(mainIframe);
 })();
 
-// ── 주요성과 포스터 more 팝업 ────────────────────────────────────
-(function(){
-  var modal   = document.getElementById('perfModal');
-  var overlay = document.getElementById('perfModalOverlay');
-  var closeBtn = document.getElementById('perfModalClose');
-  var moreBtn  = document.getElementById('perfMoreBtn');
-  if(!modal || !moreBtn) return;
+// ── 주요성과 포스터 more 팝업 (공통 헬퍼) ─────────────────────────
+function initPerfModal(moreBtnId, modalId, overlayId, closeBtnId) {
+  var modal   = document.getElementById(modalId);
+  var overlay = document.getElementById(overlayId);
+  var closeBtn = document.getElementById(closeBtnId);
+  var moreBtn  = document.getElementById(moreBtnId);
+  if (!modal || !moreBtn) return;
 
   function openModal() {
     modal.classList.add('active');
@@ -1170,13 +1170,20 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   }
   function closeModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = '';
+    // 다른 모달이 열려있지 않으면 scroll 복원
+    var anyOpen = document.querySelector('.perf-modal.active');
+    if (!anyOpen) document.body.style.overflow = '';
   }
 
   moreBtn.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', closeModal);
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeModal();
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
   });
-})();
+}
+
+// 드라마 탭 모달
+initPerfModal('perfMoreBtn', 'perfModal', 'perfModalOverlay', 'perfModalClose');
+// K-POP 탭 모달
+initPerfModal('kpopMoreBtn', 'kpopModal', 'kpopModalOverlay', 'kpopModalClose');
