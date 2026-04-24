@@ -984,3 +984,30 @@ input,textarea,select{font:inherit;color:inherit}
     gap: 5px;
   }
 }
+
+/* 빈 포스터 슬롯 */
+.perf-poster-empty {
+  background: rgba(0,0,0,0.06);
+  border: 2px dashed rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+.perf-poster-empty:hover {
+  transform: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+.perf-poster-empty span {
+  font-size: 0.72rem;
+  color: rgba(0,0,0,0.3);
+  text-align: center;
+  padding: 8px;
+}
+[data-theme="dark"] .perf-poster-empty {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+}
+[data-theme="dark"] .perf-poster-empty span {
+  color: rgba(255,255,255,0.3);
+}
