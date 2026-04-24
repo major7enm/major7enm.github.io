@@ -1163,21 +1163,39 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   var closeBtn = document.getElementById('allPerfModalClose');
   if (!modal) return;
 
-  function openModal() {
+  function openModal(genre) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // 열릴 때 항상 맨 위로 스크롤
     var box = modal.querySelector('.perf-modal-box');
-    if (box) box.scrollTop = 0;
+    if (!box) return;
+    if (genre) {
+      // 해당 장르 섹션으로 스크롤 (팝업 열린 직후 적용)
+      var target = document.getElementById('modal-section-' + genre);
+      if (target) {
+        // requestAnimationFrame으로 렌더링 후 스크롤
+        requestAnimationFrame(function () {
+          var offset = target.offsetTop - box.offsetTop - 16;
+          box.scrollTop = offset > 0 ? offset : 0;
+        });
+      } else {
+        box.scrollTop = 0;
+      }
+    } else {
+      box.scrollTop = 0;
+    }
   }
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  // 모든 .all-more-btn에 이벤트 연결
+  // 모든 .all-more-btn에 이벤트 연결 — 부모 perf-content의 data-genre 읽기
   document.querySelectorAll('.all-more-btn').forEach(function (btn) {
-    btn.addEventListener('click', openModal);
+    btn.addEventListener('click', function () {
+      var section = btn.closest('[data-genre]');
+      var genre = section ? section.getAttribute('data-genre') : null;
+      openModal(genre);
+    });
   });
 
   closeBtn.addEventListener('click', closeModal);
