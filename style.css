@@ -1028,13 +1028,17 @@ input,textarea,select{font:inherit;color:inherit}
 }
 
 
+.blog-section-top {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 45px;
+}
+
 .blog-btn-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 45px;
 }
 
 .blog-btn-wrap .blog-btn {
@@ -1047,6 +1051,9 @@ input,textarea,select{font:inherit;color:inherit}
   justify-content: center;
   text-decoration: none !important;
   border: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  position: static !important;
 }
 
 .blog-btn-wrap .blog-btn:hover {
