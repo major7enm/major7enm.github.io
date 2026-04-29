@@ -1026,3 +1026,18 @@ input,textarea,select{font:inherit;color:inherit}
 .perf-modal-section-title:first-of-type {
   margin-top: 0;
 }
+
+
+.blog-btn-wrap {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 45px;
+}
+
+.blog-btn-wrap .blog-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+}
