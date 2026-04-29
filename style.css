@@ -1029,15 +1029,27 @@ input,textarea,select{font:inherit;color:inherit}
 
 
 .blog-btn-wrap {
-  text-align: center;
-  margin-top: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
   margin-bottom: 45px;
 }
 
 .blog-btn-wrap .blog-btn {
+  background-color: #8bc34a !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 14px 32px !important;
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  border-radius: 999px !important;
   text-decoration: none !important;
+  border: none !important;
+}
+
+.blog-btn-wrap .blog-btn:hover {
+  background-color: #7cb342 !important;
+  color: #ffffff !important;
 }
