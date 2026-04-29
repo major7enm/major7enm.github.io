@@ -993,6 +993,133 @@
     color: #ffffff !important;
   }
 </style>
+<style>
+  .blog-section-top {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 50px !important;
+    margin-bottom: 45px !important;
+  }
+
+  .blog-btn-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .blog-btn {
+    background-color: #8bc34a !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    padding: 14px 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    border: none !important;
+    position: static !important;
+  }
+
+  .blog-btn:hover {
+    background-color: #7cb342 !important;
+    color: #ffffff !important;
+  }
+
+  /* 여기부터 카드 스타일 */
+  .blog-card-section {
+    width: 100% !important;
+    max-width: 1500px !important;
+    margin: 20px auto 80px auto !important;
+    padding: 0 30px !important;
+  }
+
+  .blog-card-section .row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+  }
+
+  .blog-card-section .col-lg-4,
+  .blog-card-section .col-md-6 {
+    width: 100% !important;
+  }
+
+  .blog-card {
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid #e5eaf0 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden !important;
+  }
+
+  .blog-card .card-body {
+    height: 100% !important;
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .blog-card h3 {
+    font-size: 20px !important;
+    line-height: 1.35 !important;
+    font-weight: 600 !important;
+    color: #0b2a45 !important;
+    margin: 0 0 12px 0 !important;
+  }
+
+  .blog-card .meta {
+    font-size: 14px !important;
+    color: #2c6fa3 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .blog-card .card-text {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: #222 !important;
+    margin-bottom: 24px !important;
+  }
+
+  .clamp-3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .blog-card .readmore {
+    margin-top: auto !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 8px 0 !important;
+    border: 1px solid #8bc34a !important;
+    border-radius: 4px !important;
+    color: #8bc34a !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    background: transparent !important;
+  }
+
+  .blog-card .readmore:hover {
+    background: #8bc34a !important;
+    color: #ffffff !important;
+  }
+
+  @media (max-width: 991px) {
+    .blog-card-section .row {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .blog-card-section .row {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
   <!-- 블로그 이동 버튼 -->
   <div class="blog-section-top" data-aos="fade-up" data-aos-delay="100">
     <div class="blog-btn-wrap">
