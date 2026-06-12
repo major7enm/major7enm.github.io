@@ -990,18 +990,18 @@
     color: #ffffff !important;
   }
 
-  /* 여기부터 카드 스타일 */
+  /* 여기부터 카드 스타일 — 칼럼 4열 + 작게 */
   .blog-card-section {
     width: 100% !important;
-    max-width: 1000px !important;
-    margin: 20px auto 80px auto !important;
+    max-width: 1140px !important;
+    margin: 20px auto 24px auto !important;
     padding: 0 30px !important;
   }
 
   .blog-card-section .row {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 18px !important;
   }
 
   .blog-card-section .col-lg-4,
@@ -1014,41 +1014,45 @@
     background: #ffffff !important;
     border: 1px solid #e5eaf0 !important;
     border-radius: 10px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07) !important;
     overflow: hidden !important;
   }
 
   .blog-card .card-body {
     height: 100% !important;
-    padding: 20px !important;
+    padding: 16px !important;
     display: flex !important;
     flex-direction: column !important;
   }
 
   .blog-card h3 {
-    font-size: 20px !important;
-    line-height: 1.35 !important;
+    font-size: 15px !important;
+    line-height: 1.34 !important;
     font-weight: 600 !important;
     color: #0b2a45 !important;
-    margin: 0 0 12px 0 !important;
+    margin: 0 0 8px 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   .blog-card .meta {
-    font-size: 14px !important;
+    font-size: 12px !important;
     color: #2c6fa3 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
 
   .blog-card .card-text {
-    font-size: 15px !important;
-    line-height: 1.7 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
     color: #222 !important;
-    margin-bottom: 24px !important;
+    margin-bottom: 14px !important;
   }
 
   .clamp-3 {
     display: -webkit-box !important;
-    -webkit-line-clamp: 5 !important;
+    -webkit-line-clamp: 4 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
   }
@@ -1057,13 +1061,13 @@
     margin-top: auto !important;
     display: block !important;
     width: 100% !important;
-    padding: 8px 0 !important;
+    padding: 7px 0 !important;
     border: 1px solid #8bc34a !important;
     border-radius: 4px !important;
     color: #8bc34a !important;
     text-align: center !important;
     text-decoration: none !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     background: transparent !important;
   }
 
@@ -1072,18 +1076,67 @@
     color: #ffffff !important;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1100px) {
     .blog-card-section .row {
       grid-template-columns: repeat(2, 1fr) !important;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 640px) {
     .blog-card-section .row {
       grid-template-columns: 1fr !important;
     }
   }
+
+  /* 회사 소식 / In the Press 블록 */
+  .news-block { max-width: 1000px; margin: 8px auto 44px; padding: 0 30px; }
+  .news-block-label { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; color:#c9982a; margin-bottom:16px; }
+  .news-block-label::before { content:""; width:28px; height:2px; background:#c9982a; display:inline-block; }
+  .news-card { display:flex; background:#fff; border:1px solid #e5eaf0; border-radius:12px;
+    overflow:hidden; box-shadow:0 6px 20px rgba(11,42,69,.10); text-decoration:none;
+    transition:box-shadow .25s, transform .25s; }
+  .news-card:hover { box-shadow:0 12px 30px rgba(11,42,69,.16); transform:translateY(-3px); }
+  .news-card-thumb { flex:0 0 320px; max-width:320px; min-height:210px; overflow:hidden; position:relative; }
+  .news-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .news-new-badge { position:absolute; top:12px; left:12px; background:#c9982a; color:#fff;
+    font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; letter-spacing:.06em; }
+  .news-card-body { padding:26px 28px; display:flex; flex-direction:column; justify-content:center; }
+  .news-media-badge { align-self:flex-start; display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; color:#0b2a45; background:#eef2f6; border:1px solid #dde5ec;
+    padding:5px 11px; border-radius:6px; margin-bottom:14px; }
+  .news-card-title { font-size:22px; line-height:1.34; font-weight:700; color:#0b2a45; margin:0 0 10px; }
+  .news-card-desc { font-size:15px; line-height:1.65; color:#475569; margin:0 0 16px; }
+  .news-card-meta { font-size:13.5px; font-weight:600; color:#c9982a; }
+  @media (max-width:680px){
+    .news-card{flex-direction:column}
+    .news-card-thumb{flex-basis:auto;max-width:none;height:200px;min-height:0}
+  }
+
+  /* 칼럼 더 보기 버튼 */
+  .col-more-wrap { width:100%; max-width:1140px; margin:8px auto 0; padding:0 30px 10px; text-align:center; }
+  .col-more-btn { display:inline-flex; align-items:center; gap:6px; background:transparent;
+    border:1.5px solid #8bc34a; color:#8bc34a; font-size:14px; font-weight:600;
+    padding:11px 30px; border-radius:999px; text-decoration:none; transition:all .2s; }
+  .col-more-btn:hover { background:#8bc34a; color:#fff; }
 </style>
+  <!-- 회사 소식 / In the Press -->
+  <div class="news-block" data-aos="fade-up" data-aos-delay="80">
+    <div class="news-block-label">회사 소식 · In the Press</div>
+    <a class="news-card" href="https://isplus.com/article/view/isp202606040084" target="_blank" rel="noopener">
+      <div class="news-card-thumb">
+        <span class="news-new-badge">NEW</span>
+        <img src="news_smsa_2026.jpg" alt="2026 SMSA 강연하는 김지욱 대표" loading="lazy" />
+      </div>
+      <div class="news-card-body">
+        <span class="news-media-badge">📰 일간스포츠</span>
+        <h3 class="news-card-title">2026 SMSA 강연하는 김지욱 대표</h3>
+        <p class="news-card-desc">㈜메이저세븐이엔엠 김지욱 대표가 일간스포츠 주최 '2026 스포츠 마케팅 써밋 아카데미(SMSA)'에서 <strong>'스포츠 내러티브 3.0'</strong>을 주제로 강연했습니다.</p>
+        <span class="news-card-meta">2026.06.04 · 기사 보기 ›</span>
+      </div>
+    </a>
+  </div>
+
   <!-- 블로그 이동 버튼 -->
   <div class="blog-section-top" data-aos="fade-up" data-aos-delay="100">
     <div class="blog-btn-wrap">
@@ -1104,7 +1157,7 @@
         <article class="card h-100 shadow-sm blog-card">
           <div class="card-body d-flex flex-column">
             <h3 class="h5">
-              일간스포츠 [김지욱 저작권썰.zip] ㊺ '멋진 신세계' 속 '웬 유 위시 어폰 어 스타'로 보는 저작권 보호기간
+              [김지욱 저작권썰.zip] ㊺ '멋진 신세계' 속 '웬 유 위시 어폰 어 스타'로 보는 저작권 보호기간
             </h3>
             <div class="meta small text-muted mb-2">2026.06.08</div>
             <p class="card-text flex-grow-1 clamp-3">SBS 드라마 '멋진 신세계'에 흐른 디즈니 명곡 '웬 유 위시 어폰 어 스타(When You Wish Upon a Star)'를 실마리로 음악 저작권의 '보호기간'을 짚어봅니다. 1940년에 발표된 이 곡이 지금도 권리의 대상인지, 저작권 보호기간은 어떻게 산정되며 만료 이후에는 어떤 방식으로 이용할 수 있는지 그 기준을 살펴봅니다.</p>
@@ -1120,7 +1173,7 @@
         <article class="card h-100 shadow-sm blog-card">
           <div class="card-body d-flex flex-column">
             <h3 class="h5">
-              일간스포츠 [김지욱 저작권썰.zip] ㊹ '삐끼삐끼'와 '캐치캐치': 스포츠 내러티브 3.0 시대의 음악 저작권
+              [김지욱 저작권썰.zip] ㊹ '삐끼삐끼'와 '캐치캐치': 스포츠 내러티브 3.0 시대의 음악 저작권
             </h3>
             <div class="meta small text-muted mb-2">2026.06.01</div>
             <p class="card-text flex-grow-1 clamp-3">스포츠와 엔터테인먼트의 경계가 허물어지며 스포츠 현장 자체가 새로운 콘텐츠 생산지이자 문화 트렌드의 진원지가 되고 있습니다. 2024년 '삐끼삐끼' 열풍처럼 응원 현장의 영상이 SNS에서 폭발적 반응을 얻으면서, 스포츠 공간에서 사용되는 음악의 저작권 문제가 새롭게 부각되고 있습니다.</p>
@@ -1136,7 +1189,7 @@
         <article class="card h-100 shadow-sm blog-card">
           <div class="card-body d-flex flex-column">
             <h3 class="h5">
-              일간스포츠 [김지욱 저작권썰.zip] ㊸ 그 순간, 무엇을 부르고 있었나: 엄지영의 애국가 가창 논란 톺아보기
+              [김지욱 저작권썰.zip] ㊸ 그 순간, 무엇을 부르고 있었나: 엄지영의 애국가 가창 논란 톺아보기
             </h3>
             <div class="meta small text-muted mb-2">2026.05.25</div>
             <p class="card-text flex-grow-1 clamp-3">창원NC파크 프로야구 경기에서 보컬 엄지영의 애국가 가창이 거센 논란을 불렀습니다. 과도한 애드리브와 기교가 '국민의례'의 일환이라는 점에서 비판을 받았는데, 이것이 저작권법상 어떤 쟁점을 내포하는지 들여다봅니다. YB·소향의 사례와 비교하며 애국가 재해석의 허용 범위를 짚어봅니다.</p>
@@ -1152,7 +1205,7 @@
         <article class="card h-100 shadow-sm blog-card">
           <div class="card-body d-flex flex-column">
             <h3 class="h5">
-              일간스포츠 [김지욱 저작권썰.zip] ㊷ '원더풀스'의 'Creep' : 저작권 클리어런스 노트
+              [김지욱 저작권썰.zip] ㊷ '원더풀스'의 'Creep' : 저작권 클리어런스 노트
             </h3>
             <div class="meta small text-muted mb-2">2026.05.18</div>
             <p class="card-text flex-grow-1 clamp-3">넷플릭스 리미티드 시리즈 '원더풀스'의 첫 장면에는 라디오헤드의 'Creep'이 흐릅니다. 이 곡의 저작권 클리어런스 업무는 ㈜메이저세븐이엔엠이 진행했으며, 해외 권리자와의 협의에 오랜 시간이 걸린 쉽지 않은 작업이었습니다. 세기말 분위기와 아웃사이더 정서를 담은 이 선택이 어떤 과정을 거쳤는지 들여다봅니다.</p>
@@ -1165,14 +1218,15 @@
       </div>
 
     </div>
-    <div style="text-align:right; margin-top:1.2rem; padding-right:0.5rem;">
-      <a href="https://blog.naver.com/PostList.naver?blogId=major7enm-inc&categoryNo=14&skinType=&skinId=&from=menu&userSelectMenu=true"
-         target="_blank" rel="noopener"
-         style="color:var(--color-accent, #c9982a); font-weight:600; font-size:0.95rem; text-decoration:none; letter-spacing:0.02em;">
-        more &rsaquo;
-      </a>
-    </div>
-  </div>  
+  </div>
+
+  <div class="col-more-wrap" data-aos="fade-up" data-aos-delay="150">
+    <a class="col-more-btn"
+       href="https://blog.naver.com/PostList.naver?blogId=major7enm-inc&categoryNo=14&skinType=&skinId=&from=menu&userSelectMenu=true"
+       target="_blank" rel="noopener">
+      더 보기 &rsaquo;
+    </a>
+  </div>
   </section>
   
   <!-- CONTACT -->
