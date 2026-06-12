@@ -278,7 +278,7 @@ const i18nData = {
     val2_title: '전문성', val2_desc: '15년 이상의 음악 저작권 실무 역량과 글로벌 네트워크',
     val3_title: '책임감', val3_desc: '프로젝트 시작부터 완료까지 일관된 책임감으로 대응합니다',
     val4_title: '글로벌', val4_desc: '국내외 권리사 네트워크를 통한 글로벌 클리어런스 수행',
-    history_title: '15년의 전문 역사',
+    history_title: '16년의 전문 역사',
     biz_title: '저작권 Clearance',
     cap_title: '장르별 대응역량',
     cap_sub: '각 콘텐츠 장르의 특성을 깊이 이해하고 맞춤형 솔루션을 제공합니다',
@@ -338,7 +338,7 @@ const i18nData = {
     val2_title: 'Expertise', val2_desc: '15+ years of music copyright experience with a global network',
     val3_title: 'Accountability', val3_desc: 'Consistent responsibility from project start to finish',
     val4_title: 'Global', val4_desc: 'Global clearance through domestic & international rights-holder networks',
-    history_title: '15 Years of Professional History',
+    history_title: '16 Years of Professional History',
     biz_title: 'Copyright Clearance',
     cap_title: 'Genre Expertise',
     cap_sub: 'We deliver tailored solutions with deep understanding of each content genre',
@@ -398,7 +398,7 @@ const i18nData = {
     val2_title: '専門性', val2_desc: '15年以上の音楽著作権実務能力とグローバルネットワーク',
     val3_title: '責任感', val3_desc: 'プロジェクト開始から完了まで一貫した責任感で対応します',
     val4_title: 'グローバル', val4_desc: '国内外の権利者ネットワークを通じたグローバルクリアランス',
-    history_title: '15年の専門的な歴史',
+    history_title: '16年の専門的な歴史',
     biz_title: '著作権クリアランス',
     cap_title: 'ジャンル別対応能力',
     cap_sub: '各コンテンツジャンルの特性を深く理解し、カスタマイズされたソリューションをご提供します',
@@ -458,7 +458,7 @@ const i18nData = {
     val2_title: '专业性', val2_desc: '15年以上音乐版权实务经验与全球合作网络',
     val3_title: '责任心', val3_desc: '从项目启动到完成，始终以一贯的责任感全程跟进',
     val4_title: '全球化', val4_desc: '通过国内外版权方网络，执行全球化版权许可',
-    history_title: '15年专业发展历程',
+    history_title: '16年专业发展历程',
     biz_title: '版权许可服务',
     cap_title: '按类型分类的专业能力',
     cap_sub: '深入理解各内容类型的特点，提供量身定制的解决方案',
@@ -596,8 +596,10 @@ const i18nData = {
     ko: {
       label_about: 'About Us', label_history: 'History',
       label_business: 'Business Overview', label_business2: 'Our Performance',
-      label_capability: 'Our Performance', label_performance: 'Our Performance',
+      label_capability: 'Our Expertise', label_performance: 'Our Performance',
       label_contact: 'Contact',
+      blog_sub1: '블로그에서 더 많은 소식을 확인하세요.',
+      blog_sub2: "일간스포츠 '김지욱의 저작권썰'에서 더 많은 사례와 분석을 확인하세요.",
       biz_sub: "급변하는 콘텐츠 시장 속, IP 제작의 가장 큰 허들 '음악 저작권'<br />㈜메이저세븐이엔엠은 제작자의 니즈를 충족하는 솔루션을 제시합니다.",
       biz1_title_html: 'Screening Work<br /><span>분석</span>',
       biz2_title_html: 'Clearance<br /><span>협의 및 해결</span>',
@@ -705,6 +707,8 @@ perf_c1: 'SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정
     en: {
       label_about:'About Us', label_history:'History', label_business:'Business Overview',
       label_business2:'Our Services', label_capability:'Our Expertise', label_performance:'Our Performance', label_contact:'Contact',
+      blog_sub1:'Discover more updates on our blog.',
+      blog_sub2:"Explore more cases and analysis in Kim Ji-wook's Copyright Talk on Ilgan Sports.",
       biz_sub:"In a rapidly changing content market, music copyright is the biggest hurdle in IP production.<br />Major7 E&M presents solutions that meet producers' needs.",
       biz1_title_html:'Screening Work<br /><span>Analysis</span>',
       biz2_title_html:'Clearance<br /><span>Negotiation & Resolution</span>',
@@ -812,6 +816,8 @@ perf_c1: 'SBS Fubao and Grandpa PART 1 – Goodbye with a Smile Now (NCT Jungwoo
     ja: {
       label_about:'About Us', label_history:'History', label_business:'Business Overview',
       label_business2:'Our Services', label_capability:'Our Expertise', label_performance:'Our Performance', label_contact:'Contact',
+      blog_sub1:'ブログでさらに多くのニュースをご確認ください。',
+      blog_sub2:'日刊スポーツ「キム・ジウクの著作権トーク」でより多くの事例と分析をご覧ください。',
       biz_sub:'急変するコンテンツ市場において、IP制作最大のハードル「音楽著作権」<br />メジャーセブンE&Mは制作者のニーズを満たすソリューションを提案します。',
       biz1_title_html:'Screening Work<br /><span>分析</span>',
       biz2_title_html:'Clearance<br /><span>交渉・解決</span>',
@@ -919,6 +925,8 @@ perf_c1: 'SBS プバオとおじいちゃん PART 1 – 笑顔でさようなら
     zh: {
       label_about:'关于我们', label_history:'发展历程', label_business:'业务概览',
       label_business2:'我们的服务', label_capability:'专业能力', label_performance:'主要业绩', label_contact:'联系我们',
+      blog_sub1:'在博客上查看更多动态。',
+      blog_sub2:"在《一刊体育》'金志旭版权漫谈'专栏中查看更多案例与分析。",
       biz_sub:'在瞬息万变的内容市场中，音乐版权是IP制作最大的难关。<br />Major7 E&M为制作方提供满足需求的解决方案。',
       biz1_title_html:'Screening Work<br /><span>分析</span>',
       biz2_title_html:'Clearance<br /><span>协商与解决</span>',
@@ -1032,6 +1040,12 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 
   // option 태그 번역을 위한 applyTranslations 재실행 패치
   const _orig = window._i18nApply;
+})();
+
+// ── 푸터 저작권 연도 자동 갱신 ──────────────────────
+(function(){
+  var y = document.getElementById('footerYear');
+  if (y) y.textContent = new Date().getFullYear();
 })();
 
 // ── 유튜브 썸네일 팝업 모달 ──────────────────────────
