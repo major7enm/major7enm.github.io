@@ -128,15 +128,10 @@
   elements.forEach(el => observer.observe(el));
 })();
 
-// --- Contact Form (mailto) ---
-function handleMailto(e) {
-  e.preventDefault();
-  const form = e.target;
-  const name    = form.querySelector('#name').value.trim();
-  const contact = form.querySelector('#contact-email').value.trim();
-  const subject = form.querySelector('#subject').value || '기타';
-  const message = form.querySelector('#message').value.trim();
+// --- Contact Form (자동 전송 + 실패 시 메일 작성창 폴백) ---
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/music2550@naver.com';
 
+function composeViaMail(name, contact, subject, message) {
   const mailSubject = encodeURIComponent('[메이저세븐이엔엠 문의] ' + subject);
   const mailBody = encodeURIComponent(
     '이름 / 회사명: ' + name + '\n' +
@@ -163,26 +158,66 @@ function handleMailto(e) {
   }
 }
 
-// --- Security Notice Popup (문의 내용 클릭 시) ---
+function showContactPopup(isSuccess) {
+  const popup = document.getElementById('securityPopup');
+  if (!popup) return;
+  const lang = document.documentElement.getAttribute('data-lang') || 'ko';
+  const dict = (typeof i18nData !== 'undefined' && i18nData[lang]) || {};
+  const titleEl = document.getElementById('contactPopupTitle');
+  const msgEl = document.getElementById('contactPopupMsg');
+  if (titleEl) titleEl.textContent = (isSuccess ? dict.popup_title : dict.popup_fail_title) || (isSuccess ? '문의 접수 완료' : '메일로 보내주세요');
+  if (msgEl) msgEl.innerHTML = (isSuccess ? dict.popup_msg_html : dict.popup_fail_msg_html) || '문의가 정상적으로 접수되었습니다.<br>빠른 시일 내에 회신드리겠습니다.<br><br>감사합니다.';
+  popup.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+async function handleContactSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name    = form.querySelector('#name').value.trim();
+  const contact = form.querySelector('#contact-email').value.trim();
+  const subject = form.querySelector('#subject').value || '기타';
+  const message = form.querySelector('#message').value.trim();
+
+  const btn = form.querySelector('.btn-submit');
+  const btnLabel = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '전송 중…'; }
+
+  try {
+    const res = await fetch(CONTACT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '[홈페이지 문의] ' + subject,
+        _template: 'table',
+        '이름/회사명': name,
+        '연락처': contact,
+        '문의 유형': subject,
+        '문의 내용': message
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'send failed');
+    form.reset();
+    showContactPopup(true);
+  } catch (err) {
+    // 자동 전송 실패 시 기존 방식(메일 작성창)으로 폴백
+    composeViaMail(name, contact, subject, message);
+    showContactPopup(false);
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+  }
+}
+
+// --- Contact Result Popup 닫기 ---
 (function () {
-  const textarea = document.getElementById('message');
   const popup = document.getElementById('securityPopup');
   const closeBtn = document.getElementById('securityPopupClose');
-  if (!textarea || !popup) return;
-
-  let shown = false;
-
-  textarea.addEventListener('focus', () => {
-    if (shown) return;
-    shown = true;
-    popup.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
+  if (!popup) return;
 
   function closePopup() {
     popup.classList.remove('open');
     document.body.style.overflow = '';
-    textarea.focus();
   }
 
   if (closeBtn) closeBtn.addEventListener('click', closePopup);
@@ -193,36 +228,6 @@ function handleMailto(e) {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && popup.classList.contains('open')) closePopup();
-  });
-})();
-
-// --- Mobile View Overlay ---
-(function () {
-  const btn = document.getElementById('mobileViewBtn');
-  const overlay = document.getElementById('mobileOverlay');
-  const closeBtn = document.getElementById('mobileOverlayClose');
-  if (!btn || !overlay) return;
-
-  btn.addEventListener('click', () => {
-    overlay.classList.add('open');
-    btn.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-
-  function closeOverlay() {
-    overlay.classList.remove('open');
-    btn.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
-
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeOverlay();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeOverlay();
   });
 })();
 
@@ -249,7 +254,6 @@ const i18nData = {
     nav_capability: '대응역량',
     nav_performance: '주요 성과',
     nav_contact: '문의하기',
-    mobile_view: '모바일 뷰',
     hero_badge: 'Music Copyright Clearance Agency',
     hero_title_html: '콘텐츠의 글로벌<br /><span class="hero-accent">IP 비상</span>을 가능케 하는<br />최적의 파트너',
     hero_desc_html: '방송 · 드라마 · 광고 · 게임 등 다양한 장르에서<br />음악저작물을 <strong>합리적인 비용</strong>으로 <strong>안전하게</strong> 이용할 수 있도록<br />전문적이고 체계적인 프로세스를 제공합니다.',
@@ -275,7 +279,7 @@ const i18nData = {
     info_address: '주소',
     mission_text: '"합리적인 비용과 전문적이고 체계적인 솔루션을 제공함으로써 콘텐츠의 글로벌 IP 비상을 가능케 하는 최적의 파트너, Major7 E&M"',
     val1_title: '신뢰성', val1_desc: '검증된 네트워크와 실무 경험으로 확실한 결과를 보장합니다',
-    val2_title: '전문성', val2_desc: '15년 이상의 음악 저작권 실무 역량과 글로벌 네트워크',
+    val2_title: '전문성', val2_desc: '16년 이상의 음악 저작권 실무 역량과 글로벌 네트워크',
     val3_title: '책임감', val3_desc: '프로젝트 시작부터 완료까지 일관된 책임감으로 대응합니다',
     val4_title: '글로벌', val4_desc: '국내외 권리사 네트워크를 통한 글로벌 클리어런스 수행',
     history_title: '16년의 전문 역사',
@@ -294,11 +298,13 @@ const i18nData = {
     form_message: '문의 내용',
     form_message_ph: '프로젝트 개요, 사용 장르, 일정 등을 간략히 적어주세요.',
     form_submit: '문의 보내기',
-    security_note: '이 양식은 자동 전송되지 않습니다. 버튼을 누르면 메일 작성창이 열리니 내용을 확인한 뒤 전송해 주세요.',
-    form_note: '* 버튼을 누르면 네이버 메일이 열립니다. 전송 후 빠른 시일 내에 회신드립니다.',
+    security_note: '문의를 보내시면 담당자 메일로 바로 접수됩니다. 빠른 시일 내에 회신드립니다.',
+    form_note: '* 자동 전송이 어려운 환경에서는 메일 작성창이 대신 열립니다. 내용을 그대로 보내주세요.',
     footer_services: '음악 저작권 클리어런스 | 리스크 관리 | 저작권 정보 서비스 | 콘텐츠 기획 및 제작',
-    popup_title: '보안 안내',
-    popup_msg_html: '이 문의 양식은 자동으로 전송되지 않습니다.<br>[문의 보내기]를 누르면 메일 작성창이 열리니,<br>내용을 그대로 전송해 주세요.<br><br>감사합니다.',
+    popup_title: '문의 접수 완료',
+    popup_msg_html: '문의가 정상적으로 접수되었습니다.<br>빠른 시일 내에 회신드리겠습니다.<br><br>감사합니다.',
+    popup_fail_title: '메일로 보내주세요',
+    popup_fail_msg_html: '자동 접수가 어려워 메일 작성창을 열었습니다.<br>작성된 내용을 그대로 전송해 주세요.<br><br>감사합니다.',
     popup_confirm: '확인',
   },
 
@@ -309,7 +315,6 @@ const i18nData = {
     nav_capability: 'Expertise',
     nav_performance: 'Portfolio',
     nav_contact: 'Contact',
-    mobile_view: 'Mobile View',
     hero_badge: 'Music Copyright Clearance Agency',
     hero_title_html: 'The Optimal Partner<br />for <span class="hero-accent">Global IP</span><br />Content Success',
     hero_desc_html: 'From broadcasting to drama, advertising and games —<br />we provide expert and systematic processes to ensure<br /><strong>safe and cost-effective</strong> use of music rights.',
@@ -335,7 +340,7 @@ const i18nData = {
     info_address: 'Address',
     mission_text: '"The optimal partner enabling the global IP soar of content through reasonable costs and professional, systematic solutions — Major7 E&M"',
     val1_title: 'Reliability', val1_desc: 'Guaranteed results backed by a verified network and hands-on expertise',
-    val2_title: 'Expertise', val2_desc: '15+ years of music copyright experience with a global network',
+    val2_title: 'Expertise', val2_desc: '16+ years of music copyright experience with a global network',
     val3_title: 'Accountability', val3_desc: 'Consistent responsibility from project start to finish',
     val4_title: 'Global', val4_desc: 'Global clearance through domestic & international rights-holder networks',
     history_title: '16 Years of Professional History',
@@ -354,11 +359,13 @@ const i18nData = {
     form_message: 'Message',
     form_message_ph: 'Briefly describe your project, genre, and timeline.',
     form_submit: 'Send Inquiry',
-    security_note: 'This form is not sent automatically. Clicking the button opens your email composer—please review and send it. Thank you.',
-    form_note: '* Clicking the button opens Naver Mail. We will reply promptly after submission.',
+    security_note: 'Your inquiry is delivered directly to our team. We will reply promptly.',
+    form_note: '* If automatic sending is unavailable, your email composer will open instead—please send the pre-filled message as is.',
     footer_services: 'Music Copyright Clearance | Risk Management | Copyright Information Services | Content Planning & Production',
-    popup_title: 'Security Notice',
-    popup_msg_html: 'This inquiry form is not sent automatically.<br>Clicking "Send Inquiry" opens your email composer,<br>so please send it from there.<br><br>Thank you.',
+    popup_title: 'Inquiry Received',
+    popup_msg_html: 'Your inquiry has been received.<br>We will get back to you shortly.<br><br>Thank you.',
+    popup_fail_title: 'Please Send by Email',
+    popup_fail_msg_html: 'Automatic submission was unavailable, so your email composer was opened.<br>Please send the pre-filled message as is.<br><br>Thank you.',
     popup_confirm: 'Confirm',
   },
 
@@ -369,7 +376,6 @@ const i18nData = {
     nav_capability: '対応能力',
     nav_performance: '主な実績',
     nav_contact: 'お問い合わせ',
-    mobile_view: 'モバイル表示',
     hero_badge: 'Music Copyright Clearance Agency',
     hero_title_html: 'コンテンツの<br /><span class="hero-accent">グローバルIP飛躍</span>を<br />実現する最適パートナー',
     hero_desc_html: '放送・ドラマ・広告・ゲームなど様々なジャンルで<br />音楽著作物を<strong>合理的なコスト</strong>で<strong>安全に</strong>ご利用いただけるよう<br />専門的で体系的なプロセスをご提供します。',
@@ -395,7 +401,7 @@ const i18nData = {
     info_address: '住所',
     mission_text: '「合理的なコストと専門的・体系的なソリューションを提供し、コンテンツのグローバルIP飛躍を実現する最適パートナー、Major7 E&M」',
     val1_title: '信頼性', val1_desc: '検証されたネットワークと実務経験で確かな結果をお約束します',
-    val2_title: '専門性', val2_desc: '15年以上の音楽著作権実務能力とグローバルネットワーク',
+    val2_title: '専門性', val2_desc: '16年以上の音楽著作権実務能力とグローバルネットワーク',
     val3_title: '責任感', val3_desc: 'プロジェクト開始から完了まで一貫した責任感で対応します',
     val4_title: 'グローバル', val4_desc: '国内外の権利者ネットワークを通じたグローバルクリアランス',
     history_title: '16年の専門的な歴史',
@@ -414,11 +420,13 @@ const i18nData = {
     form_message: 'お問い合わせ内容',
     form_message_ph: 'プロジェクト概要、使用ジャンル、スケジュールなどをご記入ください。',
     form_submit: '送信する',
-    security_note: 'このフォームは自動送信されません。ボタンを押すとメール作成画面が開きますので、内容をご確認のうえ送信してください。ありがとうございます。',
-    form_note: '* ボタンを押すとNaverメールが開きます。送信後、速やかにご返信いたします。',
+    security_note: 'お問い合わせは担当者のメールに直接届きます。早急にご返信いたします。',
+    form_note: '* 自動送信ができない環境では、メール作成画面が代わりに開きます。内容をそのまま送信してください。',
     footer_services: '音楽著作権クリアランス | リスク管理 | 著作権情報サービス | コンテンツ企画・制作',
-    popup_title: 'セキュリティのご案内',
-    popup_msg_html: 'このお問い合わせフォームは自動送信されません。<br>「お問い合わせを送信」を押すとメール作成画面が開きますので、<br>そのまま送信してください。<br><br>ありがとうございます。',
+    popup_title: 'お問い合わせ受付完了',
+    popup_msg_html: 'お問い合わせを受け付けました。<br>早急にご返信いたします。<br><br>ありがとうございます。',
+    popup_fail_title: 'メールでお送りください',
+    popup_fail_msg_html: '自動送信ができなかったため、メール作成画面を開きました。<br>入力済みの内容をそのまま送信してください。<br><br>ありがとうございます。',
     popup_confirm: '確認',
   },
 
@@ -429,7 +437,6 @@ const i18nData = {
     nav_capability: '专业能力',
     nav_performance: '主要业绩',
     nav_contact: '联系我们',
-    mobile_view: '手机版',
     hero_badge: '音乐版权许可代理机构',
     hero_title_html: '助力内容<br /><span class="hero-accent">全球IP腾飞</span><br />的最佳合作伙伴',
     hero_desc_html: '从广播、影视、广告到游戏，各类媒体领域<br />以<strong>合理的成本</strong><strong>安全合规</strong>地使用音乐作品<br />我们提供专业、系统化的解决方案。',
@@ -455,7 +462,7 @@ const i18nData = {
     info_address: '地址',
     mission_text: '"通过提供合理的成本与专业系统化的解决方案，成为助力内容全球IP腾飞的最佳合作伙伴——Major7 E&M"',
     val1_title: '可靠性', val1_desc: '依托经过验证的网络和实践经验，保障切实可靠的成果',
-    val2_title: '专业性', val2_desc: '15年以上音乐版权实务经验与全球合作网络',
+    val2_title: '专业性', val2_desc: '16年以上音乐版权实务经验与全球合作网络',
     val3_title: '责任心', val3_desc: '从项目启动到完成，始终以一贯的责任感全程跟进',
     val4_title: '全球化', val4_desc: '通过国内外版权方网络，执行全球化版权许可',
     history_title: '16年专业发展历程',
@@ -474,11 +481,13 @@ const i18nData = {
     form_message: '咨询内容',
     form_message_ph: '请简要描述您的项目概况、使用类型及时间安排。',
     form_submit: '发送咨询',
-    security_note: '本表单不会自动发送。点击按钮将打开您的邮件撰写窗口，请确认内容后发送。谢谢。',
-    form_note: '* 点击按钮将打开Naver邮件。提交后我们将尽快回复您。',
+    security_note: '您的咨询将直接送达负责人邮箱，我们将尽快回复。',
+    form_note: '* 如无法自动发送，将改为打开邮件撰写窗口，请直接发送已填写的内容。',
     footer_services: '音乐版权许可 | 风险管理 | 版权信息服务 | 内容策划与制作',
-    popup_title: '安全提示',
-    popup_msg_html: '本咨询表单不会自动发送。<br>点击"发送咨询"后将打开邮件撰写窗口，<br>请直接发送即可。<br><br>谢谢您。',
+    popup_title: '咨询已受理',
+    popup_msg_html: '您的咨询已成功提交。<br>我们将尽快回复您。<br><br>谢谢。',
+    popup_fail_title: '请通过邮件发送',
+    popup_fail_msg_html: '无法自动提交，已为您打开邮件撰写窗口。<br>请直接发送已填写的内容。<br><br>谢谢。',
     popup_confirm: '确认',
   }
 };
@@ -607,7 +616,7 @@ const i18nData = {
       biz1_li1:'음악 저작물 권리 분석 및 리스크 파악', biz1_li2:'사용 유형 / Syndication 방식에 맞춘 범위 분류',
       biz1_li3:'사용자의 니즈에 맞는 사용료 견적 산출', biz1_li4:'권리사 / 권리자별 국내·외 Contact Point 파악',
       biz2_li1:'사용자의 니즈에 부합한 저작권 솔루션 프로세스', biz2_li2:'Global Standard에 맞춘 유형별 Clearance',
-      biz2_li3:'Moral Right / Neighboring right / Cover / Syncronization / AR / SA / TR 등 사용 방식에 따른 조건 및 합리적인 승인로 협의',
+      biz2_li3:'Moral Right / Neighboring Right / Cover / Synchronization / AR / SA / TR 등 사용 방식에 따른 조건 및 합리적인 승인료 협의',
       biz2_li4:'계약서 작성 및 법무 검토 대응, 체결',
       biz3_li1:'저작권 분쟁 유형별 대응 프로세스 지원', biz3_li2:'저작권 분쟁 전략 수립 및 대응', biz3_li3:'침해 제기 및 자문',
       tag_broadcast:'방송', tag_drama:'드라마', tag_ad:'광고', tag_game:'게임',
@@ -623,7 +632,7 @@ const i18nData = {
       cap_ballad_title:'BALLAD 프로그램', cap_ballad_tagline:'<strong>리메이크 수요가 집중된</strong> 명곡 아카이브 정밀 대응 역량',
       cap_ballad_footer:'명곡을 향한 시장 수요와 권리 리스크 사이를 전략적으로 대응하는 전문 역량',
       cap_concert_title:'콘서트·시상식·리얼리티 예능 프로그램', cap_concert_tagline:'속도와 정확성을 동시에 요구하는 <strong>실시간 제작 환경</strong>에 최적화된 대응 전문성',
-      cap_concert_footer:'실시간으로 급변하는 제작 사이클 속에서도 저작권의 빈틈이 남기지 않는 전문 대응 역량',
+      cap_concert_footer:'실시간으로 급변하는 제작 사이클 속에서도 저작권의 빈틈을 남기지 않는 전문 대응 역량',
       col_kpop_complex:'복잡한 권리 구조', col_kpop_risk:'제작 리스크', col_solution_text:'메이저세븐이엔엠의 Solution',
       col_trot_senior:'원로 작가 및 승계 구조', col_trot_cover:'번안곡·원작 작품 권리 관계',
       col_ballad_demand:'8-90년대 명곡 수요 집중', col_ballad_conflict:'동시 사용 일정 충돌 리스크',
