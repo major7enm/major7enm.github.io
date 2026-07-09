@@ -21,6 +21,9 @@
   --color-accent: #c9982a;
   --color-accent-hover: #a87820;
   --color-accent-highlight: #f5ead0;
+  /* 밝은 배경 위 '소형 골드 텍스트' 전용 — WCAG AA 4.5:1 충족(#8a6516 ≈ 5:1 on #f8f7f4) */
+  --color-accent-ink: #8a6516;
+  --color-gold: #8a6516; /* perf 모달·more 버튼 등 기존 var(--color-gold) 사용처 */
   --color-brand-blue: #2b7fc9;
   --color-brand-blue-light: #deeaf7;
 
@@ -72,6 +75,7 @@
   --color-text-inverse: #0e1520;
   --color-primary: #4a8fd4; --color-primary-hover: #6aa6e2; --color-primary-highlight: #1e3254;
   --color-accent: #e4af3a; --color-accent-hover: #f0c050; --color-accent-highlight: #3a2d10;
+  --color-accent-ink: #e4af3a; --color-gold: #e4af3a;
   --color-brand-blue: #5ba3e0; --color-brand-blue-light: #1e3254;
   --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
   --shadow-md: 0 4px 16px rgba(0,0,0,.4);
@@ -85,6 +89,7 @@
     --color-text:#e0ddd8;--color-text-muted:#8896a8;--color-text-faint:#4e6070;
     --color-text-inverse:#0e1520;--color-primary:#4a8fd4;--color-primary-hover:#6aa6e2;
     --color-primary-highlight:#1e3254;--color-accent:#e4af3a;--color-accent-highlight:#3a2d10;
+    --color-accent-ink:#e4af3a;--color-gold:#e4af3a;
     --color-brand-blue:#5ba3e0;--color-brand-blue-light:#1e3254;
   }
 }
@@ -119,7 +124,7 @@ input,textarea,select{font:inherit;color:inherit}
 
 /* ─── TYPOGRAPHY ─────────────────────────────── */
 .section-label{font-size:var(--text-xs);font-weight:700;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--space-4)}
+  text-transform:uppercase;color:var(--color-accent-ink);margin-bottom:var(--space-4)}
 .section-label.light{color:rgba(255,255,255,.5)}
 .section-title{font-size:var(--text-2xl);font-weight:900;line-height:1.1;
   letter-spacing:-.02em;margin-bottom:var(--space-6)}
@@ -127,7 +132,10 @@ input,textarea,select{font:inherit;color:inherit}
 .section-header{text-align:center;margin-bottom:var(--space-12)}
 .section-sub{font-size:var(--text-base);color:var(--color-text-muted);
   max-width:60ch;margin-inline:auto;line-height:1.8}
-.text-accent{color:var(--color-accent)}
+/* 대형 디스플레이용 골드 — 밝은 배경에서 AA 대형(3:1) 충족(#a87820 ≈ 3.7:1) */
+.text-accent{color:var(--color-accent-hover)}
+[data-theme='dark'] .text-accent{color:var(--color-accent)}
+/* .text-gold는 네이비 섹션 전용(대비 5.2:1) — 밝은 골드 유지 */
 .text-gold{color:var(--color-accent)}
 
 /* ─── HEADER ─────────────────────────────────── */
@@ -258,7 +266,8 @@ input,textarea,select{font:inherit;color:inherit}
   border-radius:var(--radius-full);
 }
 .btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.08)}
-.hero-stats{display:flex;align-items:center;gap:var(--space-6);flex-wrap:wrap}
+/* 데스크톱 히어로는 중앙 정렬 축 — 통계도 같은 축에 맞춤 */
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:var(--space-6);flex-wrap:wrap}
 .stat{display:flex;flex-direction:column;gap:4px}
 .stat-num{font-family:var(--font-display);font-size:var(--text-xl);font-weight:900;
   color:#fff;line-height:1;letter-spacing:-.02em}
@@ -280,6 +289,15 @@ input,textarea,select{font:inherit;color:inherit}
 .about-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:var(--space-16);align-items:start;
+}
+/* 데스크톱: 좌우 컬럼 높이 정렬 — 정보 테이블이 남는 높이를 흡수해
+   중간 공백 없이 우측(미션+가치+CEO)과 같은 라인에서 끝나도록.
+   행들이 균등하게 늘어나 여유 있는 '스펙 시트' 리듬이 됨 */
+@media (min-width:960px){
+  .about-grid{align-items:stretch}
+  .about-left{display:flex;flex-direction:column}
+  .about-left .about-info-table{flex:1}
+  .about-left .info-row{flex:1;align-items:stretch}
 }
 .about-desc{color:var(--color-text-muted);line-height:1.85;
   margin-bottom:var(--space-8);max-width:52ch}
@@ -353,7 +371,7 @@ input,textarea,select{font:inherit;color:inherit}
 .business-card.featured{border-color:var(--color-primary);
   background:linear-gradient(135deg,var(--color-primary-highlight),var(--color-surface));
   box-shadow:var(--shadow-md)}
-.business-num{font-size:var(--text-xs);font-weight:900;color:var(--color-accent);
+.business-num{font-size:var(--text-xs);font-weight:900;color:var(--color-accent-ink);
   letter-spacing:.1em;margin-bottom:var(--space-4)}
 .business-icon{width:56px;height:56px;border-radius:var(--radius-lg);
   background:var(--color-primary-highlight);color:var(--color-primary);
@@ -426,7 +444,8 @@ input,textarea,select{font:inherit;color:inherit}
 .perf-points{display:flex;gap:var(--space-4);flex-wrap:wrap}
 .perf-points span{font-size:var(--text-sm);color:var(--color-text-muted);font-weight:500}
 .perf-stat-highlight{display:flex;align-items:center;gap:var(--space-3)}
-.big-num{font-family:var(--font-display);font-size:var(--text-xl);font-weight:900;color:var(--color-accent)}
+.big-num{font-family:var(--font-display);font-size:var(--text-xl);font-weight:900;color:var(--color-accent-hover)}
+[data-theme='dark'] .big-num{color:var(--color-accent)}
 .program-list{display:flex;flex-wrap:wrap;gap:var(--space-2)}
 .prog-item{font-size:var(--text-sm);font-weight:600;padding:var(--space-2) var(--space-4);
   background:var(--color-surface);border:1px solid var(--color-border);
@@ -755,13 +774,14 @@ input,textarea,select{font:inherit;color:inherit}
     padding-right:var(--space-6);
     max-width:100%;
   }
+  /* 모바일: 배지·타이틀과 겹치지 않도록 우상단 코너로 밀고 투명도 낮춤 */
   .vinyl-graphic{
-    width:55vw;
-    right:-8%;
-    top:-2%;
-    opacity:.6;
+    width:46vw;
+    right:-16%;
+    top:-4%;
+    opacity:.32;
   }
-  .hero-stats{flex-direction:row}
+  .hero-stats{flex-direction:row;justify-content:flex-start}
   .yt-placeholder{aspect-ratio:4/3}
   .yt-placeholder-inner{padding:var(--space-6)}
   /* 모바일에서 언어 스위청리 숨김 (모바일 메뉴 내부 대신 표시) */
@@ -769,7 +789,8 @@ input,textarea,select{font:inherit;color:inherit}
 }
 
 @media (max-width:600px){
-  .hero-stats{flex-direction:column;gap:var(--space-4)}
+  /* 모바일 본문이 좌측 정렬이므로 통계도 좌측 축 유지 */
+  .hero-stats{flex-direction:column;gap:var(--space-4);align-items:flex-start}
   .stat-divider{width:40px;height:1px}
   .values-grid{grid-template-columns:1fr}
   .contact-form{padding:var(--space-5)}
@@ -992,10 +1013,10 @@ input,textarea,select{font:inherit;color:inherit}
 .blog-card-more{
   margin-top:auto;display:block;text-align:center;text-decoration:none;
   padding:var(--space-2) 0;font-size:var(--text-sm);font-weight:600;
-  color:var(--color-accent);
-  border:1px solid var(--color-accent);border-radius:var(--radius-sm);
+  color:var(--color-accent-ink);
+  border:1px solid var(--color-accent-ink);border-radius:var(--radius-sm);
 }
-.blog-card-more:hover{background:var(--color-accent);color:#fff}
+.blog-card-more:hover{background:var(--color-accent-hover);border-color:var(--color-accent-hover);color:#fff}
 
 /* 회사 소식 / In the Press */
 .news-block{
@@ -1004,7 +1025,7 @@ input,textarea,select{font:inherit;color:inherit}
 }
 .news-block-label{display:flex;align-items:center;gap:var(--space-3);
   font-size:var(--text-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--color-accent);margin-bottom:var(--space-4)}
+  color:var(--color-accent-ink);margin-bottom:var(--space-4)}
 .news-block-label::before{content:"";width:28px;height:2px;background:var(--color-accent)}
 .news-card{display:flex;background:var(--color-surface);
   border:1px solid var(--color-divider);border-radius:var(--radius-lg);overflow:hidden;
@@ -1026,16 +1047,16 @@ input,textarea,select{font:inherit;color:inherit}
 .news-card-title{font-size:var(--text-lg);line-height:1.34;font-weight:700;
   color:var(--color-primary);margin-bottom:var(--space-3)}
 .news-card-desc{font-size:var(--text-sm);line-height:1.65;color:var(--color-text-muted);margin-bottom:var(--space-4)}
-.news-card-meta{font-size:var(--text-sm);font-weight:600;color:var(--color-accent)}
+.news-card-meta{font-size:var(--text-sm);font-weight:600;color:var(--color-accent-ink)}
 
 /* "더 보기" 골드 아웃라인 버튼 */
 .col-more-wrap{width:100%;max-width:var(--content-wide);margin:var(--space-2) auto 0;
   padding:0 var(--space-8) var(--space-3);text-align:center}
 .col-more-btn{display:inline-flex;align-items:center;gap:var(--space-2);
   font-size:var(--text-sm);font-weight:600;padding:var(--space-3) var(--space-8);
-  color:var(--color-accent);border:1.5px solid var(--color-accent);
+  color:var(--color-accent-ink);border:1.5px solid var(--color-accent-ink);
   border-radius:var(--radius-full);background:transparent;text-decoration:none}
-.col-more-btn:hover{background:var(--color-accent);color:#fff}
+.col-more-btn:hover{background:var(--color-accent-hover);border-color:var(--color-accent-hover);color:#fff}
 
 /* 반응형 — 사이트 표준 브레이크포인트(959 / 600)에 정렬 */
 @media (max-width:959px){
@@ -1048,6 +1069,67 @@ input,textarea,select{font:inherit;color:inherit}
 @media (max-width:600px){
   .blog-grid{grid-template-columns:1fr}
 }
+
+/* ─── CEO 프로필 카드 (About) ─────────────────── */
+.ceo-card{
+  display:flex;gap:var(--space-5);align-items:flex-start;
+  margin-top:var(--space-6);padding:var(--space-5) var(--space-6);
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+}
+.ceo-photo{
+  flex-shrink:0;width:96px;height:96px;border-radius:var(--radius-md);
+  overflow:hidden;background:var(--color-surface-2);
+  border:1px solid var(--color-divider);
+}
+.ceo-photo img{width:100%;height:100%;object-fit:cover;object-position:22% 18%}
+.ceo-label{font-size:var(--text-xs);font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--color-accent-ink);margin-bottom:var(--space-1)}
+.ceo-name{font-family:var(--font-body);font-size:var(--text-base);font-weight:800;
+  color:var(--color-text);margin-bottom:var(--space-3)}
+.ceo-name .ceo-name-en{font-size:var(--text-xs);font-weight:500;
+  color:var(--color-text-muted);margin-left:var(--space-2);letter-spacing:.03em}
+.ceo-creds{list-style:none;display:flex;flex-direction:column;gap:var(--space-1);margin-bottom:var(--space-3)}
+.ceo-creds li{font-size:var(--text-xs);color:var(--color-text-muted);
+  padding-left:var(--space-4);position:relative;line-height:1.6}
+.ceo-creds li::before{content:'·';position:absolute;left:var(--space-1);
+  color:var(--color-accent);font-weight:900}
+.ceo-link{font-size:var(--text-xs);font-weight:700;color:var(--color-accent-ink)}
+.ceo-link:hover{color:var(--color-accent-hover)}
+@media (max-width:480px){
+  .ceo-card{flex-direction:column}
+  .ceo-photo{width:100%;height:150px}
+}
+
+/* ─── 연락 채널 라벨 (Contact) ─────────────────── */
+.contact-item-body{display:flex;flex-direction:column;gap:2px}
+.contact-item-label{font-size:var(--text-xs);font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:rgba(255,255,255,.45)}
+[data-theme='dark'] .contact-item-label{color:var(--color-text-faint)}
+
+/* ─── 푸터 법적 고지 링크 ─────────────────────── */
+.footer-legal{display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-2)}
+.footer-legal a{font-size:var(--text-xs);color:var(--color-text-muted)}
+.footer-legal a:hover{color:var(--color-primary)}
+.footer-legal a.strong{font-weight:700}
+
+/* ─── 법적 문서 페이지 (privacy / terms) ───────── */
+.legal-page .header-inner{height:64px}
+.legal-main{max-width:var(--content-narrow);margin-inline:auto;
+  padding:var(--space-12) clamp(var(--space-6),5vw,var(--space-10)) var(--space-24)}
+.legal-main h1{font-size:var(--text-xl);font-weight:900;margin-bottom:var(--space-2)}
+.legal-date{font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-10)}
+.legal-main h2{font-size:var(--text-base);font-weight:800;
+  margin:var(--space-8) 0 var(--space-3);color:var(--color-primary)}
+.legal-main p,.legal-main li{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.8}
+.legal-main ul{padding-left:var(--space-5);margin-bottom:var(--space-2)}
+.legal-main table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-3) 0}
+.legal-main th,.legal-main td{border:1px solid var(--color-divider);
+  padding:var(--space-2) var(--space-3);text-align:left;color:var(--color-text-muted)}
+.legal-main th{background:var(--color-surface-2);color:var(--color-text);font-weight:700}
+.legal-back{display:inline-flex;align-items:center;gap:var(--space-2);
+  font-size:var(--text-sm);font-weight:600;color:var(--color-primary);margin-bottom:var(--space-8)}
+.legal-back:hover{color:var(--color-accent-hover)}
 
 /* ─── 접근성: 모션 줄이기 (WCAG 2.3.3) ─────────────
    OS '동작 줄이기'를 켠 사용자에게만 적용 — 무한 바운스 /
