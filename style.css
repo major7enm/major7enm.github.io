@@ -315,9 +315,11 @@ input,textarea,select{font:inherit;color:inherit}
 /* 데스크톱 히어로는 중앙 정렬 축 — 통계도 같은 축에 맞춤 */
 .hero-stats{display:flex;align-items:center;justify-content:center;gap:var(--space-6);flex-wrap:wrap}
 .stat{display:flex;flex-direction:column;gap:4px}
-.stat-num{font-family:var(--font-display);font-size:var(--text-xl);font-weight:900;
-  color:#fff;line-height:1;letter-spacing:-.02em}
-.stat-unit{font-size:.6em;font-weight:700}
+/* Cabinet Grotesk는 400/500/700/800/900만 있다. 600을 지정하면
+   700으로 대체되므로 실제 존재하는 500을 쓴다. */
+.stat-num{font-family:var(--font-display);font-size:var(--text-xl);font-weight:500;
+  color:#fff;line-height:1;letter-spacing:-.01em}
+.stat-unit{font-size:.6em;font-weight:500}
 .stat-label{font-size:var(--text-xs);color:rgba(255,255,255,.5);font-weight:500;letter-spacing:.04em}
 .stat-divider{width:1px;height:44px;background:rgba(255,255,255,.15)}
 .hero-scroll-hint{
@@ -1235,9 +1237,11 @@ input,textarea,select{font:inherit;color:inherit}
   /* 통계 3개가 세로로 쌓이면 히어로가 너무 길어진다 → 가로 1줄 */
   .hero-stats{flex-direction:row !important;align-items:flex-start;gap:var(--space-5);flex-wrap:nowrap}
   .hero-stats .stat-divider{width:1px !important;height:38px !important}
-  .hero-stats .stat-num{font-size:1.45rem}
+  /* 한글은 기본값이면 음절 단위로 잘린다("에이/전시"). 어절 단위로 끊는다 */
+  .hero-title,.hero-desc{word-break:keep-all;overflow-wrap:break-word}
+  .hero-stats .stat-num{font-size:1.22rem}
   .hero-stats .stat-label{font-size:.68rem;white-space:nowrap}
-  .hero-desc{font-size:.95rem}
+  .hero-desc{font-size:1.1rem;line-height:1.7;color:rgba(255,255,255,.86)}
 }
 
 /* ─── 섹션 탭 전환 ─────────────────────────────
@@ -1298,8 +1302,17 @@ body.tabs-mode #youtube.is-active{padding-top:0}
     margin-bottom:var(--space-6);
   }
   .hero .hero-title br{display:none}   /* 데스크톱은 한 줄 */
-  .hero .hero-desc{margin-bottom:var(--space-9)}
-  .hero .hero-stats{justify-content:center}
+  /* 부제를 본문급으로 키우고, 지표 숫자는 제목과 경쟁하지 않도록 줄인다 */
+  .hero .hero-desc{
+    font-size:clamp(1.15rem,1.75vw,1.6rem);
+    line-height:1.75;
+    color:rgba(255,255,255,.86);
+    margin-bottom:var(--space-8);
+  }
+  .hero .hero-stats{justify-content:center;gap:var(--space-6)}
+  .hero .hero-stats .stat-num{font-size:clamp(1.3rem,1.85vw,1.75rem)}
+  .hero .hero-stats .stat-label{font-size:.82rem}
+  .hero .hero-stats .stat-divider{height:34px}
 
   /* 위 40%는 포스터를 그대로 보여주고, 아래 절반은
      확실한 어두운 지면으로 만들어 문구를 앉힌다. */

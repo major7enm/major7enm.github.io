@@ -256,7 +256,7 @@ const i18nData = {
     nav_performance: '주요 성과',
     nav_contact: '문의하기',
     hero_badge: 'Music Copyright Clearance Agency',
-    hero_title_html: '콘텐츠가 <span class="hero-accent">멈추지 않도록</span>, <br />저작권부터',
+    hero_title_html: '콘텐츠가 <span class="hero-accent">멈추지 않도록</span>, <br />저작권부터',
     hero_desc_html: '드라마 · 방송 · 광고 · 게임 음악 저작권 클리어런스 전문 에이전시,<br />기획 단계에서 리스크를 <strong>선제적으로</strong> 해결합니다.',
     hero_cta_business: '사업 분야 보기',
     hero_cta_performance: '주요 성과 보기',
