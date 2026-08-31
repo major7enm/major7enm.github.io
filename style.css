@@ -1292,15 +1292,13 @@ body.tabs-mode #youtube.is-active{padding-top:0}
     padding-left:var(--space-8);
     padding-right:var(--space-8);
   }
-  .hero .hero-badge{align-self:center;margin-bottom:var(--space-5)}
   .hero .hero-title{
     font-size:clamp(1.9rem,4vw,3.6rem);
     letter-spacing:-.02em;
-    margin-bottom:var(--space-5);
+    margin-bottom:var(--space-6);
   }
   .hero .hero-title br{display:none}   /* 데스크톱은 한 줄 */
-  .hero .hero-desc{margin-bottom:var(--space-7)}
-  .hero .hero-cta{justify-content:center;margin-bottom:var(--space-9)}
+  .hero .hero-desc{margin-bottom:var(--space-9)}
   .hero .hero-stats{justify-content:center}
 
   /* 위 40%는 포스터를 그대로 보여주고, 아래 절반은
