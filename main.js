@@ -252,12 +252,18 @@ const i18nData = {
     nav_about: '회사 소개',
     nav_business: '사업 분야',
     nav_capability: '대응역량',
+    nav_insight: '인사이트',
     nav_performance: '주요 성과',
     nav_contact: '문의하기',
     hero_badge: 'Music Copyright Clearance Agency',
-    hero_title_html: '콘텐츠의 글로벌<br /><span class="hero-accent">IP 비상</span>을 가능케 하는<br />최적의 파트너',
-    hero_desc_html: '방송 · 드라마 · 광고 · 게임 등 다양한 장르에서<br />음악저작물을 <strong>합리적인 비용</strong>으로 <strong>안전하게</strong> 이용할 수 있도록<br />전문적이고 체계적인 프로세스를 제공합니다.',
+    hero_title_html: '콘텐츠가 <span class="hero-accent">멈추지 않도록</span>, <br />저작권부터',
+    hero_desc_html: '드라마 · 방송 · 광고 · 게임 음악 저작권 클리어런스 전문 에이전시,<br />기획 단계에서 리스크를 <strong>선제적으로</strong> 해결합니다.',
     hero_cta_business: '사업 분야 보기',
+    hero_cta_performance: '주요 성과 보기',
+    stat_works: '수행 작품',
+    stat_songs: '연간 클리어런스',
+    stat_songs_unit: '곡+',
+    stat_works_unit: '편+',
     stat_founded: '설립연도',
     stat_years_unit: '년+',
     stat_experience: '전문 경력',
@@ -324,12 +330,18 @@ const i18nData = {
     nav_about: 'About',
     nav_business: 'Business',
     nav_capability: 'Expertise',
+    nav_insight: 'Insights',
     nav_performance: 'Portfolio',
     nav_contact: 'Contact',
     hero_badge: 'Music Copyright Clearance Agency',
-    hero_title_html: 'The Optimal Partner<br />for <span class="hero-accent">Global IP</span><br />Content Success',
-    hero_desc_html: 'From broadcasting to drama, advertising and games —<br />we provide expert and systematic processes to ensure<br /><strong>safe and cost-effective</strong> use of music rights.',
+    hero_title_html: 'So the content <span class="hero-accent">never stops</span>, <br />rights come first.',
+    hero_desc_html: 'A music copyright clearance agency for drama, broadcast, advertising and games,<br />resolving risk <strong>at the planning stage</strong>.',
     hero_cta_business: 'Our Services',
+    hero_cta_performance: 'See Our Work',
+    stat_works: 'Titles Handled',
+    stat_songs: 'Cleared Annually',
+    stat_songs_unit: ' tracks+',
+    stat_works_unit: '+',
     stat_founded: 'Founded',
     stat_years_unit: 'yrs+',
     stat_experience: 'Experience',
@@ -396,12 +408,18 @@ const i18nData = {
     nav_about: '会社紹介',
     nav_business: '事業分野',
     nav_capability: '対応能力',
+    nav_insight: 'インサイト',
     nav_performance: '主な実績',
     nav_contact: 'お問い合わせ',
     hero_badge: 'Music Copyright Clearance Agency',
-    hero_title_html: 'コンテンツの<br /><span class="hero-accent">グローバルIP飛躍</span>を<br />実現する最適パートナー',
-    hero_desc_html: '放送・ドラマ・広告・ゲームなど様々なジャンルで<br />音楽著作物を<strong>合理的なコスト</strong>で<strong>安全に</strong>ご利用いただけるよう<br />専門的で体系的なプロセスをご提供します。',
+    hero_title_html: 'コンテンツを<span class="hero-accent">止めない</span>ために、<br />まず著作権から。',
+    hero_desc_html: 'ドラマ・放送・広告・ゲームの音楽著作権クリアランス専門エージェンシー。<br />企画段階でリスクを<strong>先回りして</strong>解決します。',
     hero_cta_business: '事業分野を見る',
+    hero_cta_performance: '主な実績を見る',
+    stat_works: '対応作品',
+    stat_songs: '年間クリアランス',
+    stat_songs_unit: '曲+',
+    stat_works_unit: '本+',
     stat_founded: '設立年度',
     stat_years_unit: '年+',
     stat_experience: '専門経験',
@@ -468,12 +486,18 @@ const i18nData = {
     nav_about: '公司介绍',
     nav_business: '业务领域',
     nav_capability: '专业能力',
+    nav_insight: '洞察',
     nav_performance: '主要业绩',
     nav_contact: '联系我们',
     hero_badge: '音乐版权许可代理机构',
-    hero_title_html: '助力内容<br /><span class="hero-accent">全球IP腾飞</span><br />的最佳合作伙伴',
-    hero_desc_html: '从广播、影视、广告到游戏，各类媒体领域<br />以<strong>合理的成本</strong><strong>安全合规</strong>地使用音乐作品<br />我们提供专业、系统化的解决方案。',
+    hero_title_html: '为了让作品<span class="hero-accent">不被叫停</span>，<br />先从版权开始。',
+    hero_desc_html: '电视剧 · 广播 · 广告 · 游戏 音乐版权许可专业代理机构，<br />在企划阶段<strong>提前</strong>化解风险。',
     hero_cta_business: '查看业务领域',
+    hero_cta_performance: '查看主要实绩',
+    stat_works: '服务作品',
+    stat_songs: '年度授权处理',
+    stat_songs_unit: '首+',
+    stat_works_unit: '部+',
     stat_founded: '成立年份',
     stat_years_unit: '年+',
     stat_experience: '专业经验',
@@ -1270,4 +1294,117 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeModal();
   });
+})();
+
+// ============================================
+//  SECTION TABS — 스크롤 대신 섹션 전환
+//  상단 메뉴를 누르면 해당 섹션만 화면에 표시된다.
+//  URL 해시(#performance)를 그대로 쓰므로 기존 링크·
+//  북마크·뒤로가기가 전부 유지된다.
+// ============================================
+(function () {
+  // 탭 이름 → 함께 보여줄 섹션 id
+  const TABS = {
+    home:        ['hero'],
+    performance: ['performance'],
+    business:    ['business'],
+    capability:  ['capability'],
+    portfolio:   ['portfolio', 'youtube'],
+    about:       ['about', 'history'],
+    contact:     ['contact'],
+  };
+  // 섹션 id → 소속 탭 (해시로 들어와도 맞는 탭을 찾도록)
+  const OWNER = {};
+  Object.keys(TABS).forEach(t => TABS[t].forEach(id => { OWNER[id] = t; }));
+
+  const panels = {};
+  Object.keys(OWNER).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('tab-panel'); panels[id] = el; }
+  });
+  if (!panels.hero) return;
+
+  document.body.classList.add('tabs-mode');
+
+  const navLinks = document.querySelectorAll('.nav a[href^="#"], .mobile-link[href^="#"]');
+  let current = null;
+
+  function activate(tab, opts) {
+    opts = opts || {};
+    if (!TABS[tab]) tab = 'home';
+    if (tab === current) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    current = tab;
+
+    Object.keys(panels).forEach(id => {
+      panels[id].classList.toggle('is-active', OWNER[id] === tab);
+    });
+
+    // 현재 탭 메뉴 강조
+    navLinks.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      a.classList.toggle('is-current', OWNER[id] === tab);
+    });
+
+    document.body.classList.toggle('on-home', tab === 'home');
+
+    // 화면 전환 느낌: 활성 섹션을 살짝 페이드 인
+    TABS[tab].forEach(id => {
+      const el = panels[id];
+      if (!el) return;
+      el.classList.remove('tab-enter');
+      void el.offsetWidth;            // 리플로우 강제 → 애니메이션 재시작
+      el.classList.add('tab-enter');
+    });
+
+    if (!opts.silent) {
+      const hash = tab === 'home' ? ' ' : '#' + TABS[tab][0];
+      history.pushState({ tab: tab }, '', tab === 'home' ? location.pathname : hash);
+    }
+    window.scrollTo(0, 0);
+  }
+
+  // 해시를 탭으로 변환
+  function tabFromHash(hash) {
+    const id = (hash || '').replace('#', '');
+    return OWNER[id] || (id ? null : 'home');
+  }
+
+  // 캡처 단계에서 가로채 기존 스무스 스크롤 핸들러보다 먼저 처리
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const tab = tabFromHash(a.getAttribute('href'));
+    if (!tab) return;                 // 탭과 무관한 앵커는 원래대로
+    e.preventDefault();
+    e.stopPropagation();
+    closeMobileMenu();   // stopPropagation 때문에 기존 닫기 핸들러가 안 도는 것을 대신 처리
+    activate(tab);
+  }, true);
+
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    if (!menu || !menu.classList.contains('open')) return;
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', true);
+    if (btn) {
+      btn.setAttribute('aria-expanded', false);
+      btn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  }
+
+  // 로고 → 홈
+  const logo = document.querySelector('.logo');
+  if (logo) logo.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); closeMobileMenu(); activate('home'); }, true);
+
+  window.addEventListener('popstate', function (e) {
+    activate((e.state && e.state.tab) || tabFromHash(location.hash) || 'home', { silent: true });
+  });
+
+  // 해시로 바로 진입한 경우 브라우저가 그 요소로 스크롤해 버리므로 되돌린다
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  activate(tabFromHash(location.hash) || 'home', { silent: true });
+  const pinTop = () => window.scrollTo(0, 0);
+  requestAnimationFrame(pinTop);
+  window.addEventListener('load', pinTop, { once: true });
 })();

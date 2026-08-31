@@ -196,6 +196,52 @@ input,textarea,select{font:inherit;color:inherit}
   color:#fff;
 }
 .hero-bg{position:absolute;inset:0;pointer-events:none}
+
+/* ─── 히어로 포스터 월 ─────────────────────────
+   images/wall-*.webp = 실제 클리어런스 수행 작품
+   포스터를 이어붙인 모자이크 띠. 두 장을 나란히
+   두고 한 장 너비만큼 밀어 무한 루프. */
+.poster-wall{
+  --pw-w:2912px; --pw-h:298px;
+  position:absolute;inset:0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  filter:saturate(.88);
+}
+.pw-row{display:flex;flex:none;width:max-content;will-change:transform}
+.pw-strip{
+  display:block;flex:none;
+  width:var(--pw-w);height:var(--pw-h);
+  background-repeat:no-repeat;
+  background-size:var(--pw-w) var(--pw-h);
+}
+.pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-1.webp)}
+.pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-2.webp)}
+.pw-row--3 .pw-strip{background-image:url(images/wall-3.webp)}
+.pw-row--1{animation:pw-left 120s linear infinite}
+.pw-row--2{animation:pw-right 145s linear infinite}
+.pw-row--3{animation:pw-left 100s linear infinite}
+.pw-row--4{animation:pw-right 132s linear infinite}
+.pw-row--5{animation:pw-left 112s linear infinite}
+.pw-row--4,.pw-row--5{display:none}
+@keyframes pw-left{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(calc(-1 * var(--pw-w)),0,0)}
+}
+@keyframes pw-right{
+  from{transform:translate3d(calc(-1 * var(--pw-w)),0,0)}
+  to{transform:translate3d(0,0,0)}
+}
+/* 포스터 위 글자 가독성 확보용 스크림 */
+.hero-scrim{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 66% 60% at 50% 48%,rgba(8,8,11,.82) 0%,rgba(8,8,11,.52) 52%,rgba(8,8,11,0) 80%),
+    linear-gradient(180deg,rgba(8,8,11,.86) 0%,rgba(8,8,11,.58) 20%,rgba(8,8,11,.60) 60%,rgba(8,8,11,.96) 100%);
+}
+/* 포스터 위에 얹히므로 글자에 그림자를 준다 */
+.hero .hero-title{text-shadow:0 2px 28px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.5)}
+.hero .hero-desc,.hero .hero-stats{text-shadow:0 1px 16px rgba(0,0,0,.7),0 1px 2px rgba(0,0,0,.5)}
+.hero .hero-badge{backdrop-filter:blur(6px)}
 .vinyl-graphic{
   position:absolute;
   right:-5%;
@@ -1170,4 +1216,102 @@ input,textarea,select{font:inherit;color:inherit}
   }
   .hero-scroll-hint{animation:none}
   .fade-up{opacity:1 !important;transform:none !important}
+}
+
+/* ─── 히어로 포스터 월 : 모바일 ───────────────
+   가벼운 -sm 띠로 교체하고 줄 수를 5줄로 늘려
+   좁은 화면에서도 세로를 채운다. */
+@media (max-width:768px){
+  .poster-wall{--pw-w:1514px;--pw-h:154px}
+  .pw-row--4,.pw-row--5{display:flex}
+  .pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-1-sm.webp)}
+  .pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-2-sm.webp)}
+  .pw-row--3 .pw-strip{background-image:url(images/wall-3-sm.webp)}
+  .hero-scrim{
+    background:
+      linear-gradient(90deg,rgba(8,8,11,.90) 0%,rgba(8,8,11,.72) 62%,rgba(8,8,11,.46) 100%),
+      linear-gradient(180deg,rgba(8,8,11,.86) 0%,rgba(8,8,11,.52) 16%,rgba(8,8,11,.56) 64%,rgba(8,8,11,.96) 100%);
+  }
+  /* 통계 3개가 세로로 쌓이면 히어로가 너무 길어진다 → 가로 1줄 */
+  .hero-stats{flex-direction:row !important;align-items:flex-start;gap:var(--space-5);flex-wrap:nowrap}
+  .hero-stats .stat-divider{width:1px !important;height:38px !important}
+  .hero-stats .stat-num{font-size:1.45rem}
+  .hero-stats .stat-label{font-size:.68rem;white-space:nowrap}
+  .hero-desc{font-size:.95rem}
+}
+
+/* ─── 섹션 탭 전환 ─────────────────────────────
+   스크롤로 내려가는 대신 상단 메뉴로 섹션을 갈아끼운다.
+   JS(main.js SECTION TABS)가 .tab-panel / .is-active 를 관리.
+   JS가 꺼져 있으면 아래 규칙이 적용되지 않아 기존 스크롤
+   원페이지로 그대로 동작한다. */
+body.tabs-mode .tab-panel{display:none}
+body.tabs-mode .tab-panel.is-active{display:block}
+
+.tab-enter{animation:tab-in .34s cubic-bezier(.22,.7,.3,1) both}
+@keyframes tab-in{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+
+/* 현재 보고 있는 메뉴 강조 */
+.nav a.is-current{color:var(--color-accent)}
+.nav a.is-current::after{
+  content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;
+  background:var(--color-accent);border-radius:2px;
+}
+.nav a{position:relative}
+.mobile-link.is-current{color:var(--color-accent);font-weight:700}
+
+/* 헤더 문의 버튼이 <a>로 바뀌었으므로 버튼 모양 유지 */
+a.btn-contact{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+
+/* 홈에서는 아래에 섹션이 없으므로 스크롤 유도를 감춘다 */
+body.tabs-mode .hero-scroll-hint{display:none}
+
+/* 탭 하나가 화면보다 짧아도 푸터가 위로 떠오르지 않게 */
+body.tabs-mode .tab-panel.is-active{min-height:calc(100vh - 73px - 160px)}
+body.tabs-mode #hero.is-active{display:flex;min-height:92vh}  /* 탭 CSS의 display:block이 히어로 flex를 덮지 않도록 */
+
+/* 탭 모드에서는 각 섹션이 화면 최상단에 오므로 위 여백을 줄인다 */
+body.tabs-mode .tab-panel.is-active:not(#hero){padding-top:var(--space-10)}
+body.tabs-mode #youtube.is-active{padding-top:0}
+
+/* ─── 히어로: 하단 중앙 정렬 ─────────────────────
+   위쪽 절반은 포스터만 보여주고, 아래쪽에 문구를
+   가운데로 모은다. 큰제목은 데스크톱에서 한 줄로
+   넓게 펼치고(모바일에서는 <br>이 살아나 두 줄),
+   스크림은 아래로 갈수록 짙어져 글자 지면을 만든다. */
+@media (min-width:769px){
+  .hero{align-items:flex-end}
+  .hero .hero-content{
+    text-align:center;
+    max-width:1360px;
+    padding-top:0;
+    padding-bottom:var(--space-12);
+    padding-left:var(--space-8);
+    padding-right:var(--space-8);
+  }
+  .hero .hero-badge{align-self:center;margin-bottom:var(--space-5)}
+  .hero .hero-title{
+    font-size:clamp(1.9rem,4vw,3.6rem);
+    letter-spacing:-.02em;
+    margin-bottom:var(--space-5);
+  }
+  .hero .hero-title br{display:none}   /* 데스크톱은 한 줄 */
+  .hero .hero-desc{margin-bottom:var(--space-7)}
+  .hero .hero-cta{justify-content:center;margin-bottom:var(--space-9)}
+  .hero .hero-stats{justify-content:center}
+
+  /* 위 40%는 포스터를 그대로 보여주고, 아래 절반은
+     확실한 어두운 지면으로 만들어 문구를 앉힌다. */
+  .hero-scrim{
+    background:linear-gradient(180deg,
+      rgba(8,8,11,.26) 0%,
+      rgba(8,8,11,.08) 16%,
+      rgba(8,8,11,.26) 36%,
+      rgba(8,8,11,.70) 52%,
+      rgba(8,8,11,.90) 64%,
+      rgba(8,8,11,.96) 100%);
+  }
 }
