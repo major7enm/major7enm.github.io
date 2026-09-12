@@ -1301,7 +1301,9 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     performance: ['performance'],
     business:    ['business'],
     capability:  ['capability'],
-    portfolio:   ['portfolio', 'youtube'],
+    // 'portfolio'를 맨 앞에 두어야 URL 해시가 기존대로 #portfolio로 유지된다.
+    // 화면에 그려지는 순서는 배열이 아니라 DOM 순서(voice → portfolio → youtube)를 따른다.
+    portfolio:   ['portfolio', 'voice', 'youtube'],
     about:       ['about', 'history'],
     contact:     ['contact'],
   };
