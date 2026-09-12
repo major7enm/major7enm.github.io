@@ -1174,11 +1174,12 @@ input,textarea,select{font:inherit;color:inherit}
 .voice-lede{font-size:clamp(1.45rem,1rem + 1.7vw,2.35rem);font-weight:800;line-height:1.42;
   letter-spacing:-.02em;color:#fff;margin:0 0 var(--space-6)}
 .voice-lede .hl{color:var(--color-accent)}
-.voice-body{font-size:var(--text-sm);line-height:1.95;color:rgba(226,232,243,.8);
-  border-left:2px solid rgba(201,152,42,.35);padding-left:var(--space-5);margin-bottom:var(--space-6)}
+/* 인용이 아니라 회사가 붙이는 설명이므로 금색 인용 바는 쓰지 않는다 */
+.voice-body{font-size:var(--text-sm);line-height:1.95;color:rgba(226,232,243,.78);
+  border-left:1px solid rgba(255,255,255,.16);padding-left:var(--space-5);margin-bottom:var(--space-8)}
 .voice-body p{margin:0 0 .9rem}
 .voice-body p:last-child{margin:0}
-.voice-attr{font-size:var(--text-sm);font-weight:700;color:#fff;margin-bottom:var(--space-8)}
+.voice-attr{font-size:var(--text-sm);font-weight:700;color:#fff;margin-bottom:var(--space-6)}
 .voice-attr span{display:block;font-weight:400;font-size:var(--text-xs);
   color:rgba(226,232,243,.62);margin-top:.35rem;letter-spacing:.01em}
 .voice-cta{display:flex;gap:var(--space-3);flex-wrap:wrap}
@@ -1210,6 +1211,12 @@ input,textarea,select{font:inherit;color:inherit}
   .voice-figure{max-width:340px}
   .voice-facts{grid-template-columns:repeat(2,1fr);gap:var(--space-5)}
   .voice-bg img{object-position:62% 38%}
+}
+/* 좁은 화면에서는 강제 줄바꿈을 풀어야 '없다'·'하다'가 혼자 떨어지지 않는다 */
+@media (max-width:600px){
+  .voice-lede{font-size:1.3rem;line-height:1.55}
+  .voice-br{display:none}
+  .voice-quote{padding-left:1.6rem}
 }
 
 /* ─── CEO 프로필 카드 (About) ─────────────────── */
