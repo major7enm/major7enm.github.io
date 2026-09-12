@@ -1297,7 +1297,9 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 (function () {
   // 탭 이름 → 함께 보여줄 섹션 id
   const TABS = {
-    home:        ['hero'],
+    // 홈은 히어로만 두면 스크롤할 것이 없다. 최신 소식을 홈에서 바로
+    // 훑을 수 있도록 인사이트 코너(voice + portfolio)를 함께 보여준다.
+    home:        ['hero', 'voice', 'portfolio'],
     performance: ['performance'],
     business:    ['business'],
     capability:  ['capability'],
@@ -1330,7 +1332,9 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     current = tab;
 
     Object.keys(panels).forEach(id => {
-      panels[id].classList.toggle('is-active', OWNER[id] === tab);
+      // OWNER가 아니라 TABS를 기준으로 판단해야 한 섹션이 두 탭에
+      // 동시에 소속될 수 있다(인사이트 코너는 홈과 인사이트에 함께 노출).
+      panels[id].classList.toggle('is-active', TABS[tab].indexOf(id) !== -1);
     });
 
     // 현재 탭 메뉴 강조

@@ -1344,8 +1344,9 @@ body.tabs-mode .tab-panel.is-active{display:block}
 /* 헤더 문의 버튼이 <a>로 바뀌었으므로 버튼 모양 유지 */
 a.btn-contact{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 
-/* 홈에서는 아래에 섹션이 없으므로 스크롤 유도를 감춘다 */
-body.tabs-mode .hero-scroll-hint{display:none}
+/* 홈 아래에 인사이트 코너가 붙으므로 스크롤 유도를 되살린다.
+   다른 탭에는 히어로가 없어 이 규칙이 영향을 주지 않는다 */
+body.tabs-mode:not(.on-home) .hero-scroll-hint{display:none}
 
 /* 탭 하나가 화면보다 짧아도 푸터가 위로 떠오르지 않게 */
 body.tabs-mode .tab-panel.is-active{min-height:calc(100vh - 73px - 160px)}
