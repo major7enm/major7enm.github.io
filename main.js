@@ -248,7 +248,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 const i18nData = {
   ko: {
-    meta_title: '주식회사 메이저세븐이엔엠 | Major7 Entertainment & Music Copyright Inc.',
+    meta_title: '주식회사 메이저세븐이엔엠 (Major7 E&M) | 음악 저작권 클리어런스 에이전시',
     nav_about: '회사 소개',
     nav_business: '사업 분야',
     nav_capability: '대응역량',
@@ -273,8 +273,9 @@ const i18nData = {
     yt_placeholder: '영상이 곧 업로드됩니다. 채널을 구독해 주세요!',
     yt_channel_btn: '채널 방문하기',
     about_title_html: '국내 최고의<br />음악 저작권<br /><span class="text-accent">클리어런스 에이전시</span>',
-    about_desc: '㈜ 메이저세븐이엔엠은 사용자가 방송·드라마·광고·게임 등 다양한 장르에서 필요한 음악저작물을 합리적인 비용으로 안전하게 이용할 수 있도록 콘텐츠 제작 전반의 이해도와 실무 경험을 바탕으로 전문적이고 체계적인 프로세스를 제공합니다.',
+    about_desc: '㈜ 메이저세븐이엔엠(Major7 E&M)은 사용자가 방송·드라마·광고·게임 등 다양한 장르에서 필요한 음악저작물을 합리적인 비용으로 안전하게 이용할 수 있도록 콘텐츠 제작 전반의 이해도와 실무 경험을 바탕으로 전문적이고 체계적인 프로세스를 제공합니다.',
     info_company: '기업명',
+    info_name_en: '영문 표기',
     info_founded_label: '설립일',
     info_founded_val: '2009년 9월',
     info_ceo: '대표이사',
@@ -351,6 +352,7 @@ const i18nData = {
     about_title_html: "Korea's Premier<br />Music Copyright<br /><span class=\"text-accent\">Clearance Agency</span>",
     about_desc: 'Major7 E&M provides professional and systematic processes based on deep understanding of content production and practical experience, enabling clients to use music in broadcasting, drama, advertising, games and more — safely and at a reasonable cost.',
     info_company: 'Company',
+    info_name_en: 'English Name',
     info_founded_label: 'Founded',
     info_founded_val: 'September 2009',
     info_ceo: 'CEO',
@@ -427,6 +429,7 @@ const i18nData = {
     about_title_html: '韓国トップクラスの<br />音楽著作権<br /><span class="text-accent">クリアランスエージェンシー</span>',
     about_desc: 'メジャーセブンE&Mは、放送・ドラマ・広告・ゲームなど様々なジャンルで必要な音楽著作物を合理的なコストで安全にご利用いただけるよう、コンテンツ制作全般の理解と実務経験に基づいた専門的かつ体系的なプロセスをご提供します。',
     info_company: '会社名',
+    info_name_en: '英文表記',
     info_founded_label: '設立日',
     info_founded_val: '2009年9月',
     info_ceo: '代表取締役',
@@ -503,6 +506,7 @@ const i18nData = {
     about_title_html: '韩国顶级<br />音乐版权<br /><span class="text-accent">许可代理机构</span>',
     about_desc: 'Major7 E&M凭借对内容制作的深刻理解和丰富实践经验，为广播、影视、广告、游戏等各类领域的音乐版权许可提供专业、系统化的流程，确保客户以合理成本安全使用音乐作品。',
     info_company: '公司名称',
+    info_name_en: '英文名称',
     info_founded_label: '成立日期',
     info_founded_val: '2009年9月',
     info_ceo: '首席执行官',
