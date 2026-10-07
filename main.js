@@ -624,6 +624,8 @@ const i18nData = {
     // 드롭다운 옵션 클릭
     langDropdown.querySelectorAll('.lang-option').forEach(btn => {
       btn.addEventListener('click', () => {
+        // 영어는 별도 영어 페이지(/en/)로 이동 — 검색 노출용 독립 페이지
+        if (btn.dataset.lang === 'en') { window.location.href = 'en/'; return; }
         applyTranslations(btn.dataset.lang);
         langDropdown.classList.remove('open');
         langBtn.setAttribute('aria-expanded', false);
@@ -642,6 +644,7 @@ const i18nData = {
   // 모바일 언어 버튼
   document.querySelectorAll('.mobile-lang-opt').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.dataset.lang === 'en') { window.location.href = 'en/'; return; }
       applyTranslations(btn.dataset.lang);
       // 모바일 메뉴 닫기
       const menu = document.getElementById('mobileMenu');

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Major7 E&amp;M | Music Copyright Clearance Agency in Korea</title>
+  <meta name="description" content="Major7 E&amp;M (주식회사 메이저세븐이엔엠) is a music copyright clearance agency in South Korea, founded in 2009. We clear music for TV drama, K-pop and music shows, streaming, film, advertising, games and live events. Contact: music2550@naver.com" />
+  <link rel="canonical" href="https://www.major7enm.co.kr/en/" />
+  <link rel="alternate" hreflang="ko" href="https://www.major7enm.co.kr/" />
+  <link rel="alternate" hreflang="en" href="https://www.major7enm.co.kr/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.major7enm.co.kr/" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+
+  <meta property="og:title" content="Major7 E&amp;M | Music Copyright Clearance Agency in Korea" />
+  <meta property="og:description" content="Music clearance for Korean drama, K-pop shows, streaming originals, advertising, games and live events. Based in the Seoul area, South Korea, since 2009." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.major7enm.co.kr/en/" />
+  <meta property="og:site_name" content="Major7 E&amp;M" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+
+  <!-- Fonts (same as the Korean homepage) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+    /* ===== English page only (en/index.html scope) ===== */
+    .en-page .header{position:sticky;top:0}
+    .lang-link{display:flex;align-items:center;gap:6px;font-size:var(--text-xs);font-weight:700;
+      padding:var(--space-2) var(--space-3);border-radius:var(--radius-full);
+      border:1.5px solid var(--color-border);color:var(--color-text-muted);
+      background:var(--color-surface);white-space:nowrap;transition:all var(--transition)}
+    .lang-link:hover{border-color:var(--color-primary);color:var(--color-primary)}
+    .lang-link .cur{color:var(--color-primary)}
+    .lang-link .sep{opacity:.4}
+
+    .en-page .hero-badge{letter-spacing:.06em}
+    .en-page .hero-title{letter-spacing:-.01em}
+
+    /* International producers band */
+    .intl{display:grid;grid-template-columns:1.05fr 1fr;gap:var(--space-12);align-items:center}
+    .intl h2{font-size:var(--text-2xl);font-weight:900;line-height:1.15;margin-bottom:var(--space-5);color:var(--color-text)}
+    .intl p{color:var(--color-text-muted);line-height:1.85}
+    .intl-steps{list-style:none;display:flex;flex-direction:column;gap:var(--space-4);counter-reset:s}
+    .intl-steps li{counter-increment:s;position:relative;padding:var(--space-5) var(--space-6) var(--space-5) calc(var(--space-6) + 44px);
+      background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+    .intl-steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:var(--space-6);top:var(--space-5);
+      font-family:var(--font-display);font-weight:900;font-size:var(--text-sm);color:var(--color-accent-ink)}
+    .intl-steps b{display:block;font-weight:800;color:var(--color-text);margin-bottom:4px}
+    .intl-steps span{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6}
+
+    /* Genre expertise cards */
+    .genre-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+    .genre-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);
+      padding:var(--space-6);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:var(--space-3)}
+    .genre-card h3{font-size:var(--text-base);font-weight:800;color:var(--color-text);line-height:1.35}
+    .genre-card .tagline{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65}
+    .genre-card .tagline strong{color:var(--color-primary);font-weight:700}
+    .genre-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:auto;padding-top:var(--space-3);border-top:1px solid var(--color-divider)}
+    .genre-card li{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6;padding-left:var(--space-4);position:relative}
+    .genre-card li::before{content:'✓';position:absolute;left:0;color:var(--color-accent-ink);font-weight:900}
+
+    /* Portfolio */
+    .pf-group{margin-top:var(--space-10)}
+    .pf-group:first-of-type{margin-top:var(--space-8)}
+    .pf-head{display:flex;align-items:baseline;gap:var(--space-4);flex-wrap:wrap;
+      padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider)}
+    .pf-head h3{font-size:var(--text-base);font-weight:800;color:var(--color-text)}
+    .pf-head p{font-size:var(--text-sm);color:var(--color-text-muted)}
+    .pf-group .perf-poster{cursor:default}
+    .pf-credits{margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6}
+    .prod-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3) var(--space-8);margin-top:var(--space-5)}
+    .prod-list li{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;padding-left:var(--space-4);position:relative}
+    .prod-list li::before{content:'·';position:absolute;left:var(--space-1);color:var(--color-accent);font-weight:900}
+
+    .contact-item-body{display:flex;flex-direction:column}
+    .info-value.info-stack{flex-direction:column;align-items:flex-start;justify-content:center}
+
+    @media (min-width:960px){
+      .en-page .mobile-menu.open{display:none}
+    }
+    @media (max-width:959px){
+      .lang-link{display:none}
+      .intl{grid-template-columns:1fr;gap:var(--space-8)}
+      .genre-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:600px){
+      .en-page a.btn-contact{display:none}
+      .genre-grid{grid-template-columns:1fr}
+      .prod-list{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.major7enm.co.kr/#organization",
+    "name": "Major7 E&M",
+    "legalName": "주식회사 메이저세븐이엔엠",
+    "alternateName": ["Major7 E&M Inc.", "Major7 Entertainment & Music Copyright Inc.", "메이저세븐이엔엠"],
+    "url": "https://www.major7enm.co.kr/en/",
+    "logo": "https://www.major7enm.co.kr/logo.png",
+    "description": "Music copyright clearance agency in South Korea, founded in 2009. Rights screening, clearance negotiation and dispute response for music used in TV drama, K-pop and music programs, OTT originals, advertising, games and live events.",
+    "foundingDate": "2009-09",
+    "founder": { "@type": "Person", "name": "Kim Ji-wook", "alternateName": "김지욱", "jobTitle": "CEO" },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3F Hansol Preminang, 12 Baengma-ro 213beon-gil, Ilsandong-gu",
+      "addressLocality": "Goyang-si",
+      "addressRegion": "Gyeonggi-do",
+      "addressCountry": "KR"
+    },
+    "email": "music2550@naver.com",
+    "telephone": "+82-10-7756-9940",
+    "knowsLanguage": ["ko", "en"],
+    "sameAs": [
+      "https://www.major7enm.co.kr/",
+      "https://blog.naver.com/major7enm-inc",
+      "https://www.youtube.com/@major7enmtv"
+    ]
+  }
+  </script>
+</head>
+<body class="en-page">
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner container">
+      <a href="#hero" class="logo" aria-label="Major7 E&amp;M home">
+        <img src="../logo.png" alt="Major7 E&amp;M logo" class="logo-img" />
+        <span class="logo-text">
+          <span class="logo-kr">Major7 E&amp;M</span>
+          <span class="logo-en">주식회사 메이저세븐이엔엠</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Main menu">
+        <a href="#services">Services</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="../" class="lang-link" hreflang="ko" aria-label="한국어 홈페이지 (Korean site)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="cur">EN</span><span class="sep">|</span><span lang="ko">한국어</span>
+        </a>
+        <a href="#contact" class="btn-contact">Contact</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#expertise" class="mobile-link">Expertise</a>
+      <a href="#portfolio" class="mobile-link">Portfolio</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="../" class="mobile-link" hreflang="ko" lang="ko">한국어 홈페이지 ›</a>
+    </div>
+  </header>
+
+  <main>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="poster-wall">
+        <div class="pw-row pw-row--1"><i class="pw-strip"></i><i class="pw-strip"></i></div>
+        <div class="pw-row pw-row--2"><i class="pw-strip"></i><i class="pw-strip"></i></div>
+        <div class="pw-row pw-row--3"><i class="pw-strip"></i><i class="pw-strip"></i></div>
+        <div class="pw-row pw-row--4"><i class="pw-strip"></i><i class="pw-strip"></i></div>
+        <div class="pw-row pw-row--5"><i class="pw-strip"></i><i class="pw-strip"></i></div>
+      </div>
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content container">
+      <div class="hero-badge">Major7 E&amp;M · Music Copyright Clearance Agency · South Korea</div>
+      <h1 class="hero-title">
+        Rights first, <br />
+        so your content <span class="hero-accent">never stops</span>.
+      </h1>
+      <p class="hero-desc">
+        We clear music for drama, broadcast, advertising and games,<br />
+        and resolve rights issues <strong>at the planning stage</strong>, before they cost you.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Send an Inquiry</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">16<span class="stat-unit">+ years</span></span>
+          <span class="stat-label">In Practice</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num">1,000<span class="stat-unit">+ tracks</span></span>
+          <span class="stat-label">Cleared per Year</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR INTERNATIONAL PRODUCTIONS -->
+  <section class="section" id="international">
+    <div class="container intl">
+      <div>
+        <div class="section-label">For International Productions</div>
+        <h2>Licensing Korean music for your production?</h2>
+        <p>Major7 E&amp;M clears Korean music for series, film, games, advertising and live events. We identify the rights holders behind each track in Korea and abroad, including publishers, labels and the heirs of legacy songwriters, and negotiate the licenses your distribution requires.</p>
+      </div>
+      <ol class="intl-steps">
+        <li><b>Rights research</b><span>We confirm who controls each composition and recording, flag the risks, and define the license scope for your media and territories.</span></li>
+        <li><b>Negotiation</b><span>We negotiate terms and fair fees for sync, master use, covers and arrangements, including approvals that involve the songwriter's moral rights.</span></li>
+        <li><b>Contracts</b><span>We draft and review the license agreements and see them through to signature, covering broadcast, streaming and international release.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-muted" id="services">
+    <div class="container">
+      <div class="section-label">Our Services</div>
+      <div class="section-header">
+        <h2 class="section-title">Music Clearance</h2>
+        <p class="section-sub">In a fast-moving content market, music rights are often the biggest hurdle between a production and its release.<br />We build solutions around what producers actually need.</p>
+      </div>
+      <div class="business-grid">
+        <div class="business-card">
+          <div class="business-num">01</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Rights Screening<br /><span>Research &amp; analysis</span></h3>
+          <ul>
+            <li>Rights analysis and risk assessment for every track</li>
+            <li>License scope defined by type of use, media and territory</li>
+            <li>Fee estimates matched to your use and budget</li>
+            <li>The right contact at each rights holder, in Korea and abroad</li>
+          </ul>
+        </div>
+        <div class="business-card featured">
+          <div class="business-num">02</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Clearance<br /><span>Negotiation &amp; licensing</span></h3>
+          <ul>
+            <li>A clearance plan built around your production</li>
+            <li>Genre-specific clearance that meets global standards</li>
+            <li>Terms and fair fees negotiated for sync, master use, covers, arrangements and moral-rights approvals</li>
+            <li>Agreements drafted, legally reviewed and signed</li>
+          </ul>
+        </div>
+        <div class="business-card">
+          <div class="business-num">03</div>
+          <div class="business-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Disputes<br /><span>Response &amp; advice</span></h3>
+          <ul>
+            <li>Response support tailored to each type of dispute</li>
+            <li>Dispute strategy and handling</li>
+            <li>Infringement claims and advice</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-tags">
+        <span>Broadcast</span><span>Drama</span><span>Streaming</span><span>K-pop</span><span>Advertising</span>
+        <span>Games</span><span>Live Events</span><span>Film</span><span>YouTube</span><span>Global Release</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section class="section" id="expertise">
+    <div class="container">
+      <div class="section-label">Our Expertise</div>
+      <div class="section-header">
+        <h2 class="section-title">Genre Expertise</h2>
+        <p class="section-sub">Every genre comes with its own rights challenges. We know them well.</p>
+      </div>
+      <div class="genre-grid">
+        <article class="genre-card">
+          <h3>Drama</h3>
+          <p class="tagline">In drama, clearing music starts with <strong>understanding the scene</strong>.</p>
+          <ul>
+            <li>Explaining the director's intent so rights holders can say yes</li>
+            <li>Early risk checks, including product placement and brand exposure</li>
+            <li>Rights secured for global distribution and secondary uses</li>
+          </ul>
+        </article>
+        <article class="genre-card">
+          <h3>K-pop Shows</h3>
+          <p class="tagline">On K-pop shows, <strong>how fast you clear songs</strong> is a competitive edge.</p>
+          <ul>
+            <li>Pools of clearable songs, with risks checked in advance</li>
+            <li>Rush approvals and terms negotiated on tight deadlines</li>
+            <li>One rights plan covering broadcast, streaming and overseas release</li>
+          </ul>
+        </article>
+        <article class="genre-card">
+          <h3>Trot, Crossover &amp; Global Music Shows</h3>
+          <p class="tagline"><strong>Precise rights analysis</strong> across generations, genres and borders.</p>
+          <ul>
+            <li>Tracing rights through inheritance and assignment</li>
+            <li>Direct negotiation with local agencies overseas</li>
+            <li>Clearing early to head off disputes</li>
+          </ul>
+        </article>
+        <article class="genre-card">
+          <h3>Ballad Shows</h3>
+          <p class="tagline">Built for <strong>remakes of classic songs</strong> that everyone wants to use.</p>
+          <ul>
+            <li>Coordinating competing requests for the same song</li>
+            <li>Reviewing how far an arrangement can go</li>
+            <li>Negotiating with future broadcast, digital and online use in mind</li>
+          </ul>
+        </article>
+        <article class="genre-card">
+          <h3>Concerts, Awards &amp; Reality Shows</h3>
+          <p class="tagline">Built for <strong>live production</strong>, where speed and accuracy both matter.</p>
+          <ul>
+            <li>Contingency plans for last-minute changes</li>
+            <li>Rights checks at every production stage</li>
+            <li>Fast re-approval when plans change on site</li>
+          </ul>
+        </article>
+        <article class="genre-card">
+          <h3>Content Production</h3>
+          <p class="tagline">Beyond clearance, we plan and produce <strong>original music</strong> for TV, documentaries and campaigns.</p>
+          <ul>
+            <li>OST and program music production</li>
+            <li>Documentary and campaign music</li>
+            <li>Artist and content planning</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section section-muted" id="portfolio">
+    <div class="container">
+      <div class="section-label">Our Performance</div>
+      <div class="section-header">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-sub">Clearance for major Korean networks and streaming originals.</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>Drama</h3><p>End-to-end clearance, from development to global release</p></div>
+        <div class="perf-poster-grid">
+          <div class="perf-poster"><img src="../images/drama_171.jpg" alt="The WONDERfools (원더풀스)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/perf6.jpg" alt="Undercover Miss Hong (언더커버 미쓰홍)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/perf5.jpg" alt="Typhoon Family (태풍상사)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/perf4.jpg" alt="Bon Appétit, Your Majesty (폭군의 셰프)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/perf1.jpg" alt="Lovely Runner (선재 업고 튀어)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/perf2.jpg" alt="Queen of Tears (눈물의 여왕)" loading="lazy" decoding="async" /></div>
+        </div>
+        <p class="pf-credits">Lovely Runner · Queen of Tears · Bon Appétit, Your Majesty · Typhoon Family · Undercover Miss Hong · The Wonderfools</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>K-pop &amp; Idol Shows</h3><p>Rights management and risk response for network and streaming originals</p></div>
+        <div class="perf-poster-grid">
+          <div class="perf-poster"><img src="../images/kpop_59.jpg" alt="Queendom (퀸덤)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_60.jpg" alt="Queendom Puzzle (퀸덤 퍼즐)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_61.jpg" alt="Girls Planet 999" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_63.jpg" alt="The Second World (두번째 세계)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_64.jpg" alt="Girls on Fire" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_67.jpg" alt="Boys II Planet" loading="lazy" decoding="async" /></div>
+        </div>
+        <p class="pf-credits">Queendom · Queendom Puzzle · Girls Planet 999 · The Second World · Girls on Fire · Boys II Planet</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>Trot &amp; Crossover</h3><p>Complex rights structures, analyzed across generations and borders</p></div>
+        <div class="perf-poster-grid">
+          <div class="perf-poster"><img src="../images/trot_88.jpg" alt="Burning Trotman (불타는 트롯맨)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/trot_89.jpg" alt="불타는 장미단" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/trot_90.jpg" alt="쇼큰" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/trot_91.jpg" alt="Miss Trot 3 · 현역가왕" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/trot_92.jpg" alt="한일가왕전" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/trot_93.jpg" alt="현역가왕3" loading="lazy" decoding="async" /></div>
+        </div>
+        <p class="pf-credits">Burning Trotman · Miss Trot 3 and other trot and crossover competitions</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>Ballad, Band &amp; Vocal Shows</h3><p>Tracking changes in ownership and coordinating stakeholders</p></div>
+        <div class="perf-poster-grid">
+          <div class="perf-poster"><img src="../images/ballad_84.jpg" alt="Phantom Singer 3 (팬텀싱어3)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/ballad_85.jpg" alt="Phantom Singer All-Star (팬텀싱어 올스타전)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/ballad_86.jpg" alt="Phantom Singer 4 (팬텀싱어4)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/ballad_87.jpg" alt="풍류대장" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/ballad_96.jpg" alt="Superband (슈퍼밴드)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/ballad_97.jpg" alt="Superband 2 (슈퍼밴드2)" loading="lazy" decoding="async" /></div>
+        </div>
+        <p class="pf-credits">Phantom Singer 3 &amp; 4 · Phantom Singer All-Star · Superband 1 &amp; 2</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>Concerts &amp; Variety</h3><p>Rapid response to changes during live production</p></div>
+        <div class="perf-poster-grid">
+          <div class="perf-poster"><img src="../images/concert_172.jpg" alt="연애실험실" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/concert_173.jpg" alt="연애전쟁" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_66.jpg" alt="K-909" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_55.jpg" alt="컷보따" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/kpop_62.jpg" alt="Peak Time · Fantasy Boys (소년판타지)" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster"><img src="../images/concert_99.jpg" alt="WET! DJ Survival" loading="lazy" decoding="async" /></div>
+        </div>
+        <p class="pf-credits">K-909 · Peak Time · Fantasy Boys · WET! DJ Survival and more</p>
+      </div>
+
+      <div class="pf-group">
+        <div class="pf-head"><h3>Music Production</h3><p>Selected credits</p></div>
+        <ul class="prod-list">
+          <li>Fubao and Grandpa (SBS), OST Part 1 sung by NCT's Jungwoo</li>
+          <li>Fubao and Grandpa (SBS), OST Part 2 sung by Red Velvet's Seulgi</li>
+          <li>Artistock Game (Mnet), music for the semi-final and final</li>
+          <li>Public service campaign with the Ministry of Environment, campaign song featuring Brave Girls</li>
+          <li>Background music for DISCOVER WORLD WIDE 'Sing Again'</li>
+          <li>Arrangement for the Monthly Yoon Jong-shin 10th-anniversary duet by Solji (EXID) and Sandeul (B1A4), 2019 MGMA</li>
+          <li>OSTs for Let's Fight Ghost and Pied Piper (tvN), Jealousy Incarnate (SBS) and more</li>
+          <li>Music for Fantastic Family, tvN's 10th-anniversary documentary</li>
+          <li>Music for Gaya, a KBS historical documentary</li>
+          <li>Music for Healing, a VR documentary marking Edaily TV's 14th anniversary</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">About Us</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <h2 class="section-title">Korea's Premier<br />Music Copyright<br /><span class="text-accent">Clearance Agency</span></h2>
+          <p class="about-desc">Major7 E&amp;M helps producers use music in broadcast, drama, advertising, games and more, safely and at a fair cost. Our process is built on years of hands-on experience and a deep understanding of how content gets made.</p>
+          <div class="about-info-table">
+            <div class="info-row"><span class="info-label">Company</span><span class="info-value info-stack"><span>Major7 E&amp;M Inc.</span><span lang="ko">주식회사 메이저세븐이엔엠</span></span></div>
+            <div class="info-row"><span class="info-label">Founded</span><span class="info-value">September 2009</span></div>
+            <div class="info-row"><span class="info-label">CEO</span><span class="info-value">Kim Ji-wook</span></div>
+            <div class="info-row"><span class="info-label">Business</span><span class="info-value">Music rights management, copyright consulting, rights information services, content planning and production</span></div>
+            <div class="info-row"><span class="info-label">Address</span><span class="info-value">3F Hansol Preminang, 12 Baengma-ro 213beon-gil, Ilsandong-gu, Goyang-si, Gyeonggi-do, Republic of Korea</span></div>
+            <div class="info-row"><span class="info-label">E-mail</span><span class="info-value"><a href="mailto:music2550@naver.com">music2550@naver.com</a></span></div>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="mission-card">
+            <div class="mission-label">Mission</div>
+            <blockquote class="mission-text">"To be the partner that helps Korean content reach the world, with fair costs and expert, well-organized solutions."</blockquote>
+          </div>
+          <div class="values-grid">
+            <div class="value-card">
+              <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Reliability</h3><p>Dependable results, backed by a proven network and hands-on experience</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+              <h3>Expertise</h3><p>16+ years in music rights, with a global network</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Accountability</h3><p>One team that stays responsible from kickoff to delivery</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <h3>Global</h3><p>Worldwide clearance through our Korean and international rights-holder networks</p>
+            </div>
+          </div>
+          <div class="ceo-card">
+            <div class="ceo-photo"><img src="../images/news_smsa_2026.jpg" alt="Kim Ji-wook, CEO of Major7 E&amp;M" loading="lazy" /></div>
+            <div class="ceo-info">
+              <div class="ceo-label">CEO</div>
+              <h3 class="ceo-name">Kim Ji-wook<span class="ceo-name-en" lang="ko">김지욱</span></h3>
+              <ul class="ceo-creds">
+                <li>M.A., Graduate School of Media &amp; Communication, Sogang University</li>
+                <li>16 years of music copyright clearance practice (2009–present)</li>
+                <li>Led music clearance for Lovely Runner, Sing Again, Boys Planet and many other shows and artist projects</li>
+                <li>Weekly copyright columnist for Ilgan Sports; speaker at the 2026 Sports Marketing Summit Academy (SMSA)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="section section-dark" id="history">
+    <div class="container">
+      <div class="section-label light">History</div>
+      <h2 class="section-title light">16 Years in Music Rights</h2>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-year">2009</div><div class="timeline-dot"></div>
+          <div class="timeline-content"><h3>Founded</h3><p>Major7 E&amp;M launched as a specialist music copyright clearance agency</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2013</div><div class="timeline-dot"></div>
+          <div class="timeline-content"><h3>Live Performance</h3><p>Expanded into live performance rights and began planning concerts and musicals</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2016</div><div class="timeline-dot"></div>
+          <div class="timeline-content"><h3>Artists &amp; Content</h3><p>Began developing artists and producing music and video content</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-dot"></div>
+          <div class="timeline-content"><h3>Rights Management</h3><p>Expanded rights management services and our network of rights holders</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-dot accent"></div>
+          <div class="timeline-content"><h3>Going Global</h3><p>Built capacity for global streaming and broadcast markets, and a network of overseas agencies</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-dark" id="contact">
+    <div class="container">
+      <div class="section-label light">Contact</div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2 class="section-title light">Tell us about<br />your project.<br /><span class="text-gold">Your partner for music rights.</span></h2>
+          <p class="contact-desc">From clearance to content production,<br />our team responds quickly and precisely.</p>
+          <div class="contact-info">
+            <a href="tel:+821077569940" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.62 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.54a16 16 0 0 0 6.55 6.55l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span class="contact-item-body"><span class="contact-item-label">Direct Line</span>+82 10-7756-9940</span>
+            </a>
+            <a href="mailto:music2550@naver.com" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span class="contact-item-body"><span class="contact-item-label">Email</span>music2550@naver.com</span>
+            </a>
+            <div class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="contact-item-body"><span class="contact-item-label">Office</span><span>12 Baengma-ro 213beon-gil, Ilsandong-gu, Goyang-si,<br />Gyeonggi-do, Republic of Korea (Hansol Preminang 3F)</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-right">
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name">Name / Company</label>
+              <input type="text" id="name" name="name" placeholder="John Doe / ABC Entertainment" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email or Phone</label>
+              <input type="text" id="contact-email" name="contact" placeholder="Email or phone number" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Inquiry Type</label>
+              <select id="subject" name="subject">
+                <option value="">Please select</option>
+                <option>Music Clearance</option>
+                <option>Drama / Streaming</option>
+                <option>K-pop / Idol Shows</option>
+                <option>Trot / Ballad Shows</option>
+                <option>Concerts / Variety / Awards</option>
+                <option>Content Production</option>
+                <option>Copyright Dispute</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project: title, how the music will be used, territories and timeline." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+            <div class="form-security-note">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Your message goes straight to our team, and we'll be in touch soon.</span>
+            </div>
+            <p class="form-note">* If the form can't send your message, your email app will open with it pre-filled. Just hit send.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="../logo.png" alt="Major7 E&amp;M logo" class="footer-logo-img" />
+          <div>
+            <div class="footer-name">Major7 Entertainment &amp; Music Copyright Inc.</div>
+            <div class="footer-name-en" lang="ko">주식회사 메이저세븐이엔엠</div>
+            <div class="footer-biz-no"><span style="color: rgb(126, 126, 126);font-size: 12px;">Business Registration No. 635-87-02858</span></div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="../" hreflang="ko" lang="ko">한국어</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="footerYear">2026</span> Major7 E&amp;M Inc. All rights reserved.</span>
+        <span>Music Clearance | Rights Risk Management | Rights Information | Content Planning &amp; Production</span>
+      </div>
+      <div class="footer-legal">
+        <a href="../privacy.html" class="strong">Privacy Policy (Korean)</a>
+        <a href="../terms.html">Terms of Use (Korean)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact result popup -->
+  <div class="security-popup-overlay" id="securityPopup" role="dialog" aria-modal="true" aria-labelledby="contactPopupTitle">
+    <div class="security-popup">
+      <div class="security-popup-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="security-popup-title" id="contactPopupTitle">Message Sent</h3>
+      <p class="security-popup-msg" id="contactPopupMsg">Thanks for reaching out.<br>We'll be in touch soon.</p>
+      <button class="security-popup-close" id="securityPopupClose">OK</button>
+    </div>
+  </div>
+
+  <script>
+    // Theme: follow system preference, toggle button (same behavior as other single pages)
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.querySelector('[data-theme-toggle]');
+      var theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      function icon() {
+        if (!toggle) return;
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+      icon();
+      if (toggle) toggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        icon();
+      });
+    })();
+
+    // Sticky header shadow
+    (function () {
+      var header = document.getElementById('header');
+      if (!header) return;
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('header--scrolled', window.scrollY > 20);
+      }, { passive: true });
+    })();
+
+    // Mobile menu
+    (function () {
+      var btn = document.getElementById('hamburger');
+      var menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+      function setOpen(open) {
+        menu.classList.toggle('open', open);
+        menu.setAttribute('aria-hidden', String(!open));
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        var s = btn.querySelectorAll('span');
+        s[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : '';
+        s[1].style.opacity = open ? '0' : '';
+        s[2].style.transform = open ? 'rotate(-45deg) translate(5px, -5px)' : '';
+      }
+      btn.addEventListener('click', function () { setOpen(!menu.classList.contains('open')); });
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+      matchMedia('(min-width:960px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+    })();
+
+    // Footer year
+    (function () {
+      var y = document.getElementById('footerYear');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+
+    // Contact form: FormSubmit (same endpoint as the Korean page), mailto fallback
+    (function () {
+      var ENDPOINT = 'https://formsubmit.co/ajax/music2550@naver.com';
+      var form = document.getElementById('contactForm');
+      var popup = document.getElementById('securityPopup');
+      var titleEl = document.getElementById('contactPopupTitle');
+      var msgEl = document.getElementById('contactPopupMsg');
+      if (!form) return;
+
+      function showPopup(ok) {
+        titleEl.textContent = ok ? 'Message Sent' : 'Please Send by Email';
+        msgEl.innerHTML = ok
+          ? 'Thanks for reaching out.<br>We\'ll be in touch soon.'
+          : 'We couldn\'t send your message automatically, so we opened your email app instead.<br>Please send the pre-filled email as it is.';
+        popup.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closePopup() {
+        popup.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('securityPopupClose').addEventListener('click', closePopup);
+      popup.addEventListener('click', function (e) { if (e.target === popup) closePopup(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && popup.classList.contains('open')) closePopup(); });
+
+      function mailFallback(name, contact, subject, message) {
+        var s = encodeURIComponent('[Major7 E&M Inquiry] ' + subject);
+        var b = encodeURIComponent('Name / Company: ' + name + '\nContact: ' + contact + '\nInquiry Type: ' + subject + '\n\nMessage:\n' + message);
+        window.location.href = 'mailto:music2550@naver.com?subject=' + s + '&body=' + b;
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var name = form.querySelector('#name').value.trim();
+        var contact = form.querySelector('#contact-email').value.trim();
+        var subject = form.querySelector('#subject').value || 'Other';
+        var message = form.querySelector('#message').value.trim();
+        var btn = form.querySelector('.btn-submit');
+        var label = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        try {
+          var res = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              _subject: '[영문 홈페이지 문의 / EN] ' + subject,
+              _template: 'table',
+              '이름/회사명 (Name/Company)': name,
+              '연락처 (Contact)': contact,
+              '문의 유형 (Inquiry Type)': subject,
+              '문의 내용 (Message)': message,
+              '접수 경로': 'www.major7enm.co.kr/en/'
+            })
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'send failed');
+          form.reset();
+          showPopup(true);
+        } catch (err) {
+          mailFallback(name, contact, subject, message);
+          showPopup(false);
+        } finally {
+          btn.disabled = false; btn.textContent = label;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
