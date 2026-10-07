@@ -85,6 +85,11 @@
     .contact-item-body{display:flex;flex-direction:column}
     .info-value.info-stack{flex-direction:column;align-items:flex-start;justify-content:center}
 
+    /* The English hero has two buttons more than the Korean one, so lift the text
+       to keep the scroll hint clear of the stats */
+    @media (min-width:769px){
+      .en-page .hero .hero-content{padding-bottom:calc(var(--space-12) + 64px)}
+    }
     @media (min-width:960px){
       .en-page .mobile-menu.open{display:none}
     }
@@ -144,9 +149,9 @@
         </span>
       </a>
       <nav class="nav" aria-label="Main menu">
+        <a href="#portfolio">Portfolio</a>
         <a href="#services">Services</a>
         <a href="#expertise">Expertise</a>
-        <a href="#portfolio">Portfolio</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -165,9 +170,9 @@
       </div>
     </div>
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#portfolio" class="mobile-link">Portfolio</a>
       <a href="#services" class="mobile-link">Services</a>
       <a href="#expertise" class="mobile-link">Expertise</a>
-      <a href="#portfolio" class="mobile-link">Portfolio</a>
       <a href="#about" class="mobile-link">About</a>
       <a href="#contact" class="mobile-link">Contact</a>
       <a href="../" class="mobile-link" hreflang="ko" lang="ko">한국어 홈페이지 ›</a>
@@ -212,6 +217,10 @@
           <span class="stat-label">Cleared per Year</span>
         </div>
       </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5" fill="currentColor"/></svg>
     </div>
   </section>
 
@@ -600,9 +609,9 @@
           </div>
         </div>
         <div class="footer-links">
+          <a href="#portfolio">Portfolio</a>
           <a href="#services">Services</a>
           <a href="#expertise">Expertise</a>
-          <a href="#portfolio">Portfolio</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="../" hreflang="ko" lang="ko">한국어</a>
@@ -680,6 +689,95 @@
       btn.addEventListener('click', function () { setOpen(!menu.classList.contains('open')); });
       menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
       matchMedia('(min-width:960px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+    })();
+
+    // Section tabs: the menu swaps sections instead of scrolling (same as the Korean homepage)
+    (function () {
+      var TABS = {
+        home:      ['hero', 'international'],
+        portfolio: ['portfolio'],
+        services:  ['services'],
+        expertise: ['expertise'],
+        about:     ['about', 'history'],
+        contact:   ['contact']
+      };
+      var OWNER = {};
+      Object.keys(TABS).forEach(function (t) { TABS[t].forEach(function (id) { OWNER[id] = t; }); });
+
+      var panels = {};
+      Object.keys(OWNER).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.classList.add('tab-panel'); panels[id] = el; }
+      });
+      if (!panels.hero) return;
+      document.body.classList.add('tabs-mode');
+
+      var navLinks = document.querySelectorAll('.nav a[href^="#"], .mobile-link[href^="#"]');
+      var current = null;
+
+      function closeMobileMenu() {
+        var menu = document.getElementById('mobileMenu');
+        var btn = document.getElementById('hamburger');
+        if (!menu || !menu.classList.contains('open')) return;
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        if (btn) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open menu');
+          btn.querySelectorAll('span').forEach(function (sp) { sp.style.transform = ''; sp.style.opacity = ''; });
+        }
+      }
+
+      function activate(tab, opts) {
+        opts = opts || {};
+        if (!TABS[tab]) tab = 'home';
+        if (tab === current) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+        current = tab;
+        Object.keys(panels).forEach(function (id) {
+          panels[id].classList.toggle('is-active', TABS[tab].indexOf(id) !== -1);
+        });
+        navLinks.forEach(function (a) {
+          a.classList.toggle('is-current', OWNER[a.getAttribute('href').slice(1)] === tab);
+        });
+        document.body.classList.toggle('on-home', tab === 'home');
+        TABS[tab].forEach(function (id) {
+          var el = panels[id];
+          if (!el) return;
+          el.classList.remove('tab-enter');
+          void el.offsetWidth;
+          el.classList.add('tab-enter');
+        });
+        if (!opts.silent) {
+          history.pushState({ tab: tab }, '', tab === 'home' ? location.pathname : '#' + TABS[tab][0]);
+        }
+        window.scrollTo(0, 0);
+      }
+
+      function tabFromHash(hash) {
+        var id = (hash || '').replace('#', '');
+        return OWNER[id] || (id ? null : 'home');
+      }
+
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var tab = tabFromHash(a.getAttribute('href'));
+        if (!tab) return;
+        e.preventDefault();
+        e.stopPropagation();
+        closeMobileMenu();
+        activate(tab);
+      }, true);
+
+      window.addEventListener('popstate', function (e) {
+        activate((e.state && e.state.tab) || tabFromHash(location.hash) || 'home', { silent: true });
+      });
+
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      activate(tabFromHash(location.hash) || 'home', { silent: true });
+      var pinTop = function () { window.scrollTo(0, 0); };
+      requestAnimationFrame(pinTop);
+      window.addEventListener('load', pinTop, { once: true });
     })();
 
     // Footer year
