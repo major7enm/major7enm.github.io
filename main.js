@@ -129,7 +129,7 @@
 })();
 
 // --- Contact Form (자동 전송 + 실패 시 메일 작성창 폴백) ---
-const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/music2550@naver.com';
+const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/major7enminc@naver.com';
 
 function composeViaMail(name, contact, subject, message) {
   const mailSubject = encodeURIComponent('[메이저세븐이엔엠 문의] ' + subject);
@@ -143,8 +143,8 @@ function composeViaMail(name, contact, subject, message) {
   // 네이버 메일 앱 딥링크 (모바일) / 네이버 메일 웹 (PC)
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   if (isMobile) {
-    const naverScheme = 'navermail://compose?to=music2550%40naver.com&subject=' + mailSubject + '&body=' + mailBody;
-    const fallback = 'mailto:music2550@naver.com?subject=' + mailSubject + '&body=' + mailBody;
+    const naverScheme = 'navermail://compose?to=major7enminc%40naver.com&subject=' + mailSubject + '&body=' + mailBody;
+    const fallback = 'mailto:major7enminc@naver.com?subject=' + mailSubject + '&body=' + mailBody;
     const start = Date.now();
     window.location.href = naverScheme;
     setTimeout(() => {
@@ -153,7 +153,7 @@ function composeViaMail(name, contact, subject, message) {
       }
     }, 1000);
   } else {
-    const naverWeb = 'https://mail.naver.com/write?to=music2550%40naver.com&subject=' + mailSubject + '&body=' + mailBody;
+    const naverWeb = 'https://mail.naver.com/write?to=major7enminc%40naver.com&subject=' + mailSubject + '&body=' + mailBody;
     window.open(naverWeb, '_blank');
   }
 }

@@ -511,6 +511,13 @@ input,textarea,select{font:inherit;color:inherit}
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:var(--space-16);align-items:start}
 .contact-desc{font-size:var(--text-base);color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:var(--space-10)}
 [data-theme='dark'] .contact-desc{color:var(--color-text-muted)}
+/* 문의 제목: 금색 줄(파트너가 되겠습니다.)이 칸 너비 안에서 한 줄로 들어가게 */
+.contact-left{container-type:inline-size}
+.contact-title{word-break:keep-all}
+@supports (font-size:1cqi){
+  .contact-title{font-size:min(var(--text-2xl),11cqi)}
+  .contact-title .text-gold{white-space:nowrap}
+}
 .contact-info{display:flex;flex-direction:column;gap:var(--space-4)}
 .contact-item{display:flex;align-items:flex-start;gap:var(--space-4);
   font-size:var(--text-sm);color:rgba(255,255,255,.75);line-height:1.6;transition:color var(--transition)}
