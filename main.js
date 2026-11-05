@@ -1468,6 +1468,8 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 //  FLOATING COLUMN CARD — 최신 칼럼 플로팅 카드
 //  Insta360 제품 페이지 우하단 카드에서 '동작'만 빌려 왔다.
 //  - 내용: BLOG 섹션의 첫 번째 칼럼 카드를 그대로 읽는다 → 칼럼 카드만 갱신하면 같이 바뀐다
+//  - 링크: 일간스포츠가 아니라 '우리 네이버 블로그'의 같은 회차 글로 보낸다.
+//    맨 앞 칼럼 카드의 data-blog 주소를 쓰고, 없으면 블로그 저작권썰 목록으로 보낸다.
 //  - 게재일에서 14일이 지나면 띄우지 않는다(새 소식이 아니면 안 띄움)
 //  - 홈·인사이트(이미 칼럼 카드가 있음)·문의하기(폼에 집중) 탭에서는 숨긴다
 //  - 아래로 스크롤하는 동안 비켜 주고, 멈추면 0.8초 뒤 돌아온다
@@ -1484,11 +1486,12 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   if (!src) return;
   var titleEl = src.querySelector('.blog-card-title');
   var dateEl = src.querySelector('.blog-card-date');
-  var linkEl = src.querySelector('.blog-card-more');
-  if (!titleEl || !linkEl || !linkEl.href) return;
+  if (!titleEl) return;
 
+  var BLOG_LIST = 'https://blog.naver.com/PostList.naver?blogId=major7enm-inc&categoryNo=14';
   var raw = titleEl.textContent.replace(/\s+/g, ' ').trim();
-  var href = linkEl.href;
+  var blogPost = (src.getAttribute('data-blog') || '').trim();
+  var href = /^https:\/\/(m\.)?blog\.naver\.com\//.test(blogPost) ? blogPost : BLOG_LIST;
   var dateTxt = dateEl ? dateEl.textContent.trim() : '';
 
   var d = dateTxt.match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
@@ -1502,7 +1505,6 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   var series = p ? p[1] : '최신 칼럼';
   var issue = p ? p[2] : '';
   var title = p ? p[3] : raw;
-  var source = /isplus\.com/.test(href) ? '일간스포츠' : '';
 
   var card = document.createElement('aside');
   card.className = 'float-col';
@@ -1515,7 +1517,7 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
         '<span class="float-col-issue"></span>' +
       '</span>' +
       '<span class="float-col-title"></span>' +
-      '<span class="float-col-meta"><span class="float-col-date"></span><span class="float-col-go">읽기 ›</span></span>' +
+      '<span class="float-col-meta"><span class="float-col-date">네이버 블로그</span><span class="float-col-go">블로그에서 읽기 ›</span></span>' +
     '</a>' +
     '<button type="button" class="float-col-close" aria-label="최신 칼럼 알림 닫기">' +
       '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
@@ -1523,11 +1525,10 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 
   var a = card.querySelector('.float-col-link');
   a.href = href;
-  a.setAttribute('aria-label', '최신 칼럼 ' + series + ' ' + issue + ' ' + title + ' 읽기 (새 창)');
+  a.setAttribute('aria-label', '최신 칼럼 ' + series + ' ' + issue + ' ' + title + ' 네이버 블로그에서 읽기 (새 창)');
   card.querySelector('.float-col-series').textContent = series;
   card.querySelector('.float-col-issue').textContent = issue;
   card.querySelector('.float-col-title').textContent = title;
-  card.querySelector('.float-col-date').textContent = [dateTxt, source].filter(Boolean).join(' · ');
   document.body.appendChild(card);
 
   var closed = false;
@@ -1597,7 +1598,7 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     card.classList.remove('is-on', 'is-away');
     m7track('float_card_close', { issue: issue });
   });
-  a.addEventListener('click', function () { m7track('float_card_click', { issue: issue }); });
+  a.addEventListener('click', function () { m7track('float_card_click', { issue: issue, to: href === BLOG_LIST ? 'blog_list' : 'blog_post' }); });
 
   document.addEventListener('m7:tabchange', sync);
   new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
