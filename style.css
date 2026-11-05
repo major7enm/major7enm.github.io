@@ -1551,3 +1551,36 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
   .float-col-close{top:50%;right:6px;transform:translateY(-50%)}
 }
 @media print{.float-col{display:none}}
+
+/* ─── 연혁 진행선 ─────────────────────────────
+   main.js HISTORY PROGRESS가 --tl-p(0~1)·--tl-head와
+   .is-scrub / .is-lit / .is-current 를 관리한다.
+   세로선을 점 중심으로 옮겼다(기존 선은 점보다 30px 왼쪽, 연도 옆을 지나갔다). */
+.timeline{--tl-x:calc(80px + var(--space-6) + 6px);--tl-bg:var(--color-primary)}
+[data-theme='dark'] .timeline{--tl-bg:#0a1525}
+.timeline::before{left:var(--tl-x)}
+@media (max-width:959px){
+  .timeline{--tl-x:calc(60px + var(--space-4) + 6px)}
+}
+.timeline-progress{position:absolute;left:var(--tl-x);top:0;width:2px;
+  height:calc(var(--tl-p,0) * 100%);border-radius:2px;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(228,175,58,.2),var(--color-accent))}
+.timeline-progress::after{content:'';position:absolute;left:50%;bottom:-5px;
+  width:10px;height:10px;margin-left:-5px;border-radius:50%;
+  background:var(--color-accent);box-shadow:0 0 12px 3px rgba(228,175,58,.5);
+  opacity:var(--tl-head,0);transition:opacity .3s ease}
+
+.timeline.is-scrub .timeline-year,
+.timeline.is-scrub .timeline-content{transition:color .5s ease,opacity .5s ease}
+.timeline.is-scrub .timeline-dot{transition:background-color .4s ease,border-color .4s ease,
+  box-shadow .4s ease,transform .4s ease}
+.timeline.is-scrub .timeline-item:not(.is-lit) .timeline-year{color:rgba(255,255,255,.28)}
+.timeline.is-scrub .timeline-item:not(.is-lit) .timeline-content{opacity:.38}
+.timeline.is-scrub .timeline-item:not(.is-lit) .timeline-dot{background:var(--tl-bg);
+  border-color:rgba(255,255,255,.22);box-shadow:none}
+.timeline.is-scrub .timeline-item.is-lit .timeline-dot{background:var(--color-accent);
+  border-color:var(--color-accent);box-shadow:0 0 0 4px rgba(228,175,58,.16)}
+.timeline.is-scrub .timeline-item.is-lit .timeline-year{color:rgba(255,255,255,.85)}
+.timeline.is-scrub .timeline-item.is-current .timeline-year{color:var(--color-accent)}
+.timeline.is-scrub .timeline-item.is-current .timeline-dot{transform:scale(1.15);
+  box-shadow:0 0 16px rgba(228,175,58,.55)}

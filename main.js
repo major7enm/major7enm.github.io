@@ -1581,3 +1581,80 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
   sync();
 })();
+
+// ============================================
+//  HISTORY PROGRESS — 회사 소개 > 연혁 진행선
+//  스크롤에 맞춰 세로선이 금색으로 차오르고, 선이 지나간 연도가 차례로 켜진다.
+//  (Insta360 첫 문장 글자 리빌과 같은 원리: 스크롤 위치 → 진행률 → 스타일)
+//  - 맨 아래까지 내리면 마지막 연도(2022)까지 반드시 켜진다
+//  - 스크롤이 거의 없는 큰 화면에서도 선이 부드럽게 따라 차오른다(보간)
+//  - '동작 줄이기' 설정 사용자는 처음부터 전부 켜진 상태로 둔다
+//  - 다른 기능과 독립: 이 블록만 지워도(되돌려도) 사이트 나머지는 그대로 동작
+// ============================================
+(function () {
+  var tl = document.querySelector('#history .timeline');
+  if (!tl) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var items = [].slice.call(tl.querySelectorAll('.timeline-item'));
+  var dots = items.map(function (it) { return it.querySelector('.timeline-dot'); });
+  var bar = document.createElement('div');
+  bar.className = 'timeline-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  tl.insertBefore(bar, tl.firstChild);
+  tl.classList.add('is-scrub');
+
+  var shown = 0, wasVisible = false, raf = 0, reported = false;
+
+  function visible() { return tl.getClientRects().length > 0; }   // 탭이 숨겨져 있으면 0
+
+  // 진행률: 화면 62% 높이의 기준선이 연혁 어디까지 내려왔는가.
+  // 페이지 끝에 가까워질수록 기준선을 화면 아래쪽으로 내려 마지막 항목까지 닿게 한다.
+  function target() {
+    var r = tl.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var left = document.documentElement.scrollHeight - vh - window.scrollY;
+    var near = Math.min(1, Math.max(0, 1 - left / (vh * 0.4)));
+    var anchor = vh * (0.62 + 0.38 * near);
+    return Math.min(1, Math.max(0, (anchor - r.top) / r.height));
+  }
+
+  function paint() {
+    var h = tl.offsetHeight;
+    var y = shown * h;
+    tl.style.setProperty('--tl-p', shown.toFixed(4));
+    tl.style.setProperty('--tl-head', shown > 0.003 && shown < 0.997 ? '1' : '0');
+    var current = -1;
+    dots.forEach(function (dot, i) {
+      if (!dot) return;
+      // 점의 중심 높이(연혁 상단 기준) = 항목 위치 + 항목 안에서 점 위치 + 점 반지름
+      var cy = items[i].offsetTop + dot.offsetTop + dot.offsetHeight / 2;
+      var lit = y >= cy - 2;
+      items[i].classList.toggle('is-lit', lit);
+      if (lit) current = i;
+    });
+    items.forEach(function (it, i) { it.classList.toggle('is-current', i === current); });
+    if (!reported && shown > 0.99) {
+      reported = true;
+      if (typeof m7track === 'function') m7track('history_complete', {});
+    }
+  }
+
+  function tick() {
+    raf = 0;
+    if (!visible()) { wasVisible = false; return; }
+    var t = target();
+    if (!wasVisible) { shown = t; wasVisible = true; }      // 탭에 막 들어왔으면 현재 위치로 바로 맞춘다
+    else shown += (t - shown) * 0.14;                        // 그다음부터는 부드럽게 따라간다
+    if (Math.abs(t - shown) < 0.001) shown = t;
+    paint();
+    if (shown !== t) raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(tick); }
+
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', kick);
+  document.addEventListener('m7:tabchange', function () { wasVisible = false; setTimeout(kick, 0); });
+  window.addEventListener('popstate', function () { setTimeout(kick, 0); });
+  kick();
+})();
