@@ -1502,7 +1502,8 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
 /* ─── 최신 칼럼 플로팅 카드 ───────────────────
    Insta360 제품 페이지 우하단 카드에서 동작만 빌려 왔다.
    main.js FLOATING COLUMN CARD가 상태 클래스를 붙인다.
-   .is-on 보이기 / .is-away 스크롤 중 비키기 / .is-footer 모바일 푸터 구간 숨김 */
+   .is-on 보이기 / .is-away 스크롤 중 비키기 / .is-footer 푸터 링크 구간 숨김
+   .is-dup 실제 칼럼 카드가 화면에 보이는 동안 숨김 */
 .float-col{
   position:fixed;right:24px;bottom:24px;z-index:90;
   width:300px;
@@ -1518,7 +1519,8 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
   transition:transform .45s cubic-bezier(.22,.7,.3,1),opacity .3s ease,visibility 0s;
 }
 .float-col.is-on.is-away,
-.float-col.is-on.is-footer{opacity:0;pointer-events:none;transform:translateX(calc(100% + 40px))}
+.float-col.is-on.is-footer,
+.float-col.is-on.is-dup{opacity:0;pointer-events:none;transform:translateX(calc(100% + 40px))}
 
 .float-col-link{display:block;padding:var(--space-4) var(--space-10) var(--space-4) var(--space-5);
   border-radius:inherit}
@@ -1543,7 +1545,8 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
   .float-col{left:12px;right:12px;width:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));
     border-radius:var(--radius-full);transform:translateY(calc(100% + 32px))}
   .float-col.is-on.is-away,
-  .float-col.is-on.is-footer{transform:translateY(calc(100% + 32px))}
+  .float-col.is-on.is-footer,
+  .float-col.is-on.is-dup{transform:translateY(calc(100% + 32px))}
   .float-col-link{display:flex;align-items:center;gap:var(--space-2);padding:11px 46px 11px 12px}
   .float-col-eyebrow{margin:0;flex:none}
   .float-col-series,.float-col-meta{display:none}

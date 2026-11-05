@@ -720,7 +720,7 @@ const i18nData = {
       label_capability: 'Our Expertise', label_performance: 'Our Performance',
       label_contact: 'Contact',
       blog_sub1: '블로그에서 더 많은 소식을 확인하세요.',
-      blog_sub2: "일간스포츠 '김지욱의 저작권썰'에서 더 많은 사례와 분석을 확인하세요.",
+      blog_sub2: "일간스포츠 연재 칼럼 '김지욱의 저작권썰'을 블로그에서 더 읽어 보세요.",
       biz_sub: "급변하는 콘텐츠 시장 속, IP 제작의 가장 큰 허들 '음악 저작권'<br />㈜메이저세븐이엔엠은 제작자의 니즈를 충족하는 솔루션을 제시합니다.",
       biz1_title_html: 'Screening Work<br /><span>분석</span>',
       biz2_title_html: 'Clearance<br /><span>협의 및 해결</span>',
@@ -829,7 +829,7 @@ perf_c1: 'SBS 푸바오와 할부지 PART 1 – 이젠 웃으며 안녕 (NCT 정
       label_about:'About Us', label_history:'History', label_business:'Business Overview',
       label_business2:'Our Services', label_capability:'Our Expertise', label_performance:'Our Performance', label_contact:'Contact',
       blog_sub1:'Discover more updates on our blog.',
-      blog_sub2:"Explore more cases and analysis in Kim Ji-wook's Copyright Talk on Ilgan Sports.",
+      blog_sub2:"Read Kim Ji-wook's Copyright Talk, his Ilgan Sports column, on our blog.",
       biz_sub:"In a rapidly changing content market, music copyright is the biggest hurdle in IP production.<br />Major7 E&M presents solutions that meet producers' needs.",
       biz1_title_html:'Screening Work<br /><span>Analysis</span>',
       biz2_title_html:'Clearance<br /><span>Negotiation & Resolution</span>',
@@ -938,7 +938,7 @@ perf_c1: 'SBS Fubao and Grandpa PART 1 – Goodbye with a Smile Now (NCT Jungwoo
       label_about:'About Us', label_history:'History', label_business:'Business Overview',
       label_business2:'Our Services', label_capability:'Our Expertise', label_performance:'Our Performance', label_contact:'Contact',
       blog_sub1:'ブログでさらに多くのニュースをご確認ください。',
-      blog_sub2:'日刊スポーツ「キム・ジウクの著作権トーク」でより多くの事例と分析をご覧ください。',
+      blog_sub2:'日刊スポーツの連載コラム「キム・ジウクの著作権トーク」は、ブログでもお読みいただけます。',
       biz_sub:'急変するコンテンツ市場において、IP制作最大のハードル「音楽著作権」<br />メジャーセブンE&Mは制作者のニーズを満たすソリューションを提案します。',
       biz1_title_html:'Screening Work<br /><span>分析</span>',
       biz2_title_html:'Clearance<br /><span>交渉・解決</span>',
@@ -1047,7 +1047,7 @@ perf_c1: 'SBS プバオとおじいちゃん PART 1 – 笑顔でさようなら
       label_about:'关于我们', label_history:'发展历程', label_business:'业务概览',
       label_business2:'我们的服务', label_capability:'专业能力', label_performance:'主要业绩', label_contact:'联系我们',
       blog_sub1:'在博客上查看更多动态。',
-      blog_sub2:"在《一刊体育》'金志旭版权漫谈'专栏中查看更多案例与分析。",
+      blog_sub2:"《一刊体育》连载专栏'金志旭版权漫谈'，欢迎在博客上继续阅读。",
       biz_sub:'在瞬息万变的内容市场中，音乐版权是IP制作最大的难关。<br />Major7 E&M为制作方提供满足需求的解决方案。',
       biz1_title_html:'Screening Work<br /><span>分析</span>',
       biz2_title_html:'Clearance<br /><span>协商与解决</span>',
@@ -1469,16 +1469,17 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 //  Insta360 제품 페이지 우하단 카드에서 '동작'만 빌려 왔다.
 //  - 내용: BLOG 섹션의 첫 번째 칼럼 카드를 그대로 읽는다 → 칼럼 카드만 갱신하면 같이 바뀐다
 //  - 링크: 일간스포츠가 아니라 '우리 네이버 블로그'의 같은 회차 글로 보낸다.
-//    맨 앞 칼럼 카드의 data-blog 주소를 쓰고, 없으면 블로그 저작권썰 목록으로 보낸다.
+//    맨 앞 칼럼 카드의 더보기 주소(네이버 블로그)를 쓰고, 블로그 주소가 아니면 저작권썰 목록으로 보낸다.
 //  - 게재일에서 14일이 지나면 띄우지 않는다(새 소식이 아니면 안 띄움)
-//  - 홈·인사이트(이미 칼럼 카드가 있음)·문의하기(폼에 집중) 탭에서는 숨긴다
+//  - 홈 첫 화면부터 띄운다. 단 실제 칼럼 카드가 화면에 보이는 동안은 겹치지 않게 숨긴다(홈·인사이트)
+//  - 문의하기 탭(폼에 집중)에서는 띄우지 않는다
 //  - 아래로 스크롤하는 동안 비켜 주고, 멈추면 0.8초 뒤 돌아온다
 //  - 닫으면 브라우저 탭을 닫을 때까지 다시 안 뜬다(다음 회차가 올라오면 다시 뜸)
 //  - 칼럼이 한국어라 한국어 화면에서만 띄운다
 // ============================================
 (function () {
   if (!M7_FEATURES.floatCard) return;
-  var SHOW_TABS = { performance: 1, business: 1, capability: 1, about: 1 };
+  var SHOW_TABS = { home: 1, performance: 1, business: 1, capability: 1, portfolio: 1, about: 1 };
   var FRESH_DAYS = 14;
   var CLOSE_KEY = 'm7_float_closed';
 
@@ -1490,7 +1491,8 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 
   var BLOG_LIST = 'https://blog.naver.com/PostList.naver?blogId=major7enm-inc&categoryNo=14';
   var raw = titleEl.textContent.replace(/\s+/g, ' ').trim();
-  var blogPost = (src.getAttribute('data-blog') || '').trim();
+  var moreEl = src.querySelector('.blog-card-more');
+  var blogPost = moreEl ? moreEl.href : '';
   var href = /^https:\/\/(m\.)?blog\.naver\.com\//.test(blogPost) ? blogPost : BLOG_LIST;
   var dateTxt = dateEl ? dateEl.textContent.trim() : '';
 
@@ -1551,6 +1553,15 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
       card.classList.add('is-on');
       if (!counted) { counted = true; m7track('float_card_show', { issue: issue }); }
     }, 1200);
+  }
+
+  // 실제 칼럼 카드(BLOG 섹션)가 화면에 조금이라도 보이면 숨긴다 — 같은 내용이 두 번 보이지 않게.
+  // 탭이 숨겨져 있으면(display:none) 교차하지 않으므로 다른 탭에는 영향이 없다.
+  var realCards = document.querySelector('#portfolio .blog-cards');
+  if (realCards && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      card.classList.toggle('is-dup', entries[entries.length - 1].isIntersecting);
+    }, { threshold: 0 }).observe(realCards);
   }
 
   // 푸터 메뉴를 가리지 않게 비킨다.
