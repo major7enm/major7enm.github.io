@@ -8,6 +8,13 @@
 //  ※ ID를 넣을 때 privacy.html 제8조에 방문 통계 수집 문장도 함께 추가할 것.
 var M7_ANALYTICS_ID = '';
 
+// --- 기능 스위치 (2026-11-05 추가분) ---
+//  마음에 안 들면 해당 값을 false로 바꿔 배포하면 그 기능만 꺼진다(나머지는 그대로).
+var M7_FEATURES = {
+  floatCard: true,     // 최신 칼럼 플로팅 카드
+  historyLine: true    // 회사 소개 > 연혁 스크롤 진행선
+};
+
 function m7track(name, data) {
   try {
     if (window.umami && typeof window.umami.track === 'function') {
@@ -1468,6 +1475,7 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 //  - 칼럼이 한국어라 한국어 화면에서만 띄운다
 // ============================================
 (function () {
+  if (!M7_FEATURES.floatCard) return;
   var SHOW_TABS = { performance: 1, business: 1, capability: 1, about: 1 };
   var FRESH_DAYS = 14;
   var CLOSE_KEY = 'm7_float_closed';
@@ -1592,6 +1600,7 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
 //  - 다른 기능과 독립: 이 블록만 지워도(되돌려도) 사이트 나머지는 그대로 동작
 // ============================================
 (function () {
+  if (typeof M7_FEATURES !== 'undefined' && !M7_FEATURES.historyLine) return;
   var tl = document.querySelector('#history .timeline');
   if (!tl) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
