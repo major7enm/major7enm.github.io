@@ -1552,15 +1552,29 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
     }, 1200);
   }
 
-  // 모바일: 띠가 푸터 링크를 가리지 않도록 푸터가 보이는 동안은 숨긴다.
-  // 데스크톱은 그대로 둔다 — 맨 아래까지 내려도 카드는 푸터 오른쪽 아래 안내 문구 위에만
-  // 걸치고, 위로 올리면 오히려 '주요 성과 more ›' 버튼과 푸터 메뉴를 가린다(실측).
+  // 푸터 메뉴를 가리지 않게 비킨다.
+  // - 모바일: 푸터가 보이기 시작하면 숨긴다
+  // - 데스크톱: 카드가 머무는 우하단 자리에 푸터 링크(회사 소개·문의하기 등)가 들어올 때만 숨긴다.
+  //   맨 아래까지 내리면 카드는 링크가 없는 푸터 안내 문구 위에 앉으므로 다시 나타난다.
+  //   (카드를 푸터 위로 띄워 올리는 방식은 '주요 성과 more ›' 버튼을 가려서 버림 — 실측)
   var footer = document.querySelector('.footer');
+  var footerLinks = footer ? [].slice.call(footer.querySelectorAll('a, button')) : [];
   var mobile = window.matchMedia('(max-width: 768px)');
   function updateLift() {
     if (!footer) return;
-    var overlap = window.innerHeight - footer.getBoundingClientRect().top;
-    card.classList.toggle('is-footer', mobile.matches && overlap > 0);
+    var vh = window.innerHeight, hide;
+    if (mobile.matches) {
+      hide = footer.getBoundingClientRect().top < vh;
+    } else {
+      var vw = document.documentElement.clientWidth;
+      var top = vh - 24 - (card.offsetHeight || 140), bottom = vh - 24;
+      var left = vw - 24 - (card.offsetWidth || 300), right = vw - 24;
+      hide = footerLinks.some(function (el) {
+        var r = el.getBoundingClientRect();
+        return r.width > 0 && r.bottom > top - 8 && r.top < bottom + 8 && r.right > left - 8 && r.left < right + 8;
+      });
+    }
+    card.classList.toggle('is-footer', hide);
   }
 
   // Insta360과 같은 규칙: 아래로 내리는 동안만 비키고, 마지막 스크롤에서 0.8초 뒤 돌아온다
