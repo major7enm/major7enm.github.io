@@ -2,6 +2,38 @@
 //  Major7 E&M — main.js
 // ============================================
 
+// --- 방문 통계 (Umami Cloud · 쿠키 없음) ---
+//  M7_ANALYTICS_ID에 Umami 웹사이트 ID를 넣기 전까지는 외부로 아무것도 보내지 않는다.
+//  ID를 넣으면 페이지 조회는 자동으로, 아래 m7track() 이벤트는 직접 기록된다.
+//  ※ ID를 넣을 때 privacy.html 제8조에 방문 통계 수집 문장도 함께 추가할 것.
+var M7_ANALYTICS_ID = '';
+
+function m7track(name, data) {
+  try {
+    if (window.umami && typeof window.umami.track === 'function') {
+      window.umami.track(name, data);
+      return;
+    }
+    if (!M7_ANALYTICS_ID) return;
+    var q = (window.__m7q = window.__m7q || []);
+    if (q.length < 50) q.push([name, data]);   // 스크립트가 늦게 뜨면 모아 뒀다 보낸다
+  } catch (e) { /* 통계 실패가 사이트 동작을 막으면 안 된다 */ }
+}
+
+(function () {
+  if (!M7_ANALYTICS_ID) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://cloud.umami.is/script.js';
+  s.setAttribute('data-website-id', M7_ANALYTICS_ID);
+  s.addEventListener('load', function () {
+    var q = window.__m7q || [];
+    window.__m7q = [];
+    q.forEach(function (ev) { m7track(ev[0], ev[1]); });
+  });
+  document.head.appendChild(s);
+})();
+
 // --- Dark Mode Toggle ---
 (function () {
   const toggle = document.querySelector('[data-theme-toggle]');
@@ -200,10 +232,12 @@ async function handleContactSubmit(e) {
     if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'send failed');
     form.reset();
     showContactPopup(true);
+    m7track('contact_submit', { result: 'sent', type: subject });   // 문의 유형만 기록(이름·연락처·내용은 보내지 않음)
   } catch (err) {
     // 자동 전송 실패 시 기존 방식(메일 작성창)으로 폴백
     composeViaMail(name, contact, subject, message);
     showContactPopup(false);
+    m7track('contact_submit', { result: 'mail_fallback', type: subject });
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
   }
@@ -1370,6 +1404,11 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
       history.pushState({ tab: tab }, '', tab === 'home' ? location.pathname : hash);
     }
     window.scrollTo(0, 0);
+
+    // 다른 기능(플로팅 칼럼 카드·연혁 진행선 등)이 지금 탭을 알 수 있게 알린다
+    document.body.dataset.tab = tab;
+    document.dispatchEvent(new CustomEvent('m7:tabchange', { detail: { tab: tab } }));
+    m7track('tab_view', { tab: tab });
   }
 
   // 해시를 탭으로 변환
@@ -1416,4 +1455,129 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   const pinTop = () => window.scrollTo(0, 0);
   requestAnimationFrame(pinTop);
   window.addEventListener('load', pinTop, { once: true });
+})();
+
+// ============================================
+//  FLOATING COLUMN CARD — 최신 칼럼 플로팅 카드
+//  Insta360 제품 페이지 우하단 카드에서 '동작'만 빌려 왔다.
+//  - 내용: BLOG 섹션의 첫 번째 칼럼 카드를 그대로 읽는다 → 칼럼 카드만 갱신하면 같이 바뀐다
+//  - 게재일에서 14일이 지나면 띄우지 않는다(새 소식이 아니면 안 띄움)
+//  - 홈·인사이트(이미 칼럼 카드가 있음)·문의하기(폼에 집중) 탭에서는 숨긴다
+//  - 아래로 스크롤하는 동안 비켜 주고, 멈추면 0.8초 뒤 돌아온다
+//  - 닫으면 브라우저 탭을 닫을 때까지 다시 안 뜬다(다음 회차가 올라오면 다시 뜸)
+//  - 칼럼이 한국어라 한국어 화면에서만 띄운다
+// ============================================
+(function () {
+  var SHOW_TABS = { performance: 1, business: 1, capability: 1, about: 1 };
+  var FRESH_DAYS = 14;
+  var CLOSE_KEY = 'm7_float_closed';
+
+  var src = document.querySelector('#portfolio .blog-card');
+  if (!src) return;
+  var titleEl = src.querySelector('.blog-card-title');
+  var dateEl = src.querySelector('.blog-card-date');
+  var linkEl = src.querySelector('.blog-card-more');
+  if (!titleEl || !linkEl || !linkEl.href) return;
+
+  var raw = titleEl.textContent.replace(/\s+/g, ' ').trim();
+  var href = linkEl.href;
+  var dateTxt = dateEl ? dateEl.textContent.trim() : '';
+
+  var d = dateTxt.match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
+  if (d) {
+    var pub = new Date(+d[1], +d[2] - 1, +d[3]);
+    if ((Date.now() - pub.getTime()) / 864e5 > FRESH_DAYS) return;
+  }
+
+  // "[김지욱 저작권썰.zip] (64) 제목" → 연재명 / 회차 / 제목
+  var p = raw.match(/^\[([^\]]+)\]\s*(\(\d+\)(?:-\d+)?)\.?\s*(.+)$/);
+  var series = p ? p[1] : '최신 칼럼';
+  var issue = p ? p[2] : '';
+  var title = p ? p[3] : raw;
+  var source = /isplus\.com/.test(href) ? '일간스포츠' : '';
+
+  var card = document.createElement('aside');
+  card.className = 'float-col';
+  card.setAttribute('aria-label', '최신 칼럼');
+  card.innerHTML =
+    '<a class="float-col-link" target="_blank" rel="noopener">' +
+      '<span class="float-col-eyebrow">' +
+        '<span class="float-col-new">NEW</span>' +
+        '<span class="float-col-series"></span>' +
+        '<span class="float-col-issue"></span>' +
+      '</span>' +
+      '<span class="float-col-title"></span>' +
+      '<span class="float-col-meta"><span class="float-col-date"></span><span class="float-col-go">읽기 ›</span></span>' +
+    '</a>' +
+    '<button type="button" class="float-col-close" aria-label="최신 칼럼 알림 닫기">' +
+      '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
+    '</button>';
+
+  var a = card.querySelector('.float-col-link');
+  a.href = href;
+  a.setAttribute('aria-label', '최신 칼럼 ' + series + ' ' + issue + ' ' + title + ' 읽기 (새 창)');
+  card.querySelector('.float-col-series').textContent = series;
+  card.querySelector('.float-col-issue').textContent = issue;
+  card.querySelector('.float-col-title').textContent = title;
+  card.querySelector('.float-col-date').textContent = [dateTxt, source].filter(Boolean).join(' · ');
+  document.body.appendChild(card);
+
+  var closed = false;
+  try { closed = sessionStorage.getItem(CLOSE_KEY) === href; } catch (e) {}
+  var showTimer = null, awayTimer = null, counted = false;
+
+  function eligible() {
+    var lang = document.documentElement.getAttribute('data-lang') || 'ko';
+    return !closed && !!SHOW_TABS[document.body.dataset.tab] && lang === 'ko';
+  }
+
+  // 탭·언어가 바뀔 때마다 띄울지 판단. 새로 띄울 때는 1.2초 뒤에 미끄러져 들어온다.
+  function sync() {
+    clearTimeout(showTimer);
+    if (!eligible()) { card.classList.remove('is-on', 'is-away'); return; }
+    if (card.classList.contains('is-on')) return;
+    showTimer = setTimeout(function () {
+      if (!eligible()) return;
+      updateLift();
+      card.classList.add('is-on');
+      if (!counted) { counted = true; m7track('float_card_show', { issue: issue }); }
+    }, 1200);
+  }
+
+  // 모바일: 띠가 푸터 링크를 가리지 않도록 푸터가 보이는 동안은 숨긴다.
+  // 데스크톱은 그대로 둔다 — 맨 아래까지 내려도 카드는 푸터 오른쪽 아래 안내 문구 위에만
+  // 걸치고, 위로 올리면 오히려 '주요 성과 more ›' 버튼과 푸터 메뉴를 가린다(실측).
+  var footer = document.querySelector('.footer');
+  var mobile = window.matchMedia('(max-width: 768px)');
+  function updateLift() {
+    if (!footer) return;
+    var overlap = window.innerHeight - footer.getBoundingClientRect().top;
+    card.classList.toggle('is-footer', mobile.matches && overlap > 0);
+  }
+
+  // Insta360과 같은 규칙: 아래로 내리는 동안만 비키고, 마지막 스크롤에서 0.8초 뒤 돌아온다
+  var lastY = window.scrollY;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    if (y > lastY + 2 && card.classList.contains('is-on')) {
+      card.classList.add('is-away');
+      clearTimeout(awayTimer);
+      awayTimer = setTimeout(function () { card.classList.remove('is-away'); }, 800);
+    }
+    lastY = y;
+    updateLift();
+  }, { passive: true });
+  window.addEventListener('resize', updateLift);
+
+  card.querySelector('.float-col-close').addEventListener('click', function () {
+    closed = true;
+    try { sessionStorage.setItem(CLOSE_KEY, href); } catch (e) {}
+    card.classList.remove('is-on', 'is-away');
+    m7track('float_card_close', { issue: issue });
+  });
+  a.addEventListener('click', function () { m7track('float_card_click', { issue: issue }); });
+
+  document.addEventListener('m7:tabchange', sync);
+  new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+  sync();
 })();

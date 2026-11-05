@@ -1498,3 +1498,56 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
       rgba(8,8,11,.96) 100%);
   }
 }
+
+/* ─── 최신 칼럼 플로팅 카드 ───────────────────
+   Insta360 제품 페이지 우하단 카드에서 동작만 빌려 왔다.
+   main.js FLOATING COLUMN CARD가 상태 클래스를 붙인다.
+   .is-on 보이기 / .is-away 스크롤 중 비키기 / .is-footer 모바일 푸터 구간 숨김 */
+.float-col{
+  position:fixed;right:24px;bottom:24px;z-index:90;
+  width:300px;
+  background:var(--color-surface);color:var(--color-text);
+  border:1px solid var(--color-divider);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateX(calc(100% + 40px));
+  transition:transform .45s cubic-bezier(.22,.7,.3,1),opacity .3s ease,visibility 0s linear .45s;
+}
+.float-col.is-on{
+  opacity:1;visibility:visible;pointer-events:auto;transform:none;
+  transition:transform .45s cubic-bezier(.22,.7,.3,1),opacity .3s ease,visibility 0s;
+}
+.float-col.is-on.is-away,
+.float-col.is-on.is-footer{opacity:0;pointer-events:none;transform:translateX(calc(100% + 40px))}
+
+.float-col-link{display:block;padding:var(--space-4) var(--space-10) var(--space-4) var(--space-5);
+  border-radius:inherit}
+.float-col-eyebrow{display:flex;align-items:center;gap:6px;margin-bottom:var(--space-2);
+  font-size:.75rem;font-weight:700;color:var(--color-text-muted);white-space:nowrap}
+.float-col-new{display:inline-block;padding:2px 7px;border-radius:var(--radius-full);
+  background:var(--color-accent);color:#1a1612;font-size:.62rem;font-weight:900;letter-spacing:.08em;line-height:1.5}
+.float-col-issue{color:var(--color-text)}
+.float-col-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:.95rem;font-weight:800;line-height:1.45;word-break:keep-all;color:var(--color-text);
+  transition:color var(--transition)}
+.float-col-meta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);
+  margin-top:var(--space-3);font-size:.75rem;color:var(--color-text-muted)}
+.float-col-go{font-weight:800;color:var(--color-primary);white-space:nowrap}
+.float-col-link:hover .float-col-title{color:var(--color-primary)}
+.float-col-close{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--color-text-muted)}
+.float-col-close:hover{background:var(--color-surface-2);color:var(--color-text)}
+
+/* 모바일: 화면 아래 한 줄 띠 */
+@media (max-width:768px){
+  .float-col{left:12px;right:12px;width:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));
+    border-radius:var(--radius-full);transform:translateY(calc(100% + 32px))}
+  .float-col.is-on.is-away,
+  .float-col.is-on.is-footer{transform:translateY(calc(100% + 32px))}
+  .float-col-link{display:flex;align-items:center;gap:var(--space-2);padding:11px 46px 11px 12px}
+  .float-col-eyebrow{margin:0;flex:none}
+  .float-col-series,.float-col-meta{display:none}
+  .float-col-title{-webkit-line-clamp:1;flex:1;min-width:0;font-size:.85rem;line-height:1.4}
+  .float-col-close{top:50%;right:6px;transform:translateY(-50%)}
+}
+@media print{.float-col{display:none}}
