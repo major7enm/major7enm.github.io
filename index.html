@@ -258,6 +258,7 @@
         var top = Math.max(12, Math.round((floor - h) * 0.45));
         var tight = h < (m ? 120 : 150), g = geo();
         if (tight && ran && !still.matches) hero.classList.add('pins-done');   // 이번 메인 화면에서 이미 재생됨
+        if (!tight && !ran && hero.classList.contains('pins-tight')) { var an = row.getAnimations()[0]; if (an) an.currentTime = 0; }   // 숨김에서 처음 나타날 때 띠도 함께 처음부터
         if (!tight) ran = true;
         hero.classList.toggle('pins-tight', tight);
         var k = g.pw / (h * 2 / 3);                  // 벽 칸의 폭에 맞춘 배율
