@@ -198,11 +198,11 @@ input,textarea,select{font:inherit;color:inherit}
 .hero-bg{position:absolute;inset:0;pointer-events:none}
 
 /* ─── 히어로 포스터 월 ─────────────────────────
-   images/wall-*.webp = 실제 클리어런스 수행 작품
+   images/wall-v2-*.webp = 실제 클리어런스 수행 작품(줄당 15칸)
    포스터를 이어붙인 모자이크 띠. 두 장을 나란히
    두고 한 장 너비만큼 밀어 무한 루프. */
 .poster-wall{
-  --pw-w:2912px; --pw-h:298px;
+  --pw-w:3120px; --pw-h:298px;
   position:absolute;inset:0;overflow:hidden;
   display:flex;flex-direction:column;justify-content:center;
   filter:saturate(.88);
@@ -214,14 +214,14 @@ input,textarea,select{font:inherit;color:inherit}
   background-repeat:no-repeat;
   background-size:var(--pw-w) var(--pw-h);
 }
-.pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-1.webp)}
-.pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-2.webp)}
-.pw-row--3 .pw-strip{background-image:url(images/wall-3.webp)}
-.pw-row--1{animation:pw-left 120s linear infinite}
-.pw-row--2{animation:pw-right 145s linear infinite}
-.pw-row--3{animation:pw-left 100s linear infinite}
-.pw-row--4{animation:pw-right 132s linear infinite}
-.pw-row--5{animation:pw-left 112s linear infinite}
+.pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-v2-1.webp)}
+.pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-v2-2.webp)}
+.pw-row--3 .pw-strip{background-image:url(images/wall-v2-3.webp)}
+.pw-row--1{animation:pw-left 129s linear infinite}
+.pw-row--2{animation:pw-right 155s linear infinite}
+.pw-row--3{animation:pw-left 107s linear infinite}
+.pw-row--4{animation:pw-right 141s linear infinite}
+.pw-row--5{animation:pw-left 120s linear infinite}
 .pw-row--4,.pw-row--5{display:none}
 @keyframes pw-left{
   from{transform:translate3d(0,0,0)}
@@ -957,6 +957,21 @@ input,textarea,select{font:inherit;color:inherit}
   object-fit: cover; display: block;
 }
 
+/* ── 신작 NEW 표시 ───────────────────────────────────
+   포스터에 data-new="등록일"을 적으면 main.js가 기간 안일 때만
+   .is-new를 붙인다. 모양은 플로팅 카드의 NEW와 같다. */
+.perf-modal-item{position:relative}
+.perf-poster.is-new::after,.perf-modal-item.is-new::after{
+  content:"NEW";position:absolute;top:8px;left:8px;z-index:1;
+  padding:2px 8px;border-radius:var(--radius-full);
+  background:var(--color-accent);color:#1a1612;
+  font-size:.66rem;font-weight:900;letter-spacing:.08em;line-height:1.5;
+  box-shadow:0 1px 6px rgba(0,0,0,.35);
+}
+@media (max-width:480px){
+  .perf-poster.is-new::after{top:5px;left:5px;padding:1px 6px;font-size:.58rem}
+}
+
 /* 모바일 */
 @media (max-width: 768px) {
   .perf-poster-grid {
@@ -1393,11 +1408,11 @@ input,textarea,select{font:inherit;color:inherit}
    가벼운 -sm 띠로 교체하고 줄 수를 5줄로 늘려
    좁은 화면에서도 세로를 채운다. */
 @media (max-width:768px){
-  .poster-wall{--pw-w:1514px;--pw-h:154px}
+  .poster-wall{--pw-w:1622px;--pw-h:154px}
   .pw-row--4,.pw-row--5{display:flex}
-  .pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-1-sm.webp)}
-  .pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-2-sm.webp)}
-  .pw-row--3 .pw-strip{background-image:url(images/wall-3-sm.webp)}
+  .pw-row--1 .pw-strip,.pw-row--5 .pw-strip{background-image:url(images/wall-v2-1-sm.webp)}
+  .pw-row--2 .pw-strip,.pw-row--4 .pw-strip{background-image:url(images/wall-v2-2-sm.webp)}
+  .pw-row--3 .pw-strip{background-image:url(images/wall-v2-3-sm.webp)}
   .hero-scrim{
     background:
       linear-gradient(90deg,rgba(8,8,11,.90) 0%,rgba(8,8,11,.72) 62%,rgba(8,8,11,.46) 100%),
@@ -1587,6 +1602,76 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
 .timeline.is-scrub .timeline-item.is-current .timeline-year{color:var(--color-accent)}
 .timeline.is-scrub .timeline-item.is-current .timeline-dot{transform:scale(1.15);
   box-shadow:0 0 16px rgba(228,175,58,.55)}
+
+/* ─── 히어로: 신작 두 장 (멈춰 선 두 장) ──────────
+   index.html의 M7_HERO_PINS가 기간 안일 때만 .hero.has-pins가 붙는다.
+   기간이 끝나면 이 블록은 저절로 효력을 잃고 벽은 wall-v2 그대로 돌아간다.
+   포스터는 파일 통째로 놓는다(자르기·재색보정·합성 없음).
+   --pin-p(0~1)는 main.js가 쓰며 포스터 위 어두운 막과 그림자에만 쓰인다. */
+.pw-pins{
+  position:absolute;left:0;right:0;top:var(--pin-top,7.5%);
+  width:max-content;margin:0 auto;
+  display:flex;gap:10px;
+  transform-origin:50% 0;
+}
+.pw-pin{position:relative;display:block;flex:none;
+  height:var(--pin-h,44vh);width:calc(var(--pin-h,44vh) * 2 / 3);background:#101015}
+.pw-pin img{display:block;width:100%;height:100%}
+.pw-pin::before{content:'';position:absolute;inset:0;
+  box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.10);
+  opacity:calc(1 - var(--pin-p,0))}
+.pw-pin::after{content:'';position:absolute;inset:0;
+  background:#08080b;opacity:calc(var(--pin-p,0) * .5)}
+.hero.pins-tight .pw-pins{display:none}
+
+/* 멈춘 두 장과 같은 포스터가 뒤로 지나가지 않도록 윗줄만 두 칸 뺀 13칸 띠를 쓴다.
+   칸이 줄어든 만큼 시간도 줄여 흐르는 속도는 그대로. */
+.hero.has-pins:not(.pins-tight) .pw-row--1,.hero.has-pins:not(.pins-tight) .pw-row--5{--pw-w:2704px}
+.hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip,.hero.has-pins:not(.pins-tight) .pw-row--5 .pw-strip{background-image:url(images/wall-v2-1-pin.webp)}
+.hero.has-pins:not(.pins-tight) .pw-row--1{animation-duration:112s}
+.hero.has-pins:not(.pins-tight) .pw-row--5{animation-duration:104s}
+
+/* 데스크톱: 두 장 주변만 낮추고 화면 끝은 남겨 '작품이 많다'는 인상을 지킨다.
+   아래쪽 글자 지면 값은 기존과 같다. */
+@media (min-width:769px){
+  .hero.has-pins:not(.pins-tight) .hero-scrim{
+    background:
+      radial-gradient(ellipse 40% 56% at 50% 30%,rgba(8,8,11,.38) 0%,rgba(8,8,11,.38) 58%,rgba(8,8,11,0) 100%),
+      linear-gradient(180deg,rgba(8,8,11,.30) 0%,rgba(8,8,11,.30) 36%,rgba(8,8,11,.70) 52%,rgba(8,8,11,.90) 64%,rgba(8,8,11,.96) 100%);
+  }
+}
+
+/* 폰: 헤드라인 위 띠만 걷어 벽이 흐르는 것을 보여 준다.
+   ::before/::after는 '가운데 정렬이되 위쪽 공간은 최소 186px 확보'를 CSS로만 만든다.
+   보통 화면에서는 기존 가운데 정렬과 위치가 같다. */
+@media (max-width:768px){
+  .pw-pins{gap:6px}
+  .hero.has-pins:not(.pins-tight) .pw-row--1,.hero.has-pins:not(.pins-tight) .pw-row--5{--pw-w:1406px}
+  .hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip,.hero.has-pins:not(.pins-tight) .pw-row--5 .pw-strip{background-image:url(images/wall-v2-1-pin-sm.webp)}
+  .hero.has-pins:not(.pins-tight) .hero-scrim{
+    background:linear-gradient(180deg,
+      rgba(8,8,11,.50) 0,
+      rgba(8,8,11,.50) calc(var(--pin-floor,34%) - 64px),
+      rgba(8,8,11,.93) calc(var(--pin-floor,34%) - 6px),
+      rgba(8,8,11,.93) 78%,
+      rgba(8,8,11,.97) 100%);
+  }
+}
+
+/* 세로로 든 일반 폰에서만 헤드라인 위 공간을 확보한다. 가로 화면·320px 폭은 기존 가운데 정렬 그대로. */
+@media (max-width:768px) and (min-width:360px) and (orientation:portrait){
+  .hero.has-pins{flex-direction:column;justify-content:flex-start}
+  .hero.has-pins::before{content:'';flex:1 1 0;min-height:calc(186px - var(--space-16))}
+  .hero.has-pins::after{content:'';flex:1 1 0}
+  .hero.has-pins .hero-content{flex:none}
+}
+
+/* 동작 줄이기: 스크롤 연동은 main.js에서 돌지 않는다. 세션 중 설정을 바꿔도 정지 상태가 되도록 못 박는다. */
+@media (prefers-reduced-motion: reduce){
+  .hero.has-pins .pw-pins{transform:none !important;will-change:auto !important}
+  .hero.has-pins .pw-pin::before{opacity:1}
+  .hero.has-pins .pw-pin::after{opacity:0}
+}
 
 /* ─── 휴대폰 상단 메뉴줄 ───────────────────────
    폭 460px 아래에서는 문의하기 버튼까지 넣을 자리가 없어 메뉴 버튼이

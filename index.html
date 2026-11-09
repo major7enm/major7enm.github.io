@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261109" />
 
   <!-- JSON-LD 구조화 데이터 -->
   <script type="application/ld+json">
@@ -180,6 +180,58 @@
         </div>
       </div>
     </div>
+    <!-- 신작 두 장: 벽 앞에 멈춰 세우는 데이터는 여기 한 곳뿐.
+         바꾸기 = items, from만 수정 / 끄기 = on:false -->
+    <script>
+    var M7_HERO_PINS = {
+      on: true,
+      from: '2026-11-09',   // 홈페이지 등록일. 주요 성과 NEW 표시와 같은 날짜
+      days: 92,             // 지나면 저절로 빠지고 두 장은 벽의 평범한 칸으로 돌아간다 (main.js M7_NEW_DAYS와 같은 값)
+      items: ['images/drama_175.jpg', 'images/drama_174.jpg']
+    };
+    (function (c) {
+      var t = Date.parse(c.from + 'T00:00:00+09:00'), now = Date.now();
+      if (!c.on || !c.items.length || !(now >= t && now - t < c.days * 864e5)) return;
+      var hero = document.getElementById('hero');
+      var title = hero.querySelector('.hero-title');
+      var row = hero.querySelector('.pw-row--1');
+      var phone = window.matchMedia('(max-width:768px)');
+      var box = document.createElement('div');
+      box.className = 'pw-pins';
+      c.items.slice(0, 2).forEach(function (src) {
+        var s = document.createElement('span'), i = new Image(400, 600);
+        s.className = 'pw-pin';
+        i.alt = '';
+        i.decoding = 'async';
+        i.setAttribute('fetchpriority', 'high');
+        i.src = src;
+        s.appendChild(i);
+        box.appendChild(s);
+      });
+      hero.classList.add('has-pins');
+      hero.querySelectorAll('.pw-row--1,.pw-row--5').forEach(function (r) { r.appendChild(r.firstElementChild.cloneNode(false)); });  // 짧아진 띠: 아주 넓은 화면에서도 빈칸이 생기지 않게
+      hero.querySelector('.hero-bg').appendChild(box);
+      // 헤드라인 위치를 실제로 재서 크기를 정한다. 언어가 바뀌어 줄바꿈이 달라져도 겹치지 않는다.
+      function fit() {
+        var r = hero.getBoundingClientRect();
+        if (!r.height) return;                       // 다른 탭(display:none)이면 잴 수 없다
+        var floor = title.getBoundingClientRect().top - r.top;
+        var rowH = row.offsetHeight, m = phone.matches;
+        var want = m ? rowH * 1.3 : Math.min(440, Math.max(rowH * 1.2, r.height * 0.44));
+        var h = Math.floor(Math.min(want, floor - (m ? 24 : 48) - 12));
+        hero.classList.toggle('pins-tight', h < (m ? 120 : 200));
+        hero.style.setProperty('--pin-h', h + 'px');
+        hero.style.setProperty('--pin-top', Math.max(12, Math.round((floor - h) * 0.45)) + 'px');
+        hero.style.setProperty('--pin-floor', Math.round(floor) + 'px');
+      }
+      fit();
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(fit);
+        ro.observe(hero);
+        ro.observe(hero.querySelector('.hero-content'));
+      }
+    })(M7_HERO_PINS);
+    </script>
     <div class="hero-scroll-hint" aria-hidden="true">
       <span data-i18n="scroll_hint">스크롤</span>
       <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5" fill="currentColor"/></svg>
@@ -637,8 +689,8 @@
           </div>
         </div>
         <div class="perf-poster-grid">
-          <div class="perf-poster"><img src="images/drama_171.jpg" alt="원더풀스" loading="lazy" decoding="async" /></div>
-          <div class="perf-poster"><img src="images/perf6.jpg" alt="언더커버 미쓰홍" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster" data-new="2026-11-09"><img src="images/drama_175.jpg" alt="100일의 거짓말" loading="lazy" decoding="async" /></div>
+          <div class="perf-poster" data-new="2026-11-09"><img src="images/drama_174.jpg" alt="유부녀 킬러" loading="lazy" decoding="async" /></div>
           <div class="perf-poster"><img src="images/perf5.jpg" alt="태풍상사" loading="lazy" decoding="async" /></div>
           <div class="perf-poster"><img src="images/perf4.jpg" alt="폭군의 셰프" loading="lazy" decoding="async" /></div>
           <div class="perf-poster"><img src="images/perf1.jpg" alt="선재업고 튀어" loading="lazy" decoding="async" /></div>
@@ -750,6 +802,8 @@
           <!-- 드라마 -->
           <div class="perf-modal-section-title" id="modal-section-drama">드라마</div>
           <div class="perf-modal-grid">
+            <div class="perf-modal-item" data-new="2026-11-09"><img src="images/drama_175.jpg" alt="100일의 거짓말" loading="lazy" decoding="async" /></div>
+            <div class="perf-modal-item" data-new="2026-11-09"><img src="images/drama_174.jpg" alt="유부녀 킬러" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_171.jpg" alt="원더풀스" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/perf6.jpg" alt="언더커버 미쓰홍" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/perf5.jpg" alt="태풍상사" loading="lazy" decoding="async" /></div>
@@ -763,18 +817,12 @@
             <div class="perf-modal-item"><img src="images/drama_36.jpg" alt="클리닝업" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_37.jpg" alt="카지노" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_38.jpg" alt="멘탈코치 제갈길" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_39.jpg" alt="선재업고 튀어" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_40.jpg" alt="눈물의 여왕" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_41.jpg" alt="너의 시간 속으로" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_42.jpg" alt="살인자o난감" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_43.jpg" alt="아무도 없는 숲속에서" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_44.jpg" alt="놀아주는 여자" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_45.jpg" alt="소년시대" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_46.jpg" alt="비밀은 없어" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_47.jpg" alt="폭군의 셰프" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_48.jpg" alt="태풍상사" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_49.jpg" alt="정년이" loading="lazy" decoding="async" /></div>
-            <div class="perf-modal-item"><img src="images/drama_50.jpg" alt="언더커버 미쓰홍" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_51.jpg" alt="협상의 기술" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_52.jpg" alt="은중과 상연" loading="lazy" decoding="async" /></div>
             <div class="perf-modal-item"><img src="images/drama_53.jpg" alt="금르르 부탁해" loading="lazy" decoding="async" /></div>
@@ -1320,6 +1368,6 @@
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="main.js?v=20261109"></script>
 </body>
 </html>

@@ -12,7 +12,9 @@ var M7_ANALYTICS_ID = '';
 //  마음에 안 들면 해당 값을 false로 바꿔 배포하면 그 기능만 꺼진다(나머지는 그대로).
 var M7_FEATURES = {
   floatCard: true,     // 최신 칼럼 플로팅 카드
-  historyLine: true    // 회사 소개 > 연혁 스크롤 진행선
+  historyLine: true,   // 회사 소개 > 연혁 스크롤 진행선
+  newBadge: true,      // 주요 성과 신작 NEW 표시(등록일부터 일정 기간만)
+  heroPinsMotion: true // 홈 신작 두 장 스크롤 연동 (false면 두 장은 멈춘 채 그대로)
 };
 
 function m7track(name, data) {
@@ -1691,5 +1693,88 @@ perf_c1: 'SBS 福宝与爷爷 PART 1 – 含笑告别 (NCT 郑宇) 制作',
   window.addEventListener('resize', kick);
   document.addEventListener('m7:tabchange', function () { wasVisible = false; setTimeout(kick, 0); });
   window.addEventListener('popstate', function () { setTimeout(kick, 0); });
+  kick();
+})();
+
+// ── 신작 NEW 표시 ─────────────────────────────────────
+//  포스터에 data-new="YYYY-MM-DD"(홈페이지 등록일)를 적어 두면 그날부터 M7_NEW_DAYS일 동안만
+//  NEW가 붙고, 기간이 지나면 저절로 사라진다. 끄려면 M7_FEATURES.newBadge = false.
+(function () {
+  if (typeof M7_FEATURES !== 'undefined' && M7_FEATURES.newBadge === false) return;
+  var M7_NEW_DAYS = 92;
+  var now = Date.now();
+  document.querySelectorAll('[data-new]').forEach(function (el) {
+    var t = Date.parse(el.getAttribute('data-new') + 'T00:00:00+09:00');
+    if (!isNaN(t) && now >= t && now - t < M7_NEW_DAYS * 86400000) el.classList.add('is-new');
+  });
+})();
+
+// ── 신작 두 장: 스크롤 연동 ─────────────────────────────
+//  히어로 포스터 두 장(index.html M7_HERO_PINS)의 위치·크기·밝기가 scrollY 하나의 함수다.
+//  내리면 벽 칸 크기로 줄며 윗줄 흐름 쪽으로 들어가고, 올리면 같은 길로 다시 나온다.
+//  재생되는 애니메이션이 아니라 시작 시각도 길이도 없다.
+//  끄려면 M7_FEATURES.heroPinsMotion = false (두 장은 그대로 서 있다).
+(function () {
+  if (typeof M7_FEATURES !== 'undefined' && M7_FEATURES.heroPinsMotion === false) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var hero = document.getElementById('hero');
+  if (!hero || !hero.classList.contains('has-pins')) return;
+  var pins = hero.querySelector('.pw-pins');
+  var row = hero.querySelector('.pw-row--1');
+  if (!pins || !row) return;
+
+  var R = 0, dx = 0, dy = 0, k = 1;
+  var shown = 0, painted = -1, snap = true, raf = 0;
+
+  // offset 값은 transform의 영향을 받지 않는다.
+  // 다른 탭이면 0이 나오므로 R은 0으로 남고, 홈으로 돌아올 때 다시 잰다.
+  function measure() {
+    var h = pins.offsetHeight;
+    if (!h) { R = 0; return; }
+    var rowH = row.offsetHeight, cellH = rowH * 290 / 298;  // 띠 높이 대 포스터 높이
+    R = Math.max(140, row.offsetTop + rowH);                // 윗줄이 헤더 뒤로 빠지는 지점
+    k = Math.min(1, cellH / h);
+    dy = pins.offsetTop - (row.offsetTop + (rowH - cellH) / 2);
+    dx = Math.min(window.innerWidth * 0.34, 520);
+    painted = -1;
+  }
+
+  function paint() {
+    if (shown === painted) return;
+    painted = shown;
+    if (shown === 0) {
+      pins.style.transform = '';
+      pins.style.removeProperty('--pin-p');
+      return;
+    }
+    pins.style.transform = 'translate3d(' + (-dx * shown).toFixed(1) + 'px,' +
+      (-dy * shown).toFixed(1) + 'px,0) scale(' + (1 + (k - 1) * shown).toFixed(4) + ')';
+    pins.style.setProperty('--pin-p', shown.toFixed(3));
+  }
+
+  function tick() {
+    raf = 0;
+    if (!R) measure();
+    if (!R) return;
+    var t = Math.min(1, Math.max(0, window.scrollY / R));
+    if (snap) { shown = t; snap = false; }     // 처음·탭 복귀는 재생 없이 현재 위치로
+    else shown += (t - shown) * 0.14;          // 연혁 진행선과 같은 보간
+    if (Math.abs(t - shown) < 0.001) shown = t;
+    paint();
+    if (shown !== t) raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(tick); }
+  function remeasure() { R = 0; kick(); }
+
+  pins.style.willChange = 'transform';
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', remeasure);
+  if (window.ResizeObserver) {
+    var pinsRO = new ResizeObserver(remeasure);
+    pinsRO.observe(pins);
+    pinsRO.observe(hero);
+    pinsRO.observe(hero.querySelector('.hero-content'));
+  }
+  document.addEventListener('m7:tabchange', function () { R = 0; snap = true; setTimeout(kick, 0); });
   kick();
 })();
