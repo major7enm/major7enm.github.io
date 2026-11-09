@@ -1587,3 +1587,22 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
 .timeline.is-scrub .timeline-item.is-current .timeline-year{color:var(--color-accent)}
 .timeline.is-scrub .timeline-item.is-current .timeline-dot{transform:scale(1.15);
   box-shadow:0 0 16px rgba(228,175,58,.55)}
+
+/* ─── 휴대폰 상단 메뉴줄 ───────────────────────
+   폭 460px 아래에서는 문의하기 버튼까지 넣을 자리가 없어 메뉴 버튼이
+   화면 밖으로 밀렸다. 문의하기는 메뉴 안에 있으므로 상단에서는 뺀다.
+   (a.btn-contact 규칙이 959px 아래 숨김을 덮어쓰고 있어 같은 선택자로 지정) */
+@media (max-width:480px){
+  a.btn-contact{display:none}
+  .header-inner{gap:var(--space-3)}
+  .header-actions{margin-left:auto;flex-shrink:0}
+  .theme-toggle,.hamburger{flex-shrink:0}
+}
+@media (max-width:359px){
+  .logo{gap:var(--space-2)}
+  .logo-kr{font-size:.74rem}
+  .header-actions{gap:var(--space-2)}
+  /* 회사 소개 표의 긴 값이 칸을 밀어 화면이 옆으로 넓어지지 않게 */
+  .about-left{min-width:0}
+  .info-value{min-width:0;overflow-wrap:anywhere}
+}
