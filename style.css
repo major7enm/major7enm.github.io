@@ -1603,52 +1603,68 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
 .timeline.is-scrub .timeline-item.is-current .timeline-dot{transform:scale(1.15);
   box-shadow:0 0 16px rgba(228,175,58,.55)}
 
-/* ─── 히어로: 신작 두 장 (멈춰 선 두 장) ──────────
+/* ─── 히어로: 신작 두 장 ──────────────────────────
    index.html의 M7_HERO_PINS가 기간 안일 때만 .hero.has-pins가 붙는다.
-   기간이 끝나면 이 블록은 저절로 효력을 잃고 벽은 wall-v2 그대로 돌아간다.
-   포스터는 파일 통째로 놓는다(자르기·재색보정·합성 없음).
-   --pin-p(0~1)는 main.js가 쓰며 포스터 위 어두운 막과 그림자에만 쓰인다. */
+   메인 화면이 보일 때마다 처음부터: --pin-hold초 동안 크게 서 있다가
+   1.6초에 걸쳐 윗줄의 두 칸 위치·크기로 이동하고, .4초 동안 띠 안의 같은 포스터(.pw-slot)로 바뀌어 함께 흐른다.
+   1.6s·.4s는 index.html의 MOVE·SWAP과 같은 값. */
 .pw-pins{
   position:absolute;left:0;right:0;top:var(--pin-top,7.5%);
   width:max-content;margin:0 auto;
-  display:flex;gap:10px;
-  transform-origin:50% 0;
+  display:flex;gap:var(--pin-gap,10px);
+  transform-origin:50% 0;will-change:transform,opacity;
+  animation:pin-settle 2s cubic-bezier(.45,0,.2,1) var(--pin-hold,10s) forwards;
 }
 .pw-pin{position:relative;display:block;flex:none;
-  height:var(--pin-h,44vh);width:calc(var(--pin-h,44vh) * 2 / 3);background:#101015}
+  height:var(--pin-h,44vh);width:calc(var(--pin-h,44vh) * 2 / 3);background:#101015;
+  animation:pin-crop 1.6s cubic-bezier(.45,0,.2,1) var(--pin-hold,10s) forwards}
 .pw-pin img{display:block;width:100%;height:100%}
 .pw-pin::before{content:'';position:absolute;inset:0;
   box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.10);
-  opacity:calc(1 - var(--pin-p,0))}
-.pw-pin::after{content:'';position:absolute;inset:0;
-  background:#08080b;opacity:calc(var(--pin-p,0) * .5)}
-.hero.pins-tight .pw-pins{display:none}
+  animation:pin-fade-out 1.6s ease var(--pin-hold,10s) forwards}
+.pw-pin::after{content:'';position:absolute;inset:0;background:#08080b;opacity:0;
+  animation:pin-dim 1.6s ease var(--pin-hold,10s) forwards}
+.hero.pins-tight .pw-pins,.hero.pins-tight .pw-slot,.hero.pins-tight .pw-scrim,
+.hero.pins-done .pw-pins,.hero.pins-done .pw-scrim{display:none}
+.hero.pins-done .pw-slot{opacity:1;animation:none}
 
-/* 멈춘 두 장과 같은 포스터가 뒤로 지나가지 않도록 윗줄만 두 칸 뺀 13칸 띠를 쓴다.
-   칸이 줄어든 만큼 시간도 줄여 흐르는 속도는 그대로. */
-.hero.has-pins:not(.pins-tight) .pw-row--1,.hero.has-pins:not(.pins-tight) .pw-row--5{--pw-w:2704px}
-.hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip,.hero.has-pins:not(.pins-tight) .pw-row--5 .pw-strip{background-image:url(images/wall-v2-1-pin.webp)}
-.hero.has-pins:not(.pins-tight) .pw-row--1{animation-duration:112s}
-.hero.has-pins:not(.pins-tight) .pw-row--5{animation-duration:104s}
-
-/* 데스크톱: 두 장 주변만 낮추고 화면 끝은 남겨 '작품이 많다'는 인상을 지킨다.
-   아래쪽 글자 지면 값은 기존과 같다. */
-@media (min-width:769px){
-  .hero.has-pins:not(.pins-tight) .hero-scrim{
-    background:
-      radial-gradient(ellipse 40% 56% at 50% 30%,rgba(8,8,11,.38) 0%,rgba(8,8,11,.38) 58%,rgba(8,8,11,0) 100%),
-      linear-gradient(180deg,rgba(8,8,11,.30) 0%,rgba(8,8,11,.30) 36%,rgba(8,8,11,.70) 52%,rgba(8,8,11,.90) 64%,rgba(8,8,11,.96) 100%);
-  }
+@keyframes pin-settle{
+  0%{transform:none;opacity:1}
+  80%{transform:translate3d(var(--pin-dx,0px),calc(var(--pin-dy,0px) * -1),0) scale(var(--pin-k,.8));opacity:1;animation-timing-function:linear}
+  100%{transform:translate3d(var(--pin-dx2,0px),calc(var(--pin-dy,0px) * -1),0) scale(var(--pin-k,.8));opacity:0;visibility:hidden}
 }
+@keyframes pin-crop{0%{clip-path:inset(0 0)}100%{clip-path:inset(var(--pin-crop,1.7%) 0)}}
+@keyframes pin-dim{to{opacity:var(--pin-dim,.2)}}
+@keyframes pin-fade-out{to{opacity:0}}
+@keyframes pin-fade-in{to{opacity:1}}
 
-/* 폰: 헤드라인 위 띠만 걷어 벽이 흐르는 것을 보여 준다.
-   ::before/::after는 '가운데 정렬이되 위쪽 공간은 최소 186px 확보'를 CSS로만 만든다.
-   보통 화면에서는 기존 가운데 정렬과 위치가 같다. */
+/* 윗줄 띠: 신작이 들어갈 두 칸. 띠 안에 있어 함께 움직인다.
+   앞의 두 장에 가려진 채 먼저 켜지고, 앞의 두 장이 걷히면서 그대로 드러난다. */
+.hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip{position:relative;background-image:url(images/wall-v3-1.webp)}
+.pw-slot{position:absolute;display:block;left:calc(100% / 15 * var(--k));top:calc(100% * 4 / 298);
+  width:calc(100% * 200 / 3120);height:calc(100% * 290 / 298);overflow:hidden;opacity:0;
+  animation:pin-fade-in 1ms linear calc(var(--pin-hold,10s) + 1.6s) forwards}
+.pw-slot img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* 어두운 막 두 겹: 두 장이 있는 동안은 .pw-scrim, 들어가면 원래 .hero-scrim으로 함께 바뀐다.
+   원래 막의 규칙(화면 크기별)은 건드리지 않고 투명도만 조절한다. */
+.pw-scrim{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 40% 56% at 50% 30%,rgba(8,8,11,.38) 0%,rgba(8,8,11,.38) 58%,rgba(8,8,11,0) 100%),
+    linear-gradient(180deg,rgba(8,8,11,.30) 0%,rgba(8,8,11,.30) 36%,rgba(8,8,11,.70) 52%,rgba(8,8,11,.90) 64%,rgba(8,8,11,.96) 100%);
+  animation:pin-fade-out 2s ease var(--pin-hold,10s) forwards}
+.hero.pins-timed:not(.pins-tight):not(.pins-done) .hero-scrim{opacity:0;
+  animation:pin-fade-in 2s ease var(--pin-hold,10s) forwards}
+
+/* 다른 탭에서 열렸으면 볼 때까지 시작하지 않는다 */
+.hero.pins-wait .pw-pins,.hero.pins-wait .pw-pin,.hero.pins-wait .pw-pin::before,.hero.pins-wait .pw-pin::after,
+.hero.pins-wait .hero-scrim,.hero.pins-wait .pw-scrim,.hero.pins-wait .pw-slot,.hero.pins-wait .pw-row--1{animation-play-state:paused}
+
+/* 두 장이 있는 동안의 막: 주변을 조금 밝혀 벽이 흐르는 것이 보이게 하고, 글자 쪽은 어둡게 */
 @media (max-width:768px){
-  .pw-pins{gap:6px}
-  .hero.has-pins:not(.pins-tight) .pw-row--1,.hero.has-pins:not(.pins-tight) .pw-row--5{--pw-w:1406px}
-  .hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip,.hero.has-pins:not(.pins-tight) .pw-row--5 .pw-strip{background-image:url(images/wall-v2-1-pin-sm.webp)}
-  .hero.has-pins:not(.pins-tight) .hero-scrim{
+  .hero.has-pins{--pin-dim:.84}
+  .hero.has-pins:not(.pins-tight) .pw-row--1 .pw-strip{background-image:url(images/wall-v3-1-sm.webp)}
+  .pw-scrim{
     background:linear-gradient(180deg,
       rgba(8,8,11,.50) 0,
       rgba(8,8,11,.50) calc(var(--pin-floor,34%) - 64px),
@@ -1666,11 +1682,10 @@ body.tabs-mode #voice.is-active{padding-top:clamp(var(--space-10),5vw,var(--spac
   .hero.has-pins .hero-content{flex:none}
 }
 
-/* 동작 줄이기: 스크롤 연동은 main.js에서 돌지 않는다. 세션 중 설정을 바꿔도 정지 상태가 되도록 못 박는다. */
+/* 동작 줄이기: 움직이지 않고 두 장이 서 있는 화면으로 고정 */
 @media (prefers-reduced-motion: reduce){
-  .hero.has-pins .pw-pins{transform:none !important;will-change:auto !important}
-  .hero.has-pins .pw-pin::before{opacity:1}
-  .hero.has-pins .pw-pin::after{opacity:0}
+  .hero.has-pins .pw-pins,.hero.has-pins .pw-pin,.hero.has-pins .pw-pin::before,.hero.has-pins .pw-pin::after,
+  .hero.has-pins .hero-scrim,.hero.has-pins .pw-scrim,.hero.has-pins .pw-slot{animation:none !important}
 }
 
 /* ─── 휴대폰 상단 메뉴줄 ───────────────────────

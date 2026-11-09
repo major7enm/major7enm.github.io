@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=20261109" />
+  <link rel="stylesheet" href="style.css?v=20261109c" />
 
   <!-- JSON-LD 구조화 데이터 -->
   <script type="application/ld+json">
@@ -180,25 +180,29 @@
         </div>
       </div>
     </div>
-    <!-- 신작 두 장: 벽 앞에 멈춰 세우는 데이터는 여기 한 곳뿐.
-         바꾸기 = items, from만 수정 / 끄기 = on:false -->
+    <!-- 신작 두 장: 메인 화면에 올 때마다 잠시 크게 세웠다가 포스터 벽 윗줄의 칸으로 들여보낸다.
+         작품 바꾸기 = items, from / 서 있는 시간 = hold(초) / 끄기 = on:false -->
     <script>
     var M7_HERO_PINS = {
       on: true,
       from: '2026-11-09',   // 홈페이지 등록일. 주요 성과 NEW 표시와 같은 날짜
-      days: 92,             // 지나면 저절로 빠지고 두 장은 벽의 평범한 칸으로 돌아간다 (main.js M7_NEW_DAYS와 같은 값)
+      days: 92,             // 지나면 저절로 빠진다 (main.js M7_NEW_DAYS와 같은 값)
+      hold: 10,             // 크게 서 있는 시간(초)
       items: ['images/drama_175.jpg', 'images/drama_174.jpg']
     };
     (function (c) {
       var t = Date.parse(c.from + 'T00:00:00+09:00'), now = Date.now();
       if (!c.on || !c.items.length || !(now >= t && now - t < c.days * 864e5)) return;
+      var MOVE = 1.6, SWAP = 0.4, SLOT = 2, CELLS = 15;   // 이동·교체 시간(style.css와 동일), 띠에서 들어갈 칸 번호, 띠의 칸 수
       var hero = document.getElementById('hero');
       var title = hero.querySelector('.hero-title');
       var row = hero.querySelector('.pw-row--1');
       var phone = window.matchMedia('(max-width:768px)');
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)');
       var box = document.createElement('div');
       box.className = 'pw-pins';
-      c.items.slice(0, 2).forEach(function (src) {
+      var items = c.items.slice(0, 2);
+      items.forEach(function (src) {
         var s = document.createElement('span'), i = new Image(400, 600);
         s.className = 'pw-pin';
         i.alt = '';
@@ -208,21 +212,68 @@
         s.appendChild(i);
         box.appendChild(s);
       });
-      hero.classList.add('has-pins');
-      hero.querySelectorAll('.pw-row--1,.pw-row--5').forEach(function (r) { r.appendChild(r.firstElementChild.cloneNode(false)); });  // 짧아진 띠: 아주 넓은 화면에서도 빈칸이 생기지 않게
-      hero.querySelector('.hero-bg').appendChild(box);
+      // 띠 안의 들어갈 자리. 띠 두 벌 모두에 넣어 반복 구간에서도 끊기지 않게 한다.
+      [].forEach.call(row.children, function (strip) {
+        items.forEach(function (src, n) {
+          var s = document.createElement('span'), i = new Image(400, 600);
+          s.className = 'pw-slot';
+          s.style.setProperty('--k', SLOT + n);
+          i.alt = '';
+          i.decoding = 'async';
+          i.src = src;
+          s.appendChild(i);
+          strip.appendChild(s);
+        });
+      });
+      hero.classList.add('has-pins', 'pins-timed');
+      hero.style.setProperty('--pin-hold', c.hold + 's');
+      // 다른 탭에서 열렸으면 실제로 볼 때부터 시간을 잰다
+      if (document.hidden) {
+        hero.classList.add('pins-wait');
+        document.addEventListener('visibilitychange', function w() {
+          if (document.hidden) return;
+          hero.classList.remove('pins-wait');
+          document.removeEventListener('visibilitychange', w);
+        });
+      }
+      var bg = hero.querySelector('.hero-bg'), veil = document.createElement('div');
+      veil.className = 'pw-scrim';
+      bg.appendChild(veil);
+      bg.appendChild(box);
+
+      var ran = false;
+      function geo() {                               // 띠의 현재 치수
+        var W = row.firstElementChild.offsetWidth, cell = W / CELLS, pw = cell * 200 / 208;
+        var dur = parseFloat(getComputedStyle(row).animationDuration) || 129;
+        return { W: W, cell: cell, pw: pw, v: W / dur, dur: dur, slot: SLOT * cell + (cell + pw) / 2 };
+      }
       // 헤드라인 위치를 실제로 재서 크기를 정한다. 언어가 바뀌어 줄바꿈이 달라져도 겹치지 않는다.
       function fit() {
         var r = hero.getBoundingClientRect();
-        if (!r.height) return;                       // 다른 탭(display:none)이면 잴 수 없다
+        if (!r.height) { ran = false; hero.classList.remove('pins-done'); return; }   // 다른 탭(display:none)이면 잴 수 없다
         var floor = title.getBoundingClientRect().top - r.top;
         var rowH = row.offsetHeight, m = phone.matches;
         var want = m ? rowH * 1.3 : Math.min(440, Math.max(rowH * 1.2, r.height * 0.44));
         var h = Math.floor(Math.min(want, floor - (m ? 24 : 48) - 12));
-        hero.classList.toggle('pins-tight', h < (m ? 120 : 200));
+        var top = Math.max(12, Math.round((floor - h) * 0.45));
+        var tight = h < (m ? 120 : 150), g = geo();
+        if (tight && ran && !still.matches) hero.classList.add('pins-done');   // 이번 메인 화면에서 이미 재생됨
+        if (!tight) ran = true;
+        hero.classList.toggle('pins-tight', tight);
+        var k = g.pw / (h * 2 / 3);                  // 벽 칸의 폭에 맞춘 배율
+        var full = g.pw * 1.5, cellH = rowH * 290 / 298, crop = (full - cellH) / 2;
         hero.style.setProperty('--pin-h', h + 'px');
-        hero.style.setProperty('--pin-top', Math.max(12, Math.round((floor - h) * 0.45)) + 'px');
+        hero.style.setProperty('--pin-top', top + 'px');
         hero.style.setProperty('--pin-floor', Math.round(floor) + 'px');
+        hero.style.setProperty('--pin-k', k.toFixed(4));
+        hero.style.setProperty('--pin-gap', ((g.cell - g.pw) / k).toFixed(2) + 'px');
+        hero.style.setProperty('--pin-crop', (crop / full * 100).toFixed(2) + '%');
+        hero.style.setProperty('--pin-dy', (top - (row.offsetTop + rowH * 4 / 298 - crop)).toFixed(1) + 'px');
+        // 띠의 시작 위치: 두 칸이 '들어가는 순간' 화면 가운데에 오도록 맞춘다
+        if (tight || still.matches) { row.style.animationDelay = ''; return; }
+        if (hero.classList.contains('pins-done')) return;
+        var off = g.slot + row.offsetLeft - r.width / 2 - g.v * (c.hold + MOVE);
+        row.style.animationDelay = (-(((off % g.W) + g.W) % g.W) / g.v).toFixed(3) + 's';
       }
       fit();
       if (window.ResizeObserver) {
@@ -230,6 +281,23 @@
         ro.observe(hero);
         ro.observe(hero.querySelector('.hero-content'));
       }
+      // 뒤로 가기로 돌아온 경우(bfcache)에도 처음부터 다시 재생
+      window.addEventListener('pageshow', function (e) {
+        if (!e.persisted || !hero.getClientRects().length) return;
+        hero.style.display = 'none';
+        void hero.offsetWidth;
+        hero.style.display = '';
+      });
+      // 이동이 시작되는 순간 띠의 실제 위치를 다시 읽어 정확한 칸으로 간다
+      box.addEventListener('animationstart', function (e) {
+        if (e.target !== box) return;
+        var g = geo(), x = new DOMMatrixReadOnly(getComputedStyle(row).transform).m41 - g.v * MOVE;
+        var center = hero.getBoundingClientRect().width / 2;
+        var a = row.offsetLeft + x + g.slot, b = a + g.W;
+        var dx = (Math.abs(a - center) < Math.abs(b - center) ? a : b) - center;
+        hero.style.setProperty('--pin-dx', dx.toFixed(1) + 'px');
+        hero.style.setProperty('--pin-dx2', (dx - g.v * SWAP).toFixed(1) + 'px');
+      });
     })(M7_HERO_PINS);
     </script>
     <div class="hero-scroll-hint" aria-hidden="true">
@@ -1368,6 +1436,6 @@
     </div>
   </div>
 
-  <script src="main.js?v=20261109"></script>
+  <script src="main.js?v=20261109c"></script>
 </body>
 </html>
