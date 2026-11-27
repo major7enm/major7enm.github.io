@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=20261109c" />
+  <link rel="stylesheet" href="style.css?v=20261127" />
 
   <!-- JSON-LD 구조화 데이터 -->
   <script type="application/ld+json">
@@ -188,12 +188,12 @@
       from: '2026-11-09',   // 홈페이지 등록일. 주요 성과 NEW 표시와 같은 날짜
       days: 92,             // 지나면 저절로 빠진다 (main.js M7_NEW_DAYS와 같은 값)
       hold: 10,             // 크게 서 있는 시간(초)
-      items: ['images/drama_175.jpg', 'images/drama_174.jpg']
+      items: ['images/drama_175.jpg', 'images/ballad_176.jpg']
     };
     (function (c) {
       var t = Date.parse(c.from + 'T00:00:00+09:00'), now = Date.now();
       if (!c.on || !c.items.length || !(now >= t && now - t < c.days * 864e5)) return;
-      var MOVE = 1.6, SWAP = 0.4, SLOT = 2, CELLS = 15;   // 이동·교체 시간(style.css와 동일), 띠에서 들어갈 칸 번호, 띠의 칸 수
+      var MOVE = 1.6, SWAP = 0.4, SLOT = 2, CELLS = 16;   // 이동·교체 시간(style.css와 동일), 띠에서 들어갈 칸 번호, 띠의 칸 수
       var hero = document.getElementById('hero');
       var title = hero.querySelector('.hero-title');
       var row = hero.querySelector('.pw-row--1');
@@ -244,7 +244,7 @@
       var ran = false;
       function geo() {                               // 띠의 현재 치수
         var W = row.firstElementChild.offsetWidth, cell = W / CELLS, pw = cell * 200 / 208;
-        var dur = parseFloat(getComputedStyle(row).animationDuration) || 129;
+        var dur = parseFloat(getComputedStyle(row).animationDuration) || 137.6;
         return { W: W, cell: cell, pw: pw, v: W / dur, dur: dur, slot: SLOT * cell + (cell + pw) / 2 };
       }
       // 헤드라인 위치를 실제로 재서 크기를 정한다. 언어가 바뀌어 줄바꿈이 달라져도 겹치지 않는다.
